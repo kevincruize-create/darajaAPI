@@ -56,16 +56,7 @@ app.post("/get", (req, res) => {
 })
 app.post("/callback", (req, res) => {
   console.log("STK PUSH CALLBACK");
-  const CheckoutRequestID = req.body.Body.stkCallback.CheckoutRequestID;
-  const ResultCode = req.body.Body.stkCallback.ResultCode;
-  var json = JSON.stringify(req.body);
-  fs.writeFile("stkcallback.json", json, "utf8", function (err) {
-    if (err) {
-      return console.log(err);
-    }
-    console.log("STK PUSH CALLBACK JSON FILE SAVED");
-  });
-  console.log(req.body);
+
 });
 
 
