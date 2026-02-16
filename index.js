@@ -55,8 +55,45 @@ app.post("/get", (req, res) => {
   console.log("STK PUSH CALLBACK KEVIN");
 })
 app.post("/callback", (req, res) => {
-  console.log("STK PUSH CALLBACK");
+  try {
+    const callback = req.body.Body.stkCallback;
 
+    const resultCode = callback.ResultCode;
+    const resultDesc = callback.ResultDesc;
+
+    // If payment failed or cancelled
+    if (resultCode !== 0) {
+      console.log("❌ Payment failed:", resultDesc);
+      return res.json({ status: "failed" });
+    }
+
+    // Extract metadata
+    const metadata = callback.CallbackMetadata.Item;
+
+    const getValue = (name) =>
+      metadata.find(item => item.Name === name)?.Value;
+
+    const amount = getValue("Amount");
+    const mpesaReceipt = getValue("MpesaReceiptNumber");
+    const phoneNumber = getValue("PhoneNumber");
+    const transactionDate = getValue("TransactionDate");
+
+    console.log("✅ PAYMENT SUCCESS");
+    console.log("Amount:", amount);
+    console.log("Phone:", phoneNumber);
+    console.log("Receipt:", mpesaReceipt);
+    console.log("Date:", transactionDate);
+
+    // Save to DB here
+    // Example:
+    // payments.create({ amount, phoneNumber, mpesaReceipt })
+
+    res.json({ status: "ok" });
+
+  } catch (error) {
+    console.error("Callback error:", error);
+    res.status(500).json({ error: "callback error" });
+  }
 });
 
 
