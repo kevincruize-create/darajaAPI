@@ -52,7 +52,7 @@ app.get("/access_token", (req, res) => {
     .catch(console.log);
 });
 app.post("/get", (req, res) => {
-  console.log("STK PUSH CALLBACK");
+  console.log("STK PUSH CALLBACK KEVIN");
 })
 app.post("/callback", (req, res) => {
   console.log("STK PUSH CALLBACK");
