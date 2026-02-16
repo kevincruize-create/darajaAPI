@@ -51,7 +51,7 @@ app.get("/access_token", (req, res) => {
     })
     .catch(console.log);
 });
-app.post("/", (req, res) => {
+app.post("/get", (req, res) => {
   console.log("STK PUSH CALLBACK");
 })
 app.post("/callback", (req, res) => {
