@@ -51,7 +51,9 @@ app.get("/access_token", (req, res) => {
     })
     .catch(console.log);
 });
-
+app.post("/", (req, res) => {
+  console.log("STK PUSH CALLBACK");
+})
 app.post("/callback", (req, res) => {
   console.log("STK PUSH CALLBACK");
   const CheckoutRequestID = req.body.Body.stkCallback.CheckoutRequestID;
