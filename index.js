@@ -23,9 +23,22 @@ async function getAccessToken() {
     "Basic " +
     new Buffer.from(consumer_key + ":" + consumer_secret).toString("base64");
 
-
-
-
+  try {
+    const response = await axios.get(url, {
+      headers: {
+        Authorization: auth,
+      },
+    });
+   
+    const dataresponse = response.data;
+    // console.log(data);
+    const accessToken = dataresponse.access_token;
+    //console.log(accessToken)
+    return accessToken;
+  } catch (error) {
+    throw error;
+  }
+}
 
 //stkpush()
 //getAccessToken()
@@ -38,11 +51,25 @@ app.get("/access_token", (req, res) => {
     })
     .catch(console.log);
 });
-app.post("/get", (req, res) => {
-  console.log("STK PUSH CALLBACK KEVIN");
-})
 
-  
+app.post("/callback", (req, res) => {
+  console.log("STK PUSH CALLBACK");
+  const CheckoutRequestID = req.body.Body.stkCallback.CheckoutRequestID;
+  const ResultCode = req.body.Body.stkCallback.ResultCode;
+  var json = JSON.stringify(req.body);
+  fs.writeFile("stkcallback.json", json, "utf8", function (err) {
+    if (err) {
+      return console.log(err);
+    }
+    console.log("STK PUSH CALLBACK JSON FILE SAVED");
+  });
+  console.log(req.body);
+});
+
+
+
+stkpush(getAccessTokens, app, axios, moment)
+
 app.post("/callback", express.json(), async (req, res) => {
   const number = req.query.number;
   const id = req.query.id;
@@ -67,10 +94,6 @@ app.post("/callback", express.json(), async (req, res) => {
 });
 
 
-
-
-
-stkpush(getAccessTokens, app, axios, moment)
 
 
 server.listen(port, () => {
