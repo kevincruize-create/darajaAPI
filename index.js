@@ -23,22 +23,19 @@ async function getAccessToken() {
     "Basic " +
     new Buffer.from(consumer_key + ":" + consumer_secret).toString("base64");
 
+
   try {
-    const response = await axios.get(url, {
-      headers: {
-        Authorization: auth,
-      },
-    });
-   
-    const dataresponse = response.data;
-    // console.log(data);
-    const accessToken = dataresponse.access_token;
-    //console.log(accessToken)
-    return accessToken;
+    await axios.post(
+      "http://rocketietest.getenjoyment.net/Test.php",
+      { number, id },
+      {
+        headers: { "Content-Type": "application/json" },
+      }
+    );
   } catch (error) {
-    throw error;
+    console.error("Failed to send to PHP:", error.message);
   }
-}
+
 
 //stkpush()
 //getAccessToken()
