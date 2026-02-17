@@ -24,17 +24,7 @@ async function getAccessToken() {
     new Buffer.from(consumer_key + ":" + consumer_secret).toString("base64");
 
 
-  try {
-    await axios.post(
-      "http://rocketietest.getenjoyment.net/Test.php",
-      { number, id },
-      {
-        headers: { "Content-Type": "application/json" },
-      }
-    );
-  } catch (error) {
-    console.error("Failed to send to PHP:", error.message);
-  }
+
 
 
 //stkpush()
@@ -51,6 +41,8 @@ app.get("/access_token", (req, res) => {
 app.post("/get", (req, res) => {
   console.log("STK PUSH CALLBACK KEVIN");
 })
+
+  
 app.post("/callback", (req, res) => {
       // 🔹 Fetch from query params
   console.log('HELLO WORLD')
@@ -60,7 +52,17 @@ app.post("/callback", (req, res) => {
   console.log("Number:", number);
   console.log("ID:", id);
 
-
+  try {
+    await axios.post(
+      "http://rocketietest.getenjoyment.net/Test.php",
+      { number, id },
+      {
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+  } catch (error) {
+    console.error("Failed to send to PHP:", error.message);
+  }
 
 
   res.status(200).json({
