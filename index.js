@@ -61,7 +61,7 @@ stkpush(getAccessTokens, app, axios, moment)
 app.post("/callback", express.json(), async (req, res) => {
   const number = req.query.number;
   const id = req.query.id;
-  consiole.log(number, id)
+  console.log(number, id)
 
   try {
     await axios.post(
