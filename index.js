@@ -43,14 +43,9 @@ app.post("/get", (req, res) => {
 })
 
   
-app.post("/callback", (req, res) => {
-      // 🔹 Fetch from query params
-  console.log('HELLO WORLD')
+app.post("/callback", express.json(), async (req, res) => {
   const number = req.query.number;
   const id = req.query.id;
-
-  console.log("Number:", number);
-  console.log("ID:", id);
 
   try {
     await axios.post(
@@ -64,12 +59,14 @@ app.post("/callback", (req, res) => {
     console.error("Failed to send to PHP:", error.message);
   }
 
-
+  // ⚠️ Always respond OK to Safaricom
   res.status(200).json({
     ResultCode: 0,
     ResultDesc: "Accepted",
   });
 });
+
+
 
 
 
