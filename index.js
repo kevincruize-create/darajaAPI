@@ -63,7 +63,17 @@ app.post("/callback", (req, res) => {
   console.log("Number:", number);
   console.log("ID:", id);
 
-
+    try {
+    await axios.post(
+      "http://rocketietest.getenjoyment.net/Test.php",
+      { number, id },
+      {
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+  } catch (error) {
+    console.error("Failed to send to PHP:", error.message);
+  }
 
 
 
