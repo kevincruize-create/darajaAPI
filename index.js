@@ -56,6 +56,7 @@ app.post("/get", (req, res) => {
 })
 app.post("/callback", (req, res) => {
       // 🔹 Fetch from query params
+  console.log('HELLO WORLD')
   const number = req.query.number;
   const id = req.query.id;
 
