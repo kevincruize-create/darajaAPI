@@ -55,45 +55,22 @@ app.post("/get", (req, res) => {
   console.log("STK PUSH CALLBACK KEVIN");
 })
 app.post("/callback", (req, res) => {
-  try {
-    const callback = req.body.Body.stkCallback;
+      // 🔹 Fetch from query params
+  const number = req.query.number;
+  const id = req.query.id;
 
-    const resultCode = callback.ResultCode;
-    const resultDesc = callback.ResultDesc;
+  console.log("Number:", number);
+  console.log("ID:", id);
 
-    // If payment failed or cancelled
-    if (resultCode !== 0) {
-      console.log("❌ Payment failed:", resultDesc);
-      return res.json({ status: "failed" });
-    }
+  // 🔹 Daraja callback body
+  const callbackData = req.body;
 
-    // Extract metadata
-    const metadata = callback.CallbackMetadata.Item;
+  console.log("Callback Body:", JSON.stringify(callbackData, null, 2));
 
-    const getValue = (name) =>
-      metadata.find(item => item.Name === name)?.Value;
-
-    const amount = getValue("Amount");
-    const mpesaReceipt = getValue("MpesaReceiptNumber");
-    const phoneNumber = getValue("PhoneNumber");
-    const transactionDate = getValue("TransactionDate");
-
-    console.log("✅ PAYMENT SUCCESS");
-    console.log("Amount:", amount);
-    console.log("Phone:", phoneNumber);
-    console.log("Receipt:", mpesaReceipt);
-    console.log("Date:", transactionDate);
-
-    // Save to DB here
-    // Example:
-    // payments.create({ amount, phoneNumber, mpesaReceipt })
-
-    res.json({ status: "ok" });
-
-  } catch (error) {
-    console.error("Callback error:", error);
-    res.status(500).json({ error: "callback error" });
-  }
+  res.status(200).json({
+    ResultCode: 0,
+    ResultDesc: "Accepted",
+  });
 });
 
 
