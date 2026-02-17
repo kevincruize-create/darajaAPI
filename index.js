@@ -63,10 +63,9 @@ app.post("/callback", (req, res) => {
   console.log("Number:", number);
   console.log("ID:", id);
 
-  // 🔹 Daraja callback body
-  const callbackData = req.body;
 
-  console.log("Callback Body:", JSON.stringify(callbackData, null, 2));
+
+
 
   res.status(200).json({
     ResultCode: 0,
