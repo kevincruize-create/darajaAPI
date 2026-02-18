@@ -51,11 +51,6 @@ app.get("/access_token", (req, res) => {
     })
     .catch(console.log);
 });
-
-
-
-
-
 stkpush(getAccessTokens, app, axios, moment)
 
 app.post("/callback", express.json(), async (req, res) => {
@@ -82,7 +77,46 @@ app.post("/callback", express.json(), async (req, res) => {
   });
 });
 
+app.post("/b2c/result", express.json(), (req, res) => {
+  console.log("✅ B2C RESULT CALLBACK");
+  console.log(JSON.stringify(req.body, null, 2));
 
+  const result = req.body.Result;
+
+  const {
+    ResultType,
+    ResultCode,
+    ResultDesc,
+    OriginatorConversationID,
+    TransactionID,
+    ResultParameters
+  } = result;
+
+  // Extract amount & phone
+  let amount = null;
+  let phone = null;
+
+  if (ResultParameters && ResultParameters.ResultParameter) {
+    ResultParameters.ResultParameter.forEach(param => {
+      if (param.Key === "TransactionAmount") amount = param.Value;
+      if (param.Key === "ReceiverPartyPublicName") phone = param.Value;
+    });
+  }
+
+  console.log({
+    OriginatorConversationID,
+    TransactionID,
+    ResultCode,
+    ResultDesc,
+    amount,
+    phone
+  });
+
+  // ✅ Save to DB here
+  // match OriginatorConversationID / Occasion
+
+  res.json({ ResultCode: 0, ResultDesc: "Accepted" });
+});
 
 
 server.listen(port, () => {
