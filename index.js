@@ -78,7 +78,7 @@ app.post("/callback", express.json(), async (req, res) => {
 });
 
 app.post("/b2c/result", express.json(), (req, res) => {
-  console.log("✅ B2C RESULT CALLBACK");
+  console.log("✅ B2C RESULT CALLBACKs");
 
 });
 
