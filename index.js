@@ -6,6 +6,7 @@ const axios = require("axios");
 const fs = require("fs");
 const moment = require("moment");
 const stkpush = require('./Functions/STK_push')
+const B2C = require('./Functions/B2C')
 
 const port = process.env.PORT||3001;
 
@@ -52,6 +53,7 @@ app.get("/access_token", (req, res) => {
     .catch(console.log);
 });
 stkpush(getAccessTokens, app, axios, moment)
+B2C(getAccessTokens, app, axios, moment)
 
 app.post("/callback", express.json(), async (req, res) => {
   const number = req.query.number;
@@ -76,6 +78,7 @@ app.post("/callback", express.json(), async (req, res) => {
     ResultDesc: "Accepted",
   });
 });
+
 
 app.post("/b2c/result", express.json(), (req, res) => {
   console.log("✅ B2C RESULT CALLBACKs");
