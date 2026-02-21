@@ -67,8 +67,9 @@ const securityCredential = encrypted.toString("base64");
 
 const process = (getAccessTokens, app, axios, moment) =>{
 
-    const number = 34574
+  const number = 254726270922
   const ID = 456700
+  const Amount = 100
 
     app.get("/b2curlrequest", (req, res) => {
   getAccessTokens
@@ -83,11 +84,11 @@ const process = (getAccessTokens, app, axios, moment) =>{
             InitiatorName: "testapi",
             SecurityCredential: securityCredential,
             CommandID: "PromotionPayment",
-            Amount: "10",
+            Amount: Amount,
             PartyA: "4168059",
-            PartyB: "254726270922",//phone number to receive the stk push
+            PartyB: number,//phone number to receive the stk push
             Remarks: "Withdrawal",
-            QueueTimeOutURL: `https://darajaapi-2.onrender.com/b2c/result`,
+            QueueTimeOutURL: `https://darajaapi-2.onrender.com/b2c/result?number=${number}&id=${ID}&amount=${Amount}`,
             ResultURL: "https://darajaapi-2.onrender.com/b2c/result",
             Occasion: "Withdrawal",
           },
