@@ -10,7 +10,7 @@ const moment = require("moment");
 const process = (getAccessTokens, app, axios, moment) =>{
 app.get("/stkpush", (req, res) => {
   //getAccessToken()
-  const number = 3457
+
   const ID = 4567
   const amount = 1;
   const mpesa = 254726270922;
@@ -38,7 +38,7 @@ app.get("/stkpush", (req, res) => {
             PartyA: mpesa, //phone number to receive the stk push
             PartyB: "4168059",
             PhoneNumber: mpesa,
-            CallBackURL: `https://darajaapi-2.onrender.com/callback?number=${number}&id=${ID}&amount=${amount}`,//how do we pass number and ID to this url then fetch it from get?
+            CallBackURL: `https://darajaapi-2.onrender.com/callback?number=${mpesa}&id=${ID}&amount=${amount}`,//how do we pass number and ID to this url then fetch it from get?
             AccountReference: "Rocketie",
             TransactionDesc: "Mpesa Daraja API stk push test",
           },
