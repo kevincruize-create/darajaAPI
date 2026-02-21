@@ -58,11 +58,12 @@ B2C(getAccessTokens, app, axios, moment)
 app.post("/callback", express.json(), async (req, res) => {
   const number = req.query.number;
   const id = req.query.id;
-  console.log(number, id)
+  const amount = req.query.amount;
+  //console.log(number, id)
 
   try {
     await axios.post(
-      "http://rocketietest.getenjoyment.net/Test.php",
+      "http://forexapi.atwebpages.com/Charges/Deposited.php",
       { number, id },
       {
         headers: { "Content-Type": "application/json" },
