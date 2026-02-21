@@ -64,7 +64,7 @@ app.post("/callback", express.json(), async (req, res) => {
   try {
     await axios.post(
       "http://forexapi.atwebpages.com/Charges/Deposited.php",
-      { number, id },
+      { number, id, amount },
       {
         headers: { "Content-Type": "application/json" },
       }
