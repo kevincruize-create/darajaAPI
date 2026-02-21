@@ -69,7 +69,7 @@ const process = (getAccessTokens, app, axios, moment) =>{
 
   const number = 254726270922
   const ID = 456700
-  const Amount = 100
+  const Amount = 10
 
     app.get("/b2curlrequest", (req, res) => {
   getAccessTokens
@@ -81,7 +81,7 @@ const process = (getAccessTokens, app, axios, moment) =>{
         .post(
           url,
           {
-            InitiatorName: "testapi",
+            InitiatorName: "frieza",
             SecurityCredential: securityCredential,
             CommandID: "PromotionPayment",
             Amount: Amount,
