@@ -82,7 +82,28 @@ app.post("/callback", express.json(), async (req, res) => {
 
 
 app.post("/b2c/result", express.json(), (req, res) => {
-  console.log("✅ B2C RESULT CALLBACK URL");
+    const number = req.query.number;
+  const id = req.query.id;
+  const amount = req.query.amount;
+  //console.log(number, id)
+
+  try {
+    await axios.post(
+      "http://forexapi.atwebpages.com/Charges/Deposited.php",
+      { number, id, amount },
+      {
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+  } catch (error) {
+    console.error("Failed to send to PHP:", error.message);
+  }
+
+  // ⚠️ Always respond OK to Safaricom
+  res.status(200).json({
+    ResultCode: 0,
+    ResultDesc: "Accepted",
+  });
 
 });
 
