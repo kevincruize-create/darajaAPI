@@ -8,7 +8,8 @@ const moment = require("moment");
 
 
 const process = (getAccessTokens, app, axios, moment) =>{
-app.get("/stkpush", (req, res) => {
+app.use(express.json());
+app.post("/stkpush", (req, res) => {
   //getAccessToken()
 // how do we fetch ID, AMOUNT, MPESA from react native expo front end
   const { myID, amount, mpesa } = req.body;
