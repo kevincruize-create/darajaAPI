@@ -83,9 +83,9 @@ app.use(express.json());
             InitiatorName: "frieza",
             SecurityCredential: securityCredential,
             CommandID: "PromotionPayment",
-            Amount: Amount,
+            Amount: amount,
             PartyA: "4168059",
-            PartyB: number,//phone number to receive the stk push
+            PartyB: mpesa,//phone number to receive the stk push
             Remarks: "Withdrawal",
             QueueTimeOutURL: `https://darajaapi-2.onrender.com/b2c/result?number=${mpesa}&id=${myID}&amount=${amount}`,
             ResultURL: "https://darajaapi-2.onrender.com/b2c/result",
