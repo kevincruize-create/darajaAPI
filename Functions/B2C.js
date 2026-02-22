@@ -66,13 +66,12 @@ const securityCredential = encrypted.toString("base64");
 //console.log("SecurityCredential:", securityCredential);
 
 const process = (getAccessTokens, app, axios, moment) =>{
+app.use(express.json());
 
-  const number = 254726270922
-  const ID = 456700
-  const Amount = 10
-
-    app.get("/b2curlrequest", (req, res) => {
-  getAccessTokens
+    app.post("/b2curlrequest", (req, res) => {
+    getAccessTokens
+      
+    const { myID, amount, mpesa } = req.body;
     .then((accessToken) => {
     
       const url = "https://api.safaricom.co.ke/mpesa/b2c/v1/paymentrequest";
@@ -88,7 +87,7 @@ const process = (getAccessTokens, app, axios, moment) =>{
             PartyA: "4168059",
             PartyB: number,//phone number to receive the stk push
             Remarks: "Withdrawal",
-            QueueTimeOutURL: `https://darajaapi-2.onrender.com/b2c/result?number=${number}&id=${ID}&amount=${Amount}`,
+            QueueTimeOutURL: `https://darajaapi-2.onrender.com/b2c/result?number=${mpesa}&id=${myID}&amount=${amount}`,
             ResultURL: "https://darajaapi-2.onrender.com/b2c/result",
             Occasion: "Withdrawal",
           },
