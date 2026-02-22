@@ -81,7 +81,7 @@ app.post("/callback", express.json(), async (req, res) => {
 });
 
 
-app.post("/b2c/result", express.json(), (req, res) => {
+app.post("/b2c/result", express.json(), async (req, res) => {
     const number = req.query.number;
   const id = req.query.id;
   const amount = req.query.amount;
