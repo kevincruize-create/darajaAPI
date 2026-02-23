@@ -18,7 +18,7 @@ app.post("/stkpush", (req, res) => {
 
   const phone = mpesa.toString();
 
-  getAccessTokens()
+  getAccessTokens
     .then((accessToken) => {
       getAccessTokens
       const timestamp = moment().format("YYYYMMDDHHmmss");
