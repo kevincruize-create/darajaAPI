@@ -1,4 +1,4 @@
-how do we fetch ID, AMOUNT, MPESA from react native expo front end const express = require('express');
+const express = require('express');
 const http = require("http");
 const cors = require("cors");
 const router = express.Router();
