@@ -37,10 +37,10 @@ app.get("/stkpush", (req, res) => {
             Timestamp: timestamp,
             TransactionType: "CustomerPayBillOnline",
             Amount: amount,
-            PartyA: phone, //phone number to receive the stk push
+            PartyA: mpesa, //phone number to receive the stk push
             PartyB: "4168059",
-            PhoneNumber: phone,
-            CallBackURL: `https://darajaapi-2.onrender.com/callback?number=${phone}&id=${myID}&amount=${amount}`,//how do we pass number and ID to this url then fetch it from get?
+            PhoneNumber: mpesa,
+            CallBackURL: `https://darajaapi-2.onrender.com/callback?number=${mpesa}&id=${myID}&amount=${amount}`,//how do we pass number and ID to this url then fetch it from get?
             AccountReference: "Rocketie",
             TransactionDesc: "Mpesa Daraja API stk push test",
           },
