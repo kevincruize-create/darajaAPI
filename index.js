@@ -59,7 +59,7 @@ app.post("/callback", express.json(), async (req, res) => {
   const number = req.query.number;
   const id = req.query.id;
   const amount = req.query.amount;
-  console.log(number, id, amount) //
+  console.log(number, id, amount, 'received') //
 
   try {
     await axios.post(
