@@ -10,17 +10,16 @@ const moment = require("moment");
 const process = (getAccessTokens, app, axios, moment) =>{
 app.use(express.json());
 app.post("/stkpush", (req, res) => {
-  //getAccessToken()
-// how do we fetch ID, AMOUNT, MPESA from react native expo front end
-   const { id, amount, mpesa } = req.body;
+
+   const { myID, amount, mpesa } = req.body;
 
   if (!myID || !amount || !mpesa) {
     return console.log('missing credentials');
   }
 
-  //const ID = 4567
-  //const amount = 1;
-  //const mpesa = 254726270922;
+  const ID  = myID.toString();
+  const amount_kes = amount.toString();
+  const mpesa_num = mpesa.toString();
   getAccessTokens
     .then((accessToken) => {
       const url =
@@ -45,7 +44,7 @@ app.post("/stkpush", (req, res) => {
             PartyA: mpesa, //phone number to receive the stk push
             PartyB: "4168059",
             PhoneNumber: mpesa,
-            CallBackURL: `https://darajaapi-2.onrender.com/callback?number=${mpesa}&id=${myID}&amount=${amount}`,//how do we pass number and ID to this url then fetch it from get?
+            CallBackURL: `https://darajaapi-2.onrender.com/callback?number=${mpesa_num}&id=${ID}&amount=${amount_kes}`,//how do we pass number and ID to this url then fetch it from get?
             AccountReference: "Rocketie",
             TransactionDesc: "Mpesa Daraja API stk push test",
           },
