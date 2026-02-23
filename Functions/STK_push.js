@@ -10,53 +10,53 @@ const moment = require("moment");
 const process = (getAccessTokens, app, axios, moment) =>{
 app.use(express.json());
 app.post("/stkpush", (req, res) => {
-  //getAccessToken()
-// how do we fetch ID, AMOUNT, MPESA from react native expo front end
   const { myID, amount, mpesa } = req.body;
 
-  getAccessTokens
+  if (!myID || !amount || !mpesa) {
+    return res.status(400).json({ error: "Missing required fields" });
+  }
+
+  const phone = mpesa.toString();
+
+  getAccessTokens()
     .then((accessToken) => {
-      const url =
-        "https://api.safaricom.co.ke/mpesa/stkpush/v1/processrequest";
+      const url = "https://api.safaricom.co.ke/mpesa/stkpush/v1/processrequest";
       const auth = "Bearer " + accessToken;
       const timestamp = moment().format("YYYYMMDDHHmmss");
-      const password = new Buffer.from(
+
+      const password = Buffer.from(
         "4168059" +
-          "50630e57477fc855e55e6ce684fd4095606e4a93b52f7b6be5d270f3bac886d2" +
-          timestamp
+        "50630e57477fc855e55e6ce684fd4095606e4a93b52f7b6be5d270f3bac886d2" +
+        timestamp
       ).toString("base64");
 
-      axios
-        .post(
-          url,
-          {
-            BusinessShortCode: "4168059",
-            Password: password,
-            Timestamp: timestamp,
-            TransactionType: "CustomerPayBillOnline",
-            Amount: amount,
-            PartyA: mpesa, //phone number to receive the stk push
-            PartyB: "4168059",
-            PhoneNumber: mpesa,
-            CallBackURL: `https://darajaapi-2.onrender.com/callback?number=${mpesa}&id=${myID}&amount=${amount}`,//how do we pass number and ID to this url then fetch it from get?
-            AccountReference: "Rocketie",
-            TransactionDesc: "Mpesa Daraja API stk push test",
-          },
-          {
-            headers: {
-              Authorization: auth,
-            },
-          }
-        )
-        .then((response) => {
-          res.send("😀 Request is successful done ✔✔. Please enter mpesa pin to complete the transaction");
-        })
-        .catch((error) => {
-          console.log(error);
-          res.status(500).send("❌ Request failed");
-        });
+      return axios.post(
+        url,
+        {
+          BusinessShortCode: "4168059",
+          Password: password,
+          Timestamp: timestamp,
+          TransactionType: "CustomerPayBillOnline",
+          Amount: amount,
+          PartyA: phone,
+          PartyB: "4168059",
+          PhoneNumber: phone,
+          CallBackURL: `https://darajaapi-2.onrender.com/callback?number=${phone}&id=${myID}&amount=${amount}`,
+          AccountReference: myID,
+          TransactionDesc: "Mpesa Daraja API stk push test",
+        },
+        {
+          headers: { Authorization: auth },
+        }
+      );
     })
-    .catch(console.log);
+    .then(() => {
+      res.send("😀 STK Push sent. Enter M-Pesa PIN.");
+    })
+    .catch((error) => {
+      console.error(error.response?.data || error.message);
+      res.status(500).send("❌ Request failed");
+    });
 });
 }
 
