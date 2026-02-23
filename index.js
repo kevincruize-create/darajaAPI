@@ -89,7 +89,7 @@ app.post("/b2c/result", express.json(), async (req, res) => {
 
   try {
     await axios.post(
-      "forexapi.atwebpages.com/Charges/Withdraw.php",
+      "http://forexapi.atwebpages.com/Charges/Withdraw.php",
       { number, id, amount },
       {
         headers: { "Content-Type": "application/json" },
