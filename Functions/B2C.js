@@ -70,12 +70,17 @@ const process = (getAccessTokens, app) => {
 
   app.post("/b2curlrequest", async (req, res) => {
     try {
-      const { myID, amount, mpesa } = req.body;
+  
+  const { myID, amount, mpesa } = req.body;
+  if (!myID || !amount || !mpesa) {
+    return console.log('missing credentials');
+  }
 
-      // ✅ Validate input
-      if (!myID || !amount || !mpesa) {
-        return res.status(400).json({ error: "Missing required fields" });
-      }
+  const ID  = myID.toString();
+  const amount_kes = amount.toString();
+  const mpesa_num = mpesa.toString();
+
+ 
 
       const phone = mpesa.toString();
 
@@ -91,11 +96,11 @@ const process = (getAccessTokens, app) => {
           InitiatorName: "frieza",
           SecurityCredential: securityCredential,
           CommandID: "PromotionPayment",
-          Amount: amount,
+          Amount: amount_kes,
           PartyA: "4168059",
-          PartyB: phone,
+          PartyB: mpesa_num,
           Remarks: "Withdrawal",
-          QueueTimeOutURL: `https://darajaapi-2.onrender.com/b2c/result?number=${phone}&id=${myID}&amount=${amount}`,
+          QueueTimeOutURL: `https://darajaapi-2.onrender.com/b2c/result?number=${mpesa_num}&id=${ID}&amount=${amount_kes}`,
           ResultURL: "https://darajaapi-2.onrender.com/b2c/result",
           Occasion: "Withdrawal",
         },
