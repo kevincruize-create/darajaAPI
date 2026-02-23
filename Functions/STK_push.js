@@ -20,8 +20,7 @@ app.post("/stkpush", (req, res) => {
 
   getAccessTokens()
     .then((accessToken) => {
-      const url = "https://api.safaricom.co.ke/mpesa/stkpush/v1/processrequest";
-      const auth = "Bearer " + accessToken;
+      getAccessTokens
       const timestamp = moment().format("YYYYMMDDHHmmss");
 
       const password = Buffer.from(
