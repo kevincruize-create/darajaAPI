@@ -1,4 +1,4 @@
-const express = require('express');
+how do we fetch ID, AMOUNT, MPESA from react native expo front end const express = require('express');
 const http = require("http");
 const cors = require("cors");
 const router = express.Router();
@@ -8,14 +8,12 @@ const moment = require("moment");
 
 
 const process = (getAccessTokens, app, axios, moment) =>{
-app.get("/stkpush", (req, res) => {
- const { myID, amount, mpesa } = req.body;
-
-  if (!myID || !amount || !mpesa) {
-    return console.log('missing credentials');
-  }
-
-  const phone = mpesa.toString();
+app.post("/stkpush", (req, res) => {
+  //getAccessToken()
+// how do we fetch ID, AMOUNT, MPESA from react native expo front end
+  const ID = 4567
+  const amount = 1;
+  const mpesa = 254726270922;
   getAccessTokens
     .then((accessToken) => {
       const url =
@@ -36,11 +34,11 @@ app.get("/stkpush", (req, res) => {
             Password: password,
             Timestamp: timestamp,
             TransactionType: "CustomerPayBillOnline",
-            Amount: 1,
-            PartyA: '254726270922', //phone number to receive the stk push
+            Amount: amount,
+            PartyA: mpesa, //phone number to receive the stk push
             PartyB: "4168059",
-            PhoneNumber: '254726270922',
-            CallBackURL: `https://darajaapi-2.onrender.com/callback?number=${mpesa}&id=${myID}&amount=${amount}`,//how do we pass number and ID to this url then fetch it from get?
+            PhoneNumber: mpesa,
+            CallBackURL: `https://darajaapi-2.onrender.com/callback?number=${mpesa}&id=${ID}&amount=${amount}`,//how do we pass number and ID to this url then fetch it from get?
             AccountReference: "Rocketie",
             TransactionDesc: "Mpesa Daraja API stk push test",
           },
