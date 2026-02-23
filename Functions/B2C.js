@@ -71,15 +71,16 @@ app.use(express.json());
 
 
     app.post("/b2curlrequest", (req, res) => {
-    getAccessTokens.then((accessToken) => {
-         const { myID, amount, mpesa } = req.body;
-        if (!myID || !amount || !mpesa) {
+      const { myID, amount, mpesa } = req.body;
+       if (!myID || !amount || !mpesa) {
        return console.log('missing credentials');
        }
 
   const ID  = myID.toString();
   const amount_kes = amount.toString();
   const mpesa_num = mpesa.toString();
+    getAccessTokens.then((accessToken) => {
+  
       const url = "https://api.safaricom.co.ke/mpesa/b2c/v1/paymentrequest";
       const auth = "Bearer " + accessToken;
       axios
