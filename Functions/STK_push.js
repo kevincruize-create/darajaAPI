@@ -12,7 +12,7 @@ app.use(express.json());
 app.post("/stkpush", (req, res) => {
 
    const { myID, amount, mpesa } = req.body;
-
+//
   if (!myID || !amount || !mpesa) {
     return console.log('missing credentials');
   }
