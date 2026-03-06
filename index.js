@@ -112,17 +112,16 @@ const fetchData = async () => {
     const response = await fetch("http://forexapi.atwebpages.com/Log_in/Google_approve.php");
     const data = await response.json();
 
-    console.log(data.message); // prints: no
+    return data.message; // return the value
   } catch (error) {
     console.error(error);
+    return null;
   }
 };
 
-
-
-app.get("/test", (req, res) => {
-  fetchData();
-  res.send(data.message);
+app.get("/test", async (req, res) => {
+  const message = await fetchData();
+  res.send(message);
 });
 
 
