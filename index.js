@@ -107,6 +107,19 @@ app.post("/b2c/result", express.json(), async (req, res) => {
 
 });
 
+const fetchData = async () => {
+  try {
+    const response = await fetch("http://forexapi.atwebpages.com/Log_in/Google_approve.php");
+    const data = await response.json();
+
+    console.log(data.message); // prints: no
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+fetchData();
+
 
 server.listen(port, () => {
   console.log(`Server running on ${port}`);
