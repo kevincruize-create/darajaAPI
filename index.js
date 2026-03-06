@@ -118,7 +118,12 @@ const fetchData = async () => {
   }
 };
 
-fetchData();
+
+
+app.get("/test", (req, res) => {
+  fetchData();
+  res.send(data.message);
+});
 
 
 server.listen(port, () => {
