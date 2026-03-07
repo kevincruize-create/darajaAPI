@@ -8,6 +8,23 @@ const moment = require("moment");
 const stkpush = require('./Functions/STK_push')
 const B2C = require('./Functions/B2C')
 
+const marketer_list = require('./Rocketie_php/Marketer_list')
+const create_account = require('./Rocketie_php/Create_account')
+const display_editted = require('./Rocketie_php/Display_editted')
+const edit_profile = require('./Rocketie_php/Edit_profile')
+const get_details = require('./Rocketie_php/Get_details')
+const log_in = require('./Rocketie_php/Log_in')
+const Google_approve = require('./Rocketie_php/Google_approve')
+
+const balance = require('./Charges/Balance')
+const deposited_update = require('./Charges/Deposited_update')
+const pay_marketer = require('./Charges/Pay_marketer')
+const rocketie_win_loss = require('./Charges/Rocketie_win_losses')
+const update_depps = require('./Charges/Update_depp')
+const update_withdrawn = require('./Charges/Update_withdrawn')
+const update_withdrawn_real = require('./Charges/Update_withdrawn_real')
+const withdraw = require('./Charges/Withdraw')
+
 const port = process.env.PORT||3001;
 
 const app = express();
@@ -107,23 +124,24 @@ app.post("/b2c/result", express.json(), async (req, res) => {
 
 });
 
-const fetchData = async () => {
-  try {
-    const response = await fetch("http://forexapi.atwebpages.com/Log_in/Google_approve.php");
-    const data = await response.json();
+// log in
+marketer_list(app)
+create_account(app)
+display_editted(app)
+edit_profile(app)
+get_details(app)
+log_in(app)
+Google_approve(app)
 
-    return data.message; // return the value
-  } catch (error) {
-    console.error(error);
-    return null;
-  }
-};
-
-app.get("/test", async (req, res) => {
-  const message = await fetchData();
-  res.send(message);
-});
-
+//charges
+balance(app)
+deposited_update(app)
+pay_marketer(app)
+rocketie_win_loss(app)
+update_depps(app)
+update_withdrawn(app)
+update_withdrawn_real(app)
+withdraw(app)
 
 server.listen(port, () => {
   console.log(`Server running on ${port}`);
