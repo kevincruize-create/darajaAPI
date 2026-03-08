@@ -1,15 +1,19 @@
 const express = require('express');
 //const app = express();
+app.use(express.json());
 
 const process = (app) => {
 
 //const name = 'Kevin Mukoya'
 //const mpesa = 254726270922
-const phone = 254726270922
+const { phone } = req.body;
+  if (!phone) {
+    return console.log('missing credentials');
+  }
+//const phone = 254726270922
 
   const fetchData = async () => {
     try {
-
       const response = await fetch("http://forexapi.atwebpages.com/Log_in/Log_in.php", {
         method: "POST",
         headers: {
@@ -29,7 +33,7 @@ const phone = 254726270922
     }
   };
 
-  app.get("/Log_in", async (req, res) => {
+  app.post("/Log_in", async (req, res) => {
 
     const data = await fetchData();   // call your function
 
@@ -39,5 +43,6 @@ const phone = 254726270922
 
 
 }
+
 
 module.exports = process;
