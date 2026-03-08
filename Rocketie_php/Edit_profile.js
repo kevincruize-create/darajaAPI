@@ -2,12 +2,12 @@ const express = require('express');
 //const app = express();
 
 const process = (app) => {
+app.use(express.json());
+//const name = 'Kevin Mukoya'
+//const mpesa = 254726270922
+//const myID = 38
 
-const name = 'Kevin Mukoya'
-const mpesa = 254726270922
-const myID = 38
-
-  const fetchData = async () => {
+  const fetchData = async (ID, names, mpesa_num) => {
     try {
 
       const response = await fetch("http://forexapi.atwebpages.com/Log_in/Edit_profile.php", {
@@ -16,9 +16,9 @@ const myID = 38
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          myID,
-          name,
-          mpesa,
+          myID: ID,
+          name: names,
+          mpesa: mpesa_num,
         }),
       });
 
@@ -31,9 +31,18 @@ const myID = 38
     }
   };
 
-  app.get("/Edit_profile", async (req, res) => {
+  app.post("/Edit_profile", async (req, res) => {
+    const { myID, name, mpesa } = req.body;
+      if (!myID || !name || !mpesa) 
+      {
+       return console.log('missing credentials');
+      }
 
-    const data = await fetchData();   // call your function
+       const ID  = myID.toString();
+       const names = name.toString();
+       const mpesa_num = mpesa.toString();
+
+    const data = await fetchData(ID, names, mpesa_num);   // call your function
 
     res.json(data);                   // send to browser
 
@@ -41,5 +50,6 @@ const myID = 38
 
 
 }
+
 
 module.exports = process;
