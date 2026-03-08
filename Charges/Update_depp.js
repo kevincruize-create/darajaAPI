@@ -28,7 +28,7 @@ const myID = 38
     }
   };
 
-  app.get("/Update_dep", async (req, res) => {
+  app.post("/Update_dep", async (req, res) => {
 
     const data = await fetchData();   // call your function
 
@@ -38,5 +38,6 @@ const myID = 38
 
 
 }
+
 
 module.exports = process;
