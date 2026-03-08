@@ -31,7 +31,7 @@ const amount = 0
     }
   };
 
-  app.get("/Pay_markter", async (req, res) => {
+  app.post("/Pay_markter", async (req, res) => {
 
     const data = await fetchData();   // call your function
 
@@ -41,5 +41,6 @@ const amount = 0
 
 
 }
+
 
 module.exports = process;
