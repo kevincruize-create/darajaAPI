@@ -2,12 +2,12 @@ const express = require('express');
 //const app = express();
 
 const process = (app) => {
+app.use(express.json());
+//const myID = 38
+//const odd = 2.44
+//const amount = 30
 
-const myID = 38
-const odd = 2.44
-const amount = 30
-
-  const fetchData = async () => {
+  const fetchData = async (ID, amount_kes, odd_num) => {
     try {
 
       const response = await fetch("http://forexapi.atwebpages.com/Charges/Rocketie_win_losses.php", {
@@ -16,9 +16,9 @@ const amount = 30
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          my_id: myID,
-          odd,
-          my_amount:amount
+          my_id: ID,
+          odd: odd_num,
+          my_amount:amount_kes
         }),
       });
 
@@ -33,7 +33,16 @@ const amount = 30
 
   app.post("/Rocketie_win_losses", async (req, res) => {
 
-    const data = await fetchData();   // call your function
+      const { myID, odd, amount } = req.body;
+      if (!myID || !amount || !odd) {
+       return console.log('missing credentials');
+       }
+
+  const ID  = myID.toString();
+  const amount_kes = amount.toString();
+  const odd_num = odd.toString();
+    
+    const data = await fetchData(ID, amount_kes, odd_num);   // call your function
 
     res.json(data);                   // send to browser
 
@@ -44,3 +53,4 @@ const amount = 30
 
 
 module.exports = process;
+
