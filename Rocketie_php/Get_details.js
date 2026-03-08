@@ -32,7 +32,7 @@ app.use(express.json());
 
   app.post("/get_details", async (req, res) => {
 
-      const {myID} = req.body;
+      const {user_ID} = req.body;
       if (!myID) {
        return console.log('missing credentials');
       }
@@ -48,3 +48,4 @@ app.use(express.json());
 
 
 module.exports = process;
+
