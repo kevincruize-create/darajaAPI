@@ -31,7 +31,7 @@ const amount = 30
     }
   };
 
-  app.get("/Rocketie_win_losses", async (req, res) => {
+  app.post("/Rocketie_win_losses", async (req, res) => {
 
     const data = await fetchData();   // call your function
 
@@ -41,5 +41,6 @@ const amount = 30
 
 
 }
+
 
 module.exports = process;
