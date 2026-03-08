@@ -32,7 +32,7 @@ const amount = 200
     }
   };
 
-  app.get("/Withdraw", async (req, res) => {
+  app.post("/Withdraw", async (req, res) => {
 
     const data = await fetchData();   // call your function
 
@@ -42,5 +42,6 @@ const amount = 200
 
 
 }
+
 
 module.exports = process;
