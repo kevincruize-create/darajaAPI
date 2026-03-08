@@ -27,7 +27,7 @@ const myID = 38
     }
   };
 
-  app.get("/Balance", async (req, res) => {
+  app.post("/Balance", async (req, res) => {
 
     const data = await fetchData();   // call your function
 
@@ -37,5 +37,6 @@ const myID = 38
 
 
 }
+
 
 module.exports = process;
