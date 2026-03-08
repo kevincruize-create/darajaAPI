@@ -16,9 +16,9 @@ app.use(express.json());
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          phone,
-          names,
-          whatsapp,
+          phone: phone_num,
+          names: names_selected,
+          whatsapp: whatsapp_num,
         }),
       });
 
@@ -54,4 +54,5 @@ app.use(express.json());
 
 
 module.exports = process;
+
 
