@@ -27,7 +27,7 @@ const process = (app) => {
     }
   };
 
-  app.get("/Google_approve", async (req, res) => {
+  app.post("/Google_approve", async (req, res) => {
 
     const data = await fetchData();   // call your function
 
@@ -37,5 +37,6 @@ const process = (app) => {
 
 
 }
+
 
 module.exports = process;
