@@ -2,10 +2,10 @@ const express = require('express');
 //const app = express();
 
 const process = (app) => {
+app.use(express.json());
+//const myID = 38
 
-const myID = 38
-
-  const fetchData = async () => {
+  const fetchData = async (ID) => {
     try {
 
       const response = await fetch("http://forexapi.atwebpages.com/Charges/Balance.php", {
@@ -14,7 +14,7 @@ const myID = 38
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          myID
+          myID:ID
         }),
       });
 
@@ -29,7 +29,13 @@ const myID = 38
 
   app.post("/Balance", async (req, res) => {
 
-    const data = await fetchData();   // call your function
+      const { myID } = req.body;
+        if (!myID) {
+          return console.log('missing credentials');
+       }
+
+    const ID  = myID.toString();
+    const data = await fetchData(ID);   // call your function
 
     res.json(data);                   // send to browser
 
@@ -40,3 +46,4 @@ const myID = 38
 
 
 module.exports = process;
+
