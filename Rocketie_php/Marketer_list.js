@@ -2,10 +2,10 @@ const express = require('express');
 //const app = express();
 
 const process = (app) => {
+app.use(express.json());
+  //const marketer_ID = 823427;
 
-  const marketer_ID = 823427;
-
-  const fetchData = async () => {
+  const fetchData = async (ID) => {
     try {
 
       const response = await fetch("http://forexapi.atwebpages.com/Charges/Payment_list.php", {
@@ -14,7 +14,7 @@ const process = (app) => {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          offer_ID: marketer_ID
+          offer_ID: ID
         })
       });
 
@@ -27,14 +27,22 @@ const process = (app) => {
     }
   };
 
-  app.get("/Marketer_list", async (req, res) => {
+  app.post("/Marketer_list", async (req, res) => {
 
-    const data = await fetchData();   // call your function
+    const { offer_ID } = req.body;
+        if (!offer_ID) 
+    {
+       return console.log('missing credentials');
+    }
+
+    const ID  = offer_ID.toString();
+    const data = await fetchData(ID);   // call your function
 
     res.json(data);                   // send to browser
 
   });
 
 }
+
 
 module.exports = process;
