@@ -1,9 +1,9 @@
 const express = require('express');
 //const app = express();
-app.use(express.json());
+//app.use(express.json());
 
 const process = (app) => {
-
+app.use(express.json());
 //const name = 'Kevin Mukoya'
 //const mpesa = 254726270922
 const { phone } = req.body;
@@ -46,3 +46,4 @@ const { phone } = req.body;
 
 
 module.exports = process;
+
