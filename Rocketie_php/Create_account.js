@@ -2,12 +2,12 @@ const express = require('express');
 //const app = express();
 
 const process = (app) => {
+app.use(express.json());
+//const phone = 4556;
+//const names = 'Joe Allan Joe'
+//const whatsapp = 4455667
 
-const phone = 4556;
-const names = 'Joe Allan Joe'
-const whatsapp = 4455667
-
-  const fetchData = async () => {
+  const fetchData = async (phone, names, whatsapp) => {
     try {
 
       const response = await fetch("http://forexapi.atwebpages.com/Log_in/Regester_names.php", {
@@ -31,9 +31,19 @@ const whatsapp = 4455667
     }
   };
 
-  app.get("/create_account", async (req, res) => {
-
-    const data = await fetchData();   // call your function
+  app.post("/create_account", async (req, res) => {
+   const { names, phone, whatsapp } = req.body;
+    if (!names || !phone || !whatsapp) {
+       return console.log('missing credentials');
+    }
+    //const phone = 4556;
+   //const names = 'Joe Allan Joe'
+  //const whatsapp = 4455667
+    const phone  = phone.toString();
+    const names = names.toString();
+    const whatsapp = whatsapp.toString();
+    
+    const data = await fetchData(phone, names, whatsapp);   // call your function
 
     res.json(data);                   // send to browser
 
@@ -41,5 +51,6 @@ const whatsapp = 4455667
 
 
 }
+
 
 module.exports = process;
