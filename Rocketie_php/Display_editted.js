@@ -28,7 +28,7 @@ const process = (app) => {
     }
   };
 
-  app.get("/display_editted", async (req, res) => {
+  app.post("/display_editted", async (req, res) => {
 
       const { myID } = req.body;
         if (!myID) 
@@ -49,3 +49,4 @@ const process = (app) => {
 
 
 module.exports = process;
+
