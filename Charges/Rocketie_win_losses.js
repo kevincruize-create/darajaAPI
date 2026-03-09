@@ -33,13 +33,13 @@ app.use(express.json());
 
   app.post("/Rocketie_win_losses", async (req, res) => {
 
-      const { myID, odd, amount } = req.body;
+      const { my_id, odd, my_amount } = req.body;
       if (!myID || !amount || !odd) {
        return console.log('missing credentials');
        }
 
-  const ID  = myID.toString();
-  const amount_kes = amount.toString();
+  const ID  = my_id.toString();
+  const amount_kes = my_amount.toString();
   const odd_num = odd.toString();
     
     const data = await fetchData(ID, amount_kes, odd_num);   // call your function
@@ -53,4 +53,5 @@ app.use(express.json());
 
 
 module.exports = process;
+
 
