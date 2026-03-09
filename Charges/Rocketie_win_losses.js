@@ -34,7 +34,7 @@ app.use(express.json());
   app.post("/Rocketie_win_losses", async (req, res) => {
 
       const { my_id, odd, my_amount } = req.body;
-      if (!myID || !amount || !odd) {
+      if (!my_id || !my_amount || !odd) {
        return console.log('missing credentials');
        }
 
@@ -53,5 +53,6 @@ app.use(express.json());
 
 
 module.exports = process;
+
 
 
