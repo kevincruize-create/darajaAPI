@@ -35,7 +35,11 @@ app.use(express.json());
 
       const { my_id, odd, my_amount } = req.body;
       if (!my_id || !my_amount || !odd) {
-       return console.log('missing credentials');
+        if(!my_id) console.log('missing ID');
+        if(!my_amount) console.log('missing amount');
+        if(!odd) console.log('missing odd');
+      
+        return 
        }
 
   const ID  = my_id.toString();
@@ -53,6 +57,7 @@ app.use(express.json());
 
 
 module.exports = process;
+
 
 
 
