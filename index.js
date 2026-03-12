@@ -7,7 +7,7 @@ const fs = require("fs");
 const moment = require("moment");
 const stkpush = require('./Functions/STK_push')
 const B2C = require('./Functions/B2C')
-const fs = require("fs");
+//const fs = require("fs");
 
 const marketer_list = require('./Rocketie_php/Marketer_list')
 const create_account = require('./Rocketie_php/Create_account')
@@ -140,7 +140,7 @@ app.post("/b2c/result", express.json(), async (req, res) => {
 });
 
 //call back
-call_back_stk(app)
+call_back_stk(app, fs)
 
 // log in
 marketer_list(app)
