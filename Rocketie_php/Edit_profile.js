@@ -38,6 +38,10 @@ app.use(express.json());
        return console.log('missing credentials');
       }
 
+      console.log('name', name)
+      console.log('myID', myID)
+      console.log('mpesa', mpesa)
+
        const ID  = myID.toString();
        const names = name.toString();
        const mpesa_num = mpesa.toString();
@@ -53,3 +57,4 @@ app.use(express.json());
 
 
 module.exports = process;
+
