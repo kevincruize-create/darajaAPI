@@ -97,6 +97,20 @@ app.post("/callback", express.json(), async (req, res) => {
   });
 });
 
+app.post("/callback_2", express.json(), async (req, res) => {
+  console.log("STK PUSH CALLBACK");
+  const CheckoutRequestID = req.body.Body.stkCallback.CheckoutRequestID;
+  const ResultCode = req.body.Body.stkCallback.ResultCode;
+  var json = JSON.stringify(req.body);
+  fs.writeFile("stkcallback.json", json, "utf8", function (err) {
+    if (err) {
+      return console.log(err);
+    }
+    console.log("STK PUSH CALLBACK JSON FILE SAVED");
+  });
+  console.log(req.body);
+});
+
 
 app.post("/b2c/result", express.json(), async (req, res) => {
     const number = req.query.number;
