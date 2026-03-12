@@ -99,7 +99,7 @@ app.post("/callback", express.json(), async (req, res) => {
 
 app.post("/callback_2", express.json(), async (req, res) => {
   console.log("STK PUSH CALLBACK ANOTHER");
-    console.log("STK PUSH CALLBACK");
+ 
   const CheckoutRequestID = req.body.Body.stkCallback.CheckoutRequestID;
   const ResultCode = req.body.Body.stkCallback.ResultCode;
   var json = JSON.stringify(req.body);
