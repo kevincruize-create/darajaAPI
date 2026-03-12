@@ -7,6 +7,7 @@ const fs = require("fs");
 const moment = require("moment");
 const stkpush = require('./Functions/STK_push')
 const B2C = require('./Functions/B2C')
+const fs = require("fs");
 
 const marketer_list = require('./Rocketie_php/Marketer_list')
 const create_account = require('./Rocketie_php/Create_account')
