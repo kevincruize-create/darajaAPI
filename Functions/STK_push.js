@@ -41,9 +41,9 @@ app.post("/stkpush", (req, res) => {
             Timestamp: timestamp,
             TransactionType: "CustomerPayBillOnline",
             Amount: `1`,
-            PartyA: `254726270922`, //phone number to receive the stk push
+            PartyA: `${mpesa_num}`, //phone number to receive the stk push
             PartyB: "4168059",
-            PhoneNumber: `254726270922`,
+            PhoneNumber: `${mpesa_num}`,
             CallBackURL: `https://darajaapi-2.onrender.com/callback?number=${mpesa_num}&id=${ID}&amount=${amount_kes}`,//how do we pass number and ID to this url then fetch it from get?
             AccountReference: "Rocketie",
             TransactionDesc: "Mpesa Daraja API stk push test",
@@ -56,6 +56,7 @@ app.post("/stkpush", (req, res) => {
         )
         .then((response) => {
           res.send("😀 Request is successful done ✔✔. Please enter mpesa pin to complete the transaction");
+           console.log(mpesa_num)
         })
         .catch((error) => {
           console.log(error);
