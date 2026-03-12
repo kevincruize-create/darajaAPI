@@ -40,7 +40,7 @@ app.post("/stkpush", (req, res) => {
             Password: password,
             Timestamp: timestamp,
             TransactionType: "CustomerPayBillOnline",
-            Amount: `1`,
+            Amount: `${amount_kes}`,
             PartyA: `${mpesa_num}`, //phone number to receive the stk push
             PartyB: "4168059",
             PhoneNumber: `${mpesa_num}`,
