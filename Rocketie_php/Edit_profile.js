@@ -33,10 +33,11 @@ app.use(express.json());
 
   app.post("/Edit_profile", async (req, res) => {
     const { myID, name, mpesa } = req.body;
-      if (!myID || !name || !mpesa) 
-      {
-       return console.log('missing credentials');
-      }
+     if (!myID || !name || !mpesa) {
+       return res.status(400).json({
+         error: "Missing credentials"
+       });
+     }
 
       console.log('name', name)
       console.log('myID', myID)
@@ -57,4 +58,5 @@ app.use(express.json());
 
 
 module.exports = process;
+
 
