@@ -73,7 +73,7 @@ app.get("/access_token", (req, res) => {
     .catch(console.log);
 });
 
-app.getapp.get("/access_token_2", (req, res) => {
+app.get("/access_token_2", (req, res) => {
     res.send(getAccessTokens)
 });
 stkpush(getAccessTokens, app, axios, moment)
