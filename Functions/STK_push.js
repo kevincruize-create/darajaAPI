@@ -7,7 +7,7 @@ const fs = require("fs");
 const moment = require("moment");
 
 
-const process = (getAccessTokens, app, axios, moment) =>{
+const process = (getAccessToken, app, axios, moment) =>{
 app.use(express.json());
 app.post("/stkpush", (req, res) => {
 
@@ -20,7 +20,7 @@ app.post("/stkpush", (req, res) => {
   const ID  = myID.toString();
   const amount_kes = amount.toString();
   const mpesa_num = mpesa.toString();;
-  getAccessTokens
+  getAccessToken
     .then((accessToken) => {
       const url =
         "https://api.safaricom.co.ke/mpesa/stkpush/v1/processrequest";
