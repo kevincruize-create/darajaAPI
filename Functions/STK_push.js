@@ -19,7 +19,7 @@ app.post("/stkpush", (req, res) => {
 
   const ID  = myID.toString();
   const amount_kes = amount.toString();
-  const mpesa_num = 254726270922;
+  const mpesa_num = mpesa.toString();;
   getAccessTokens
     .then((accessToken) => {
       const url =
@@ -56,7 +56,7 @@ app.post("/stkpush", (req, res) => {
         )
         .then((response) => {
           res.send("😀 Request is successful done ✔✔. Please enter mpesa pin to complete the transaction");
-           console.log(mpesa_num)
+           console.log('numbers', mpesa_num, mpesa)
         })
         .catch((error) => {
           console.log(error);
