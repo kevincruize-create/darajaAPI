@@ -19,7 +19,7 @@ app.post("/stkpush", (req, res) => {
 
   const ID  = myID.toString();
   const amount_kes = amount.toString();
-  const mpesa_num = mpesa.toString();
+  const mpesa_num = 254726270922;
   getAccessTokens
     .then((accessToken) => {
       const url =
