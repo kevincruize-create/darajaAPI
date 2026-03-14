@@ -76,8 +76,8 @@ app.get("/access_token", (req, res) => {
 app.get("/access_token_2", (req, res) => {
     res.send(getAccessToken())
 });
-stkpush(getAccessTokens, app, axios, moment)
-B2C(getAccessTokens, app, axios, moment)
+stkpush(getAccessToken, app, axios, moment)
+B2C(getAccessToken, app, axios, moment)
 
 
 app.post("/callback_2", express.json(), async (req, res) => {
