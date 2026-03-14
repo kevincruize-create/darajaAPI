@@ -70,51 +70,49 @@ app.use(express.json());
 
 
 
-    app.post("/b2curlrequest", (req, res) => {
-      const { myID, amount, mpesa } = req.body;
-       if (!myID || !amount || !mpesa) {
-       return console.log('missing credentials');
-       }
+  app.post("/b2curlrequest", async (req, res) => {
+  try {
+    const { myID, amount, mpesa } = req.body;
 
-  const ID  = myID.toString();
-  const amount_kes = amount.toString();
-  const mpesa_num = mpesa.toString();
-    getAccessToken.then((accessToken) => {
-  
-      const url = "https://api.safaricom.co.ke/mpesa/b2c/v1/paymentrequest";
-      const auth = "Bearer " + accessToken;
-      axios
-        .post(
-          url,
-          {
-            InitiatorName: "frieza",
-            SecurityCredential: securityCredential,
-            CommandID: "PromotionPayment",
-            Amount: amount_kes,
-            PartyA: "4168059",
-            PartyB: mpesa_num,//phone number to receive the stk push
-            Remarks: "Withdrawal",
-            QueueTimeOutURL: `https://darajaapi-2.onrender.com/b2c/result?number=${mpesa_num}&id=${ID}&amount=${amount_kes}`,
-            ResultURL: `https://darajaapi-2.onrender.com/b2c/result?number=${mpesa_num}&id=${ID}&amount=${amount_kes}`,
-            Occasion: "Withdrawal",
-          },
-          {
-            headers: {
-              Authorization: auth,
-            },
-          }
-        )
-        .then((response) => {
-          res.status(200).json(response.data);
-        })
-        .catch((error) => {
-          console.log(error);
-          res.status(500).send("❌ Request failed");
-        });
-    })
-    .catch(console.log);
+    if (!myID || !amount || !mpesa) {
+      return res.status(400).send("Missing credentials");
+    }
+
+    const ID = myID.toString();
+    const amount_kes = amount.toString();
+    const mpesa_num = mpesa.toString();
+
+    // 🔥 SAME FIX AS STK PUSH
+    const accessToken = await getAccessToken();
+
+    const url = "https://api.safaricom.co.ke/mpesa/b2c/v1/paymentrequest";
+    const auth = "Bearer " + accessToken;
+
+    const response = await axios.post(
+      url,
+      {
+        InitiatorName: "frieza",
+        SecurityCredential: securityCredential,
+        CommandID: "PromotionPayment",
+        Amount: amount_kes,
+        PartyA: "4168059",
+        PartyB: mpesa_num,
+        Remarks: "Withdrawal",
+        QueueTimeOutURL: `https://darajaapi-2.onrender.com/b2c/result?number=${mpesa_num}&id=${ID}&amount=${amount_kes}`,
+        ResultURL: `https://darajaapi-2.onrender.com/b2c/result?number=${mpesa_num}&id=${ID}&amount=${amount_kes}`,
+        Occasion: "Withdrawal",
+      },
+      {
+        headers: { Authorization: auth },
+      }
+    );
+
+    res.status(200).json(response.data);
+  } catch (error) {
+    console.error(error.response?.data || error.message);
+    res.status(500).send("❌ B2C request failed");
+  }
 });
-
 }
 
 module.exports = process;
