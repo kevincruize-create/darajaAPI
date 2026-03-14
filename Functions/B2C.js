@@ -65,7 +65,7 @@ const securityCredential = encrypted.toString("base64");
 
 //console.log("SecurityCredential:", securityCredential);
 
-const process = (getAccessTokens, app, axios, moment) =>{
+const process = (getAccessToken, app, axios, moment) =>{
 app.use(express.json());
 
 
@@ -79,7 +79,7 @@ app.use(express.json());
   const ID  = myID.toString();
   const amount_kes = amount.toString();
   const mpesa_num = mpesa.toString();
-    getAccessTokens.then((accessToken) => {
+    getAccessToken.then((accessToken) => {
   
       const url = "https://api.safaricom.co.ke/mpesa/b2c/v1/paymentrequest";
       const auth = "Bearer " + accessToken;
