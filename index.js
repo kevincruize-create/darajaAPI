@@ -74,7 +74,7 @@ app.get("/access_token", (req, res) => {
 });
 
 app.get("/access_token_2", (req, res) => {
-    res.send(getAccessTokens())
+    res.send(getAccessToken())
 });
 stkpush(getAccessTokens, app, axios, moment)
 B2C(getAccessTokens, app, axios, moment)
