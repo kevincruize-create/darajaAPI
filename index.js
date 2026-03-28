@@ -148,7 +148,7 @@ app.post("/b2c/result", express.json(), async (req, res) => {
 app.use("/ACL", express.static(path.join(__dirname, "ACL", "build")));
 
 // Catch-all for React routing
-app.get("/ACL/*", (req, res) => {
+app.get("/ACL", (req, res) => {
   res.sendFile(path.join(__dirname, "ACL", "build", "index.html"));
 });
 
