@@ -27,6 +27,8 @@ const update_withdrawn = require('./Charges/Update_withdrawn')
 const update_withdrawn_real = require('./Charges/Update_withdrawn_real')
 const withdraw = require('./Charges/Withdraw')
 
+const ACL = require('./Functions/ACL')
+
 const call_back_stk = require('./Functions/call_back_stk')
 
 const port = process.env.PORT||3001;
@@ -154,6 +156,7 @@ app.get("/ACL", (req, res) => {
 
 //call back
 call_back_stk(app, fs)
+ACL(app, fs)
 
 // log in
 marketer_list(app)
