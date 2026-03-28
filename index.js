@@ -144,7 +144,7 @@ app.post("/b2c/result", express.json(), async (req, res) => {
 
 });
 
-const server = http.createServer((req, res) => {
+const servers = http.createServer((req, res) => {
   if (req.url === '/') {
     const filePath = path.join(__ACL/build, 'index.html');
 
