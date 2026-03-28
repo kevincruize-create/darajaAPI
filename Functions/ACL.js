@@ -41,7 +41,7 @@ app.use(express.json());
     }
   };
 
-  app.post("/Pay_markter", async (req, res) => {
+  app.post("/ACL", async (req, res) => {
   
     const { firstName,secondtName,phone,alt_phone,email,gender,IYF_course,location,day,time,accom,fac } = req.body;
    
