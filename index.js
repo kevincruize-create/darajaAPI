@@ -147,11 +147,10 @@ app.post("/b2c/result", express.json(), async (req, res) => {
 // Serve static files from ACL/build
 app.use("/ACL", express.static(path.join(__dirname, "ACL", "build")));
 
-// Handle React/Vite routing
-app.get("/ACL/*", (req, res) => {
+// Handle React/Vite routing (FIXED)
+app.get("/ACL/:path(*)", (req, res) => {
   res.sendFile(path.join(__dirname, "ACL", "build", "index.html"));
 });
-
 
 //call back
 call_back_stk(app, fs)
