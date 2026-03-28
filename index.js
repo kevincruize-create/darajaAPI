@@ -7,6 +7,7 @@ const fs = require("fs");
 const moment = require("moment");
 const stkpush = require('./Functions/STK_push')
 const B2C = require('./Functions/B2C')
+const path = require('path');
 //const fs = require("fs");
 
 const marketer_list = require('./Rocketie_php/Marketer_list')
@@ -142,6 +143,23 @@ app.post("/b2c/result", express.json(), async (req, res) => {
   });
 
 });
+
+const server = http.createServer((req, res) => {
+  if (req.url === '/') {
+    const filePath = path.join(__ACL/build, 'index.html');
+
+    fs.readFile(filePath, (err, data) => {
+      if (err) {
+        res.writeHead(500);
+        res.end('Error loading file');
+      } else {
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+        res.end(data);
+      }
+    });
+  }
+});
+
 
 //call back
 call_back_stk(app, fs)
