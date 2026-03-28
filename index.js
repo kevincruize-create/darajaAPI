@@ -144,20 +144,12 @@ app.post("/b2c/result", express.json(), async (req, res) => {
 
 });
 
-const servers = http.createServer((req, res) => {
-  if (req.url === '/ACL') {
-    const filePath = path.join(__dirname, 'ACL', 'build', 'index.html');
+// Serve static files from ACL/build
+app.use("/ACL", express.static(path.join(__dirname, "ACL", "build")));
 
-    fs.readFile(filePath, (err, data) => {
-      if (err) {
-        res.writeHead(500);
-        res.end('Error loading file');
-      } else {
-        res.writeHead(200, { 'Content-Type': 'text/html' });
-        res.end(data);
-      }
-    });
-  }
+// Handle React/Vite routing
+app.get("/ACL/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "ACL", "build", "index.html"));
 });
 
 
