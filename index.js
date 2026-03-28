@@ -146,7 +146,7 @@ app.post("/b2c/result", express.json(), async (req, res) => {
 
 const servers = http.createServer((req, res) => {
   if (req.url === '/') {
-    const filePath = path.join(__dirname, 'build', 'index.html');
+    const filePath = path.join(__dirname, 'ACL', 'build', 'index.html';
 
     fs.readFile(filePath, (err, data) => {
       if (err) {
