@@ -33,8 +33,8 @@ app.use(express.json());
   };
 
   app.post("/create_account", async (req, res) => {
-   const { names, phone, whatsapp, team } = req.body;
-    if (!names || !phone || !whatsapp) {
+   const { names, phone,  team } = req.body;
+    if (!names || !phone ) {
        return console.log('missing credentials');
     }
     //const phone = 4556;
