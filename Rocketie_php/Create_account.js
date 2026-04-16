@@ -7,7 +7,7 @@ app.use(express.json());
 //const names = 'Joe Allan Joe'
 //const whatsapp = 4455667
 
-  const fetchData = async (phone_num, names_selected, whatsapp_num, team_name) => {
+  const fetchData = async (phone_num, names_selected,  team_name) => {
     try {
 
       const response = await fetch("http://forexapi.atwebpages.com/Log_in/Regester_names.php", {
@@ -18,7 +18,7 @@ app.use(express.json());
         body: JSON.stringify({
           phone: phone_num,
           names: names_selected,
-          whatsapp: whatsapp_num,
+         
           team: team_name
         }),
       });
@@ -42,10 +42,10 @@ app.use(express.json());
   //const whatsapp = 4455667
     const phone_num  = phone.toString();
     const names_selected = names.toString();
-    const whatsapp_num = whatsapp.toString();
+    
     const team_name = team.toString();
     
-    const data = await fetchData(phone_num, names_selected, whatsapp_num, team_name);   // call your function
+    const data = await fetchData(phone_num, names_selected,  team_name);   // call your function
 
     res.json(data);                   // send to browser
 
