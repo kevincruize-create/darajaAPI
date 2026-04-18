@@ -27,6 +27,8 @@ const update_withdrawn = require('./Charges/Update_withdrawn')
 const update_withdrawn_real = require('./Charges/Update_withdrawn_real')
 const withdraw = require('./Charges/Withdraw')
 
+const send_offer = require('./Charges/Send_offer')
+
 const ACL = require('./Functions/ACL')
 
 const call_back_stk = require('./Functions/call_back_stk')
@@ -176,6 +178,9 @@ update_depps(app)
 update_withdrawn(app)
 update_withdrawn_real(app)
 withdraw(app)
+
+//send offer
+send_offer(app)
 
 app.get("/", (req, res) => {
   res.status(200).send("OK");
