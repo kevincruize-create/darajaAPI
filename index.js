@@ -27,7 +27,7 @@ const update_withdrawn = require('./Charges/Update_withdrawn')
 const update_withdrawn_real = require('./Charges/Update_withdrawn_real')
 const withdraw = require('./Charges/Withdraw')
 
-const send_offer = require('./Charges/Send_offer')
+const send_offer = require('./Offers/Send_offer')
 
 const ACL = require('./Functions/ACL')
 
