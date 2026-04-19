@@ -28,6 +28,7 @@ const update_withdrawn_real = require('./Charges/Update_withdrawn_real')
 const withdraw = require('./Charges/Withdraw')
 
 const send_offer = require('./Offers/Send_offer')
+const my_offer = require('./Offers/Display_my_offers')
 
 const ACL = require('./Functions/ACL')
 
@@ -181,6 +182,7 @@ withdraw(app)
 
 //send offer
 send_offer(app)
+my_offer(app)
 
 app.get("/", (req, res) => {
   res.status(200).send("OK");
