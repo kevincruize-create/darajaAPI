@@ -30,6 +30,7 @@ const withdraw = require('./Charges/Withdraw')
 const send_offer = require('./Offers/Send_offer')
 const my_offer = require('./Offers/Display_my_offers')
 const display_offer = require('./Offers/Display_offer')
+const fetch_win = require('./Charges/fetch_win')
 
 const ACL = require('./Functions/ACL')
 
@@ -185,6 +186,7 @@ withdraw(app)
 send_offer(app)
 my_offer(app)
 display_offer(app)
+fetch_win(app)
 
 app.get("/", (req, res) => {
   res.status(200).send("OK");
