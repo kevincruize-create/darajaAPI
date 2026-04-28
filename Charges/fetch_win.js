@@ -11,7 +11,7 @@ app.use(express.json());
   const fetchData = async (ID, amount_kes) => {
     try {
 
-      const response = await fetch("http://forexapi.atwebpages.com/offers/collect_win.php", {
+      const response = await fetch("http://forexapi.atwebpages.com/Charges/collect_win.php", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
