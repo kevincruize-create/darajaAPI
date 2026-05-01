@@ -49,7 +49,8 @@ app.use(express.json());
   const team_B = team_b.toString();
   const offerer_id = offerer_ID.toString();
   const offer_id = offer_ID.toString();
- 
+
+    console.log(ID, amount_kes, team_A, team_B, offerer_id, offer_id)
     
     const data = await fetchData(ID, amount_kes, team_A, team_B, offerer_id, offer_id);   // call your function
 
