@@ -38,8 +38,9 @@ app.use(express.json());
   app.post("/accept_offer", async (req, res) => {
 
     const { myID,  amount, team_a, team_b, offerer_ID, offer_ID } = req.body;
-        if (!myID || !amount || !team_a || !team_b || !offerer_ID || !amount ) {
-       return console.log('missing credentials');
+        
+       if (!myID || !amount || !team_a || !team_b || !offerer_ID || !amount ) {
+            return console.log('missing credentials');
        }
 
   const ID  = myID.toString();
