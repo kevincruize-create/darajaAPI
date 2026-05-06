@@ -8,7 +8,7 @@ app.use(express.json());
 //const user_ID = 0
 //const amount = 0
 
-  const fetchData = async (ID, amount_kes) => {
+  const fetchData = async (ID, amount_kes, game_id) => {
     try {
 
       const response = await fetch("http://forexapi.atwebpages.com/Charges/collect_win.php", {
@@ -18,7 +18,8 @@ app.use(express.json());
         },
         body: JSON.stringify({
           myID:ID,
-          amount:amount_kes
+          amount:amount_kes,
+          game_id
         }),
       });
 
@@ -33,16 +34,17 @@ app.use(express.json());
 
   app.post("/fetch_win", async (req, res) => {
 
-    const { myID,  amount } = req.body;
-        if (!myID || !amount ) {
+    const { myID,  amount, gameid } = req.body;
+        if (!myID || !amount || !gameid ) {
            return console.log('missing credentials');
        }
 
   const ID  = myID.toString();
   const amount_kes = amount.toString();
+  const game_id = gameid.toString();
  
     
-    const data = await fetchData(ID, amount_kes);   // call your function
+    const data = await fetchData(ID, amount_kes, game_id);   // call your function
 
     res.json(data);                   // send to browser
 
