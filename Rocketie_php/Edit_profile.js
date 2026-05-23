@@ -7,7 +7,7 @@ app.use(express.json());
 //const mpesa = 254726270922
 //const myID = 38
 
-  const fetchData = async (ID, names, mpesa_num, team) => {
+  const fetchData = async (ID, names, mpesa_num, team_name) => {
     try {
 
       const response = await fetch("http://forexapi.atwebpages.com/Log_in/Edit_profile.php", {
@@ -19,7 +19,7 @@ app.use(express.json());
           myID: ID,
           name: names,
           mpesa: mpesa_num,
-          team,
+          team: team_name,
         }),
       });
 
@@ -49,7 +49,7 @@ app.use(express.json());
        const mpesa_num = mpesa.toString();
        const team_name = team.toString();
 
-    const data = await fetchData(ID, names, mpesa_num, team);   // call your function
+    const data = await fetchData(ID, names, mpesa_num, team_name);   // call your function
 
     res.json(data);                   // send to browser
 
