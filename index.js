@@ -33,6 +33,7 @@ const display_offer = require('./Offers/Display_offer')
 const fetch_win = require('./Charges/fetch_win')
 const confirm_game = require('./Offers/Confirm_offer')
 const accept_offer = require('./Offers/Accept_offer')
+const update_room = require('./Offers/Update_room')
 
 const ACL = require('./Functions/ACL')
 
@@ -191,6 +192,7 @@ display_offer(app)
 fetch_win(app)
 confirm_game(app)
 accept_offer(app)
+update_room(app)
 
 app.get("/", (req, res) => {
   res.status(200).send("OK");
