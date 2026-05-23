@@ -7,7 +7,7 @@ app.use(express.json());
 //const mpesa = 254726270922
 //const myID = 38
 
-  const fetchData = async (ID, names, mpesa_num) => {
+  const fetchData = async (ID, names, mpesa_num, team) => {
     try {
 
       const response = await fetch("http://forexapi.atwebpages.com/Log_in/Edit_profile.php", {
@@ -19,6 +19,7 @@ app.use(express.json());
           myID: ID,
           name: names,
           mpesa: mpesa_num,
+          team,
         }),
       });
 
@@ -32,8 +33,8 @@ app.use(express.json());
   };
 
   app.post("/Edit_profile", async (req, res) => {
-    const { myID, name, mpesa } = req.body;
-     if (!myID || !name || !mpesa) {
+    const { myID, name, mpesa, team } = req.body;
+     if (!myID || !name || !mpesa || !team) {
        return res.status(400).json({
          error: "Missing credentials"
        });
@@ -46,8 +47,9 @@ app.use(express.json());
        const ID  = myID.toString();
        const names = name.toString();
        const mpesa_num = mpesa.toString();
+       const team_name = team.toString();
 
-    const data = await fetchData(ID, names, mpesa_num);   // call your function
+    const data = await fetchData(ID, names, mpesa_num, team);   // call your function
 
     res.json(data);                   // send to browser
 
