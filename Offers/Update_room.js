@@ -9,7 +9,7 @@ app.use(express.json());
 
 //const phone = 254726270922
 
-  const fetchData = async (room_num, ID) => {
+  const fetchData = async (room_num, ID, type_text) => {
     try {
       const response = await fetch("http://forexapi.atwebpages.com/offers/Update_room.php", {
         method: "POST",
@@ -18,7 +18,8 @@ app.use(express.json());
         },
         body: JSON.stringify({
           room: room_num,
-          myID:ID
+          myID:ID,
+          type: type_text
          }),
       });
 
@@ -33,14 +34,15 @@ app.use(express.json());
 
   app.post("/Update_room", async (req, res) => {
   
-   const { room, myID } = req.body;
-     if (!room || !myID) {
+   const { room, myID, type } = req.body;
+     if (!room || !myID || !type) {
       return console.log('missing credentials');
      }
     const room_num  = room.toString();
-    const ID  = room.toString(myID);
+    const ID  = myID.toString();
+    const type_text  = type.toString();
     
-    const data = await fetchData(room_num, ID);   // call your function
+    const data = await fetchData(room_num, ID, type_text);   // call your function
 
     res.json(data);                   // send to browser
 
