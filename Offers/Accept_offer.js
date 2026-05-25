@@ -38,9 +38,9 @@ app.use(express.json());
 
   app.post("/accept_offer", async (req, res) => {
 
-    const { myID,  amount, team_a, team_b, offerer_ID, offer_ID, room } = req.body;
+    const { myID,  amount, team_a, team_b, offerer_ID, offer_ID } = req.body;
         
-       if (!myID || !amount || !team_a || !team_b || !offerer_ID || !amount || !room ) {
+       if (!myID || !amount || !team_a || !team_b || !offerer_ID || !amount  ) {
             return console.log('missing credentials');
        }
 
@@ -50,7 +50,7 @@ app.use(express.json());
   const team_B = team_b.toString();
   const offerer_id = offerer_ID.toString();
   const offer_id = offer_ID.toString();
-  const room_num = room.toString();
+  const room_num =300;
 
     console.log(ID, amount_kes, team_A, team_B, offerer_id, offer_id, room_num)
     
