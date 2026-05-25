@@ -34,14 +34,14 @@ app.use(express.json());
 
   app.post("/send_offer", async (req, res) => {
 
-    const { myID,  amount, room } = req.body;
-        if (!myID || !amount || !room ) {
+    const { myID,  amount } = req.body;
+        if (!myID || !amount ) {
        return console.log('missing credentials');
        }
 
   const ID  = myID.toString();
   const amount_kes = amount.toString();
-  const room_num = room.toString();
+  const room_num = 300;
     
     const data = await fetchData(ID, amount_kes, room_num);   // call your function
 
