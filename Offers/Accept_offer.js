@@ -29,6 +29,10 @@ app.use(express.json());
 
       const data = await response.json();
 
+      const new_data = {ID, amount_kes, team_A, team_B, offerer_id, offer_id, room_num}
+
+      io.emit("accept_offer_notf", new_data);
+
       return data;
 
     } catch (error) {
