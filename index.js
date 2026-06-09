@@ -44,7 +44,7 @@ const port = process.env.PORT||3001;
 const app = express();
 app.use(cors());
 const server = http.createServer(app);
-//https://github.com/alvin-kiveu/Mpesa-Daraja-Api-NODE.JS/blob/master/app.js
+// https://github.com/alvin-kiveu/Mpesa-Daraja-Api-NODE.JS/blob/master/app.js
 
 const io = new Server(server, {
   cors: {
