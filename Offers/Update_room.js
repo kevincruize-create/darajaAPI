@@ -25,6 +25,11 @@ app.use(express.json());
 
       const data = await response.json();
 
+      
+      const new_data = {room_num, team, ID}
+
+      io.emit("receive_update_notf", new_data);
+
       return data;
 
     } catch (error) {
