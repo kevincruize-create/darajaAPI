@@ -198,8 +198,8 @@ my_offer(app)
 display_offer(app)
 fetch_win(app)
 confirm_game(app)
-accept_offer(app)
-update_room(app)
+accept_offer(app, io)
+update_room(app, io)
 
 app.get("/", (req, res) => {
   res.status(200).send("OK");
