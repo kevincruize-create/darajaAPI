@@ -26,7 +26,7 @@ app.use(express.json());
       const data = await response.json();
 
       
-      const new_data = {room_num, ID}
+      const new_data = {room_num, ID};
 
       io.emit("receive_update_notf", new_data);
 
