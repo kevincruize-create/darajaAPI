@@ -32,7 +32,7 @@ app.use(express.json());
     }
   };
 
-  app.post("/send_offer", async (req, res) => {
+  app.post("/send_offer_rocketie", async (req, res) => {
 
     const { myID,  amount } = req.body;
         if (!myID || !amount ) {
