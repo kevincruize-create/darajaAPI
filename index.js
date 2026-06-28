@@ -37,8 +37,8 @@ const accept_offer = require('./Offers/Accept_offer')
 const update_room = require('./Offers/Update_room')
 
 const place_offer_rocketie = require('./Rocketie/Offers/Place_offer')
-const get_my_offer = require('./Rocketie/Offers/Get_my_offer.js
-const rocketie_offers = require('./Rocketie/Offers/Offers.js')
+const get_my_offer = require('./Rocketie/Offers/Get_my_offer)
+const rocketie_offers = require('./Rocketie/Offers/Offers')
 
 const ACL = require('./Functions/ACL')
 
