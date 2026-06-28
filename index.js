@@ -36,6 +36,8 @@ const confirm_game = require('./Offers/Confirm_offer')
 const accept_offer = require('./Offers/Accept_offer')
 const update_room = require('./Offers/Update_room')
 
+const place_offer_rocketie = require('./Rocketie/Offers/Place_offer')
+
 const ACL = require('./Functions/ACL')
 
 const call_back_stk = require('./Functions/call_back_stk')
@@ -200,6 +202,9 @@ fetch_win(app)
 confirm_game(app)
 accept_offer(app, io)
 update_room(app, io)
+
+//Rocketie
+place_offer_rocketie(app)
 
 app.get("/", (req, res) => {
   res.status(200).send("OK");
