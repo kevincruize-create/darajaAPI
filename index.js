@@ -37,6 +37,7 @@ const accept_offer = require('./Offers/Accept_offer')
 const update_room = require('./Offers/Update_room')
 
 const place_offer_rocketie = require('./Rocketie/Offers/Place_offer')
+const get_my_offer = require('./Rocketie/Offers/Get_my_offer.js')
 
 const ACL = require('./Functions/ACL')
 
@@ -205,6 +206,7 @@ update_room(app, io)
 
 //Rocketie
 place_offer_rocketie(app)
+get_my_offer(app)
 
 app.get("/", (req, res) => {
   res.status(200).send("OK");
