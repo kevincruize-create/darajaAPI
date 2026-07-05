@@ -8,7 +8,7 @@ app.use(express.json());
 //const user_ID = 0
 //const amount = 0
 
-  const fetchData = async (ID, game_room) => {
+  const fetchData = async (ID, game_room, game_amt) => {
     try {
 
       const response = await fetch("http://forexapi.atwebpages.com/Rocketie/Offers/Check_player_exists.php", {
@@ -18,7 +18,8 @@ app.use(express.json());
         },
         body: JSON.stringify({
           myID:ID,
-          room: game_room
+          room: game_room,
+          amount: game_amt
           }),
       });
 
@@ -33,16 +34,16 @@ app.use(express.json());
 
   app.post("/display_played", async (req, res) => {
 
-    const { myID, room } = req.body;
-        if (!myID || !room) {
+    const { myID, room, amount } = req.body;
+        if (!myID || !room || !amount) {
        return console.log('missing credentials');
        }
 
   const ID  = myID.toString();
-  const game_room  = myID.toString();
-
+  const game_room  = room.toString();
+  const game_amt  = amount.toString();
     
-    const data = await fetchData(ID, game_room);   // call your function
+    const data = await fetchData(ID, game_room, game_amt);   // call your function
 
     res.json(data);                   // send to browser
 
