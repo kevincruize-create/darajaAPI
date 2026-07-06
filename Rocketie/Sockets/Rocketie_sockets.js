@@ -5,7 +5,7 @@ const express = require('express');
 const process = (app, io) => {
 
 const Room = 300;
- const array = [{ name: 'Kev', myID: 94, attacker:'', game_room:6, damage:'', health:40, status:'', coins:100 }];
+ const array = [];
 //const array = [];
 //const array = [];
 //console.log('hello')
