@@ -54,7 +54,7 @@ io.on('connection', (socket) => {
 
     //console.log(playersInRoom.length);
 
-   //console.log('updated array', array) 
+     console.log('updated array', array) 
 
   })
 
