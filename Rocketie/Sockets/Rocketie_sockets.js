@@ -23,20 +23,13 @@ io.on('connection', (socket) => {
 
     if(!user)
     {
-        array.push({
-         name: data.sender,
-         myID: data.myID,
-         game_room: data.room,
-         attacker:'',
-         health:100,
-         damage:'',
-         status:'',
-         coins:0
-
-        });
-    } // it pushes the array twice.
-
-   console.log('updated array', array) // it displays double entry
+        console.log('exists not')
+    }
+    else
+    {
+       console.log('exists')
+    }
+   
 
    
 
