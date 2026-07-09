@@ -41,7 +41,7 @@ io.on('connection', (socket) => {
     }
    
 
-   
+   console.log('updated array', array) 
 
   })
 
