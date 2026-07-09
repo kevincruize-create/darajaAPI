@@ -19,14 +19,14 @@ io.on('connection', (socket) => {
 
   socket.on('push_array', (data) => {
 
-    const user = array.find(item => item.myID === data.myID && item.game_room === data.room);
+    const user = array.find(item => item.myID === data.myID && item.room === data.room);
 
     if(!user)
     {
          array.push({
          name: data.sender,
          myID: data.myID,
-         game_room: data.room,
+         room: data.room,
          attacker:'',
          health:100,
          damage:'',
