@@ -31,7 +31,8 @@ io.on('connection', (socket) => {
          health:100,
          damage:'',
          status:'',
-         coins:0
+         coins:0,
+         win:''
 
         });
     }
@@ -42,9 +43,18 @@ io.on('connection', (socket) => {
 
     const playersInRoom = array.filter(item => item.room === data.room);
 
-    console.log(playersInRoom.length);
+    if(playersInRoom >= 2)
+    {
+        const update = array.find(item => item.room === data.room);
+        if(update)
+        {
+          update.win = 'eligible';
+        }
+    }
 
-   console.log('updated array', array) 
+    //console.log(playersInRoom.length);
+
+   //console.log('updated array', array) 
 
   })
 
