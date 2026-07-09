@@ -43,7 +43,7 @@ io.on('connection', (socket) => {
 
     const playersInRoom = array.filter(item => item.room === data.room);
 
-    if(playersInRoom >= 2)
+    if(playersInRoom.length >= 2)
     {
         console.log('yes it is 2')
         const update = array.find(item => item.room === data.room);
