@@ -23,7 +23,17 @@ io.on('connection', (socket) => {
 
     if(!user)
     {
-        console.log('exists not')
+         array.push({
+         name: data.sender,
+         myID: data.myID,
+         game_room: data.room,
+         attacker:'',
+         health:100,
+         damage:'',
+         status:'',
+         coins:0
+
+        });
     }
     else
     {
