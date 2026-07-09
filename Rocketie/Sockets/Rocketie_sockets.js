@@ -39,9 +39,11 @@ io.on('connection', (socket) => {
     {
        console.log('exists')
     }
-   
+
+    const number = array.find(item => item.room === data.room);
 
    console.log('updated array', array) 
+   console.log('players', number.length)
 
   })
 
