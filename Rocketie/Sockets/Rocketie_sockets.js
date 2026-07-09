@@ -65,17 +65,19 @@ io.on('connection', (socket) => {
 
     console.log('bomb')
 
-    const user = array.find(item => item.myID === data.myID);
+    const user = array.find(item => item.myID === data.myID && item.room === data.room);
 
      if (user) {
          
-         user.status = 'loose'
-         console.log('loss', array)
+         //user.status = 'loose'
+         //console.log('loss', array)
+         array.splice(user, 1);
+         io.emit('array', array);
 
      }
 
 
-    io.emit('array', array);
+    
 
  
   });
