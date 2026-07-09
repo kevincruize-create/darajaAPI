@@ -19,7 +19,7 @@ io.on('connection', (socket) => {
 
   socket.on('push_array', (data) => {
 
-    const user = array.find(item => item.myID === data.myID && item.room === data.room);
+    const user = array.find(item => item.myID === data.myID && item.game_room === data.room);
 
     if(!user)
     {
