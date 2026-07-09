@@ -46,7 +46,7 @@ io.on('connection', (socket) => {
     if(playersInRoom.length >= 2)
     {
         console.log('yes it is 2')
-        const update = array.find(item => item.room === data.room && item.myID === data.myID);
+        const update = array.find(item => item.room === data.room);
         if(update)
         {
            console.log('yes it is eligible')
