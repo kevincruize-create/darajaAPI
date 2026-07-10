@@ -42,6 +42,7 @@ const rocketie_offers = require('./Rocketie/Offers/Offers')
 const rocketie_sockets = require('./Rocketie/Sockets/Rocketie_sockets')
 const check_played = require('./Rocketie/Sockets/Check_played')
 const del_win_offer = require('./Rocketie/Offers/Delete_offer')
+const log_in_rocketie = require('./Rocketie/Logins/Log_in')
 
 const ACL = require('./Functions/ACL')
 
@@ -215,6 +216,7 @@ rocketie_offers(app)
 rocketie_sockets(app, io)
 check_played(app)
 del_win_offer(app)
+log_in_rocketie(app)
 
 app.get("/", (req, res) => {
   res.status(200).send("OK");
