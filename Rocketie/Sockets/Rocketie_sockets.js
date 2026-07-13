@@ -133,7 +133,7 @@ io.on('connection', (socket) => {
 
     // update where array contains the details of the enemy then send data to that enemy.
 
-    const user = array.find(item => item.myID === data.myID && item.game_room === data.room);
+    const user = array.find(item => item.myID === data.myID && item.room === data.room);
 
      if (user) {
       
@@ -179,7 +179,7 @@ io.on('connection', (socket) => {
 
     // update where array contains the details of the enemy then send data to that enemy.
 
-    const user = array.find(item => item.myID === data.myID && item.game_room === data.room);
+    const user = array.find(item => item.myID === data.myID && item.room === data.room);
 
      if (user) {
         
