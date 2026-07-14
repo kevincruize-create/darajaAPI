@@ -91,7 +91,7 @@ io.on('connection', (socket) => {
 
     console.log('bomb')
 
-    const user = array.find(item => item.ID === data.victim);
+    const user = array.find(item => item.myID === data.victim);
 
      if (user) {
         user.damage = 'bomb';
