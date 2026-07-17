@@ -108,7 +108,7 @@ io.on('connection', (socket) => {
 
            // emit player array
         console.log('bomb', data.room)
-        io.emit('bomb', data);
+        io.to(data.room).emit('bomb', data);
         io.to(data.room).emit('array', array);
      }
      else{
@@ -133,11 +133,11 @@ io.on('connection', (socket) => {
      if (user) {
         user.damage = 'freeze_controls';
         user.attacker = data.sender;
+        console.log('freeze_controls', data.victim)
+        io.to(data.room).emit('freeze_controls', data);
      }
  
-     console.log('freeze_controls', data.victim)
 
-    io.emit('freeze_controls', data);
 
   });
 
@@ -152,7 +152,7 @@ io.on('connection', (socket) => {
       
          user.health = data.health;
          //console.log('health')
-         io.emit('array', array);
+         io.to(data.room).emit('array', array);
         
      }
 
@@ -180,8 +180,8 @@ io.on('connection', (socket) => {
         user.attacker = data.attacker;
 
             console.log('take coins', data)//
-            io.emit('receive_coins', data);
-            io.emit('array', array);
+            io.to(data.room).emit('receive_coins', data);
+            io.to(data.room).emit('array', array);
      }
 
 
@@ -199,11 +199,11 @@ io.on('connection', (socket) => {
         
         user.coins = data.coins + 5;
         console.log('coins update')
-       
+             //console.log('coins')
+        io.to(data.room).emit('array', array);
      }
 
-     //console.log('coins')
-    io.emit('array', array);
+
 
   });
 
