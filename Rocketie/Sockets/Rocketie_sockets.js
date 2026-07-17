@@ -78,7 +78,7 @@ io.on('connection', (socket) => {
          //user.status = 'loose'
          //console.log('loss', array)
          array.splice(user, 1);
-         io..to(data.room).emit('array', array);
+         io.to(data.room).emit('array', array);
 
      }
 
@@ -106,8 +106,8 @@ io.on('connection', (socket) => {
 
            // emit player array
 
-    io.to(data.room)emit('bomb', data);
-    io.to(data.room)emit('array', array);
+    io.to(data.room).emit('bomb', data);
+    io.to(data.room).emit('array', array);
      }
 
 
