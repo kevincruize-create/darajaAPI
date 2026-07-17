@@ -152,7 +152,7 @@ io.on('connection', (socket) => {
       
          user.health = data.health;
          //console.log('health')
-         io.to(data.room).emit('array', array);
+    
         
      }
 
@@ -160,7 +160,7 @@ io.on('connection', (socket) => {
 
    //  io.emit('array', array);
 
-
+        io.to(data.room).emit('array', array);
    // io.emit('freeze_controls', data);
 
   });
@@ -200,9 +200,9 @@ io.on('connection', (socket) => {
         user.coins = data.coins + 5;
         console.log('coins update')
              //console.log('coins')
-        io.to(data.room).emit('array', array);
+    
      }
-
+        io.to(data.room).emit('array', array);
 
 
   });
