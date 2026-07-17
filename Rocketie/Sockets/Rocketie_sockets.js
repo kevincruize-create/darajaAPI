@@ -98,7 +98,7 @@ io.on('connection', (socket) => {
     
 
     const user = array.find(item => item.myID === data.victim);
-
+     console.log('bomb', data.room)
      if (user) {
         user.damage = 'bomb';
         user.attacker = data.sender;
