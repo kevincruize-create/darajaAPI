@@ -36,7 +36,7 @@ io.on('connection', (socket) => {
          health:100,
          damage:'',
          status:'',
-         coins:0,
+         coins:data.coins,
          win:''
 
         });
