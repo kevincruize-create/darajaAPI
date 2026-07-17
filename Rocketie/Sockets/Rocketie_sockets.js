@@ -95,7 +95,7 @@ io.on('connection', (socket) => {
 
     // update where array contains the details of the enemy then send data to that enemy.
 
-    console.log('bomb')
+    
 
     const user = array.find(item => item.myID === data.victim);
 
@@ -105,9 +105,9 @@ io.on('connection', (socket) => {
         user.health = user.health - 50
 
            // emit player array
-
-    io.to(data.room).emit('bomb', data);
-    io.to(data.room).emit('array', array);
+        console.log('bomb', data.room)
+        io.to(data.room).emit('bomb', data);
+        io.to(data.room).emit('array', array);
      }
 
 
