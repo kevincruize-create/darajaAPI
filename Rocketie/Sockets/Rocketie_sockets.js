@@ -108,7 +108,7 @@ io.on('connection', (socket) => {
 
            // emit player array
         console.log('bomb', data.room)
-        io.to(data.room).emit('bomb', data);
+        io.emit('bomb', data);
         io.to(data.room).emit('array', array);
      }
      else{
