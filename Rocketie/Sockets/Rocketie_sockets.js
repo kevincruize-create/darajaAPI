@@ -98,8 +98,10 @@ io.on('connection', (socket) => {
     
 
     const user = array.find(item => item.myID === data.victim);
-     console.log('bomb', data.room)
+    // console.log('bomb', data.room)
      if (user) {
+
+        console.log('bomb victim exists')
         user.damage = 'bomb';
         user.attacker = data.sender;
         user.health = user.health - 50
@@ -108,6 +110,9 @@ io.on('connection', (socket) => {
         console.log('bomb', data.room)
         io.to(data.room).emit('bomb', data);
         io.to(data.room).emit('array', array);
+     }
+     else{
+        console.log('bomb victim no exists')
      }
 
 
