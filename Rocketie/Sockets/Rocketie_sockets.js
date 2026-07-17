@@ -17,6 +17,7 @@ io.on('connection', (socket) => {
 
     socket.on("join_game", (room) => {
         socket.join(room);
+        console.log('room join', room)
     });
 
   
@@ -57,7 +58,7 @@ io.on('connection', (socket) => {
     }
 
     //console.log(playersInRoom.length);
-     io.to(room).emit('array_check', array);
+     io.to(data.room).emit('array_check', array);
 
      console.log('updated array', array) 
 
