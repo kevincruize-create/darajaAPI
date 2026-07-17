@@ -4,7 +4,7 @@ const express = require('express');
 
 const process = (app, io) => {
 
-const Room = 300;
+const room = 6;
  const array = [];
 //const array = [];
 //const array = [];
@@ -15,7 +15,11 @@ io.on('connection', (socket) => {
   //console.log('hello')
   console.log('User connected:', socket.id);
 
-  io.emit('array_check', array);
+    socket.on("join_game", (room) => {
+        socket.join(room);
+    });
+
+  
 
   socket.on('push_array', (data) => {
 
@@ -53,6 +57,7 @@ io.on('connection', (socket) => {
     }
 
     //console.log(playersInRoom.length);
+     io.to(room).emit('array_check', array);
 
      console.log('updated array', array) 
 
