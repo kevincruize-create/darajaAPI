@@ -38,7 +38,8 @@ io.on('connection', (socket) => {
          status:'',
          coins:data.coins,
          win:'',
-         shield:''
+         shield:'',
+         socketId: socket.id,
         });
     }
     else
@@ -246,6 +247,14 @@ io.on('connection', (socket) => {
 
   socket.on('disconnect', () => {
     console.log('User disconnected:', socket.id);
+
+    const index = array.findIndex(
+        p => p.socketId === socket.id
+    );
+
+    if(index !== -1){
+        array.splice(index,1);
+    }
 
    });
 });
