@@ -230,7 +230,7 @@ io.on('connection', (socket) => {
         
         
         user.coins = data.coins + 5;
-        console.log('coins update')
+      //  console.log('coins update')
              //console.log('coins')
     
      }
