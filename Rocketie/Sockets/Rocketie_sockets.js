@@ -37,8 +37,8 @@ io.on('connection', (socket) => {
          damage:'',
          status:'',
          coins:data.coins,
-         win:''
-
+         win:'',
+         shield:''
         });
     }
     else
@@ -122,6 +122,38 @@ io.on('connection', (socket) => {
   });
 
 
+     // Receive message from client
+  socket.on('shield', (data) => {
+
+    // update where array contains the details of the enemy then send data to that enemy.
+
+    const user = array.find(item => item.myID === data.myID && item.room === data.room);
+
+     if (user) {
+        user.shield = 'on';
+       
+        io.to(data.room).emit('array', array);
+     }
+ 
+
+
+  });
+
+   socket.on('shield_off', (data) => {
+
+    // update where array contains the details of the enemy then send data to that enemy.
+
+    const user = array.find(item => item.myID === data.myID && item.room === data.room);
+
+     if (user) {
+        user.shield = 'off';
+       
+        io.to(data.room).emit('array', array);
+     }
+ 
+
+
+  });
 
     // Receive message from client
   socket.on('freeze_controls', (data) => {
