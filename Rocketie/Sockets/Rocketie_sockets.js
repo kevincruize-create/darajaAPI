@@ -122,6 +122,22 @@ io.on('connection', (socket) => {
 
   });
 
+   socket.on('eliminate_attacker', (data) => {
+
+    // update where array contains the details of the enemy then send data to that enemy.
+
+    const user = array.find(item => item.myID === data.myID && item.room === data.room);
+
+     if (user) {
+        user.attacker = '';
+        user.health = data.health;
+        io.to(data.room).emit('array', array);
+     }
+ 
+
+
+  });
+
 
      // Receive message from client
   socket.on('shield', (data) => {
