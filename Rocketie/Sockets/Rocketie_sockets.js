@@ -136,6 +136,22 @@ io.on('connection', (socket) => {
 
   });
 
+   socket.on('unfreeze', (data) => {
+
+    // update where array contains the details of the enemy then send data to that enemy.
+
+    const user = array.find(item => item.myID === data.myID && item.room === data.room);
+
+     if (user) {
+         user.damage = '';
+         io.to(data.room).emit('array', array);
+     }
+ 
+
+
+  });
+
+
    socket.on('eliminate_attacker', (data) => {
 
     // update where array contains the details of the enemy then send data to that enemy.
