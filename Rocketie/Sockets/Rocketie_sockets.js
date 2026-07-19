@@ -40,6 +40,7 @@ io.on('connection', (socket) => {
          win:'',
          shield:'',
          socketId: socket.id,
+         eliminations: 0
         });
     }
     else
@@ -78,11 +79,24 @@ io.on('connection', (socket) => {
          
          //user.status = 'loose'
          //console.log('loss', array)
+         io.to(data.room).emit('eliminator', data);
          array.splice(user, 1);
          io.to(data.room).emit('array', array);
 
      }
 
+
+    const player = array.find(item => item.attacker === data.attacker && item.room === data.room);
+
+       if (player) 
+       {
+         if(player !== '')
+         {
+         user.eliminations = user.eliminations + 1;  
+         io.to(data.room).emit('array', array);
+         }
+
+       }
 
     
 
