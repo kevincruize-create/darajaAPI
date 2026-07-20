@@ -122,7 +122,7 @@ io.on('connection', (socket) => {
         user.health = user.health - 50
 
            // emit player array
-        console.log('bomb', data.room)
+        console.log('bomb', array)
         io.to(data.room).emit('bomb', data);
         io.to(data.room).emit('array', array);
      }
