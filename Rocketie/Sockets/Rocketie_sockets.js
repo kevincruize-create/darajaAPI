@@ -147,7 +147,7 @@ io.on('connection', (socket) => {
   });
 
     socket.on('revenge_data', (data) => {
-     console.log('revenge data')
+     console.log('revenge data', data.room)
      io.to(data.room).emit('array', array);
     });
 
