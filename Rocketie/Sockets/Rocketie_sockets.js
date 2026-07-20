@@ -71,36 +71,27 @@ io.on('connection', (socket) => {
 
     // update where array contains the details of the enemy then send data to that enemy.
 
-    console.log('bomb')
-
-    const user = array.find(item => item.myID === data.myID && item.room === data.room);
-
-     if (user) {
-         
-         //user.status = 'loose'
-         //console.log('loss', array)
-         io.to(data.room).emit('eliminator', data);
-         array.splice(user, 1);
-         io.to(data.room).emit('array', array);
-
-     }
-
-
-    const player = array.find(item => item.name === data.attacker);
+   const player = array.find(item => item.name === data.attacker);
 
        if (player) 
        {
-         if(player !== '')
-         {
+              
           user.eliminations = user.eliminations + 1;  
           console.log('update elimination', array)
           io.to(data.room).emit('array', array);
-         }
-         else{
-           console.log('no elimination update')
-         }
+        
+              const user = array.find(item => item.myID === data.myID && item.room === data.room);
 
-       }
+               if (user) {
+         
+                  //user.status = 'loose'
+                 //console.log('loss', array)
+                 io.to(data.room).emit('eliminator', data);
+                 array.splice(user, 1);
+                 io.to(data.room).emit('array', array);
+
+               }
+      }
 
        else{
                 console.log('not found', data.attacker)
