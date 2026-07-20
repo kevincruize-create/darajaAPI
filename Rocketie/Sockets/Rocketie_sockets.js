@@ -102,6 +102,11 @@ io.on('connection', (socket) => {
 
        }
 
+       else{
+                console.log('not found')
+        
+       }
+
     
 
  
