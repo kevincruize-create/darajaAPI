@@ -103,7 +103,7 @@ io.on('connection', (socket) => {
        }
 
        else{
-                console.log('not found')
+                console.log('not found', data.attacker)
         
        }
 
