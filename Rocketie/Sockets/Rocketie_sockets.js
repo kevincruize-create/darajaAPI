@@ -92,8 +92,12 @@ io.on('connection', (socket) => {
        {
          if(player !== '')
          {
-         user.eliminations = user.eliminations + 1;  
-         io.to(data.room).emit('array', array);
+          user.eliminations = user.eliminations + 1;  
+          console.log('update elimination', array)
+          io.to(data.room).emit('array', array);
+         }
+         else{
+           console.log('no elimination update')
          }
 
        }
