@@ -111,6 +111,7 @@ io.on('connection', (socket) => {
                  //console.log('loss', array)
                  io.to(data.room).emit('eliminator', data);
                  array.splice(user, 1);
+                 console.log('loss', array)
                  io.to(data.room).emit('array', array);
 
                }
