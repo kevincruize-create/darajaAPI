@@ -86,7 +86,7 @@ io.on('connection', (socket) => {
      }
 
 
-    const player = array.find(item => item.attacker === data.attacker && item.room === data.room);
+    const player = array.find(item => item.name === data.attacker && item.room === data.room);
 
        if (player) 
        {
