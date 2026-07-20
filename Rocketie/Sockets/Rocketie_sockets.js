@@ -42,10 +42,18 @@ io.on('connection', (socket) => {
          socketId: socket.id,
          eliminations: 0
         });
+            //console.log(playersInRoom.length);
+           io.to(data.room).emit('array', array);
+
+           console.log('updated array', array) 
     }
     else
     {
        console.log('exists')
+           //console.log(playersInRoom.length);
+       io.to(data.room).emit('array', array);
+
+       console.log('updated array', array) 
     }
 
     const playersInRoom = array.filter(item => item.room === data.room);
@@ -57,12 +65,14 @@ io.on('connection', (socket) => {
        playersInRoom.forEach(player => {
           player.win = 'eligible';
        });
-    }
 
-    //console.log(playersInRoom.length);
+      //console.log(playersInRoom.length);
      io.to(data.room).emit('array', array);
 
      console.log('updated array', array) 
+    }
+
+
 
   })
 
