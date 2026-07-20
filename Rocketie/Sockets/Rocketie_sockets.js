@@ -148,7 +148,13 @@ io.on('connection', (socket) => {
 
     socket.on('revenge_data', (data) => {
      console.log('revenge data', data.room)
-     io.to(data.room).emit('array', array);
+     
+     const user = array.find(item => item.room === data.room);
+     if(user)
+     {
+       io.to(data.room).emit('array', array);
+     }
+    
     });
 
    socket.on('unfreeze', (data) => {
