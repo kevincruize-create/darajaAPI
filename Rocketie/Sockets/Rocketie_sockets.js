@@ -76,7 +76,7 @@ io.on('connection', (socket) => {
        if (player) 
        {
               
-          user.eliminations = user.eliminations + 1;  
+          player.eliminations = player.eliminations + 1;  
           console.log('update elimination', array)
           io.to(data.room).emit('array', array);
         
