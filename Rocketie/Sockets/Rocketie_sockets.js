@@ -46,6 +46,8 @@ io.on('connection', (socket) => {
          myID: data.myID,
          room: data.room,
          attacker:'',
+         victim_name:'',
+         victim: '',
          health:100,
          damage:'',
          status:'',
@@ -144,7 +146,7 @@ io.on('connection', (socket) => {
         user.damage = 'bomb';
         user.attacker = data.sender;
         user.health = user.health - 50
-
+        user.victim_name = data.victim_name
            // emit player array
         console.log('bomb', array)
         io.to(data.room).emit('bomb', data);
@@ -247,6 +249,7 @@ io.on('connection', (socket) => {
      if (user) {
         user.damage = 'freeze_controls';
         user.attacker = data.sender;
+        user.victim_name = data.victim_name
         console.log('freeze_controls', data.victim)
         io.to(data.room).emit('freeze_controls', data);
      }
