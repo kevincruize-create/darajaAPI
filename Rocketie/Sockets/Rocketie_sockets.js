@@ -5,20 +5,7 @@ const express = require('express');
 const process = (app, io) => {
 
 const room = 6;
- const array = [{
-  name: 'Jen',
-    myID: 98,
-    room: 6,
-    attacker: 'Jona parks',
-    health: -34,
-    damage: 'bomb',
-    status: '',
-    coins: 203.625,
-    win: 'eligible',
-    shield: '',
-    socketId: '9duCHtXPeJe__TINAAAF',
-    eliminations: 1
- }];
+ const array = [];
 //const array = [];
 //const array = [];
 //console.log('hello')
