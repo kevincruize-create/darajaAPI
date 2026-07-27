@@ -29,7 +29,7 @@ app.post("/stkpush", async (req, res) => {
     const timestamp = moment().format("YYYYMMDDHHmmss");
 
     const password = Buffer.from(
-      "4168059" +
+      "4405831" +
       "50630e57477fc855e55e6ce684fd4095606e4a93b52f7b6be5d270f3bac886d2" +
       timestamp
     ).toString("base64");
@@ -43,7 +43,7 @@ app.post("/stkpush", async (req, res) => {
         TransactionType: "CustomerPayBillOnline",
         Amount: `${amount_kes}`,
         PartyA: `${mpesa_num}`,
-        PartyB: "4168059",
+        PartyB: "4405831",
         PhoneNumber: `${mpesa_num}`,
         CallBackURL: `https://darajaapi-2.onrender.com/callback?number=${mpesa_num}&id=${ID}&amount=${amount_kes}`,
         AccountReference: "Rocketie",
