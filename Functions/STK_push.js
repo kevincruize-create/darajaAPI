@@ -30,7 +30,7 @@ app.post("/stkpush", async (req, res) => {
 
     const password = Buffer.from(
       "4405831" +
-      "50630e57477fc855e55e6ce684fd4095606e4a93b52f7b6be5d270f3bac886d2" +
+      "6684d0788f943a2191927b915600ff72aaba3bc149498b4d330684866db9fd42" +
       timestamp
     ).toString("base64");
 
