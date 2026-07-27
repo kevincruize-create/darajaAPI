@@ -37,7 +37,7 @@ app.post("/stkpush", async (req, res) => {
     await axios.post(
       url,
       {
-        BusinessShortCode: "4168059",
+        BusinessShortCode: "4405831",
         Password: password,
         Timestamp: timestamp,
         TransactionType: "CustomerPayBillOnline",
