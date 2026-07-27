@@ -35,7 +35,7 @@ app.post("/stkpush", async (req, res) => {
     ).toString("base64");
 
     await axios.post(
-      url,
+      url,//
       {
         BusinessShortCode: "4405831",
         Password: password,
