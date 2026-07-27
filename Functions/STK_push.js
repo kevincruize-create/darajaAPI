@@ -29,7 +29,7 @@ app.post("/stkpush", async (req, res) => {
     const timestamp = moment().format("YYYYMMDDHHmmss");
 
     const password = Buffer.from(
-      "4405831" +
+      "4168059" +
       "50630e57477fc855e55e6ce684fd4095606e4a93b52f7b6be5d270f3bac886d2" +
       timestamp
     ).toString("base64");
@@ -37,13 +37,13 @@ app.post("/stkpush", async (req, res) => {
     await axios.post(
       url,
       {
-        BusinessShortCode: "4405831",
+        BusinessShortCode: "4168059",
         Password: password,
         Timestamp: timestamp,
         TransactionType: "CustomerPayBillOnline",
         Amount: `${amount_kes}`,
         PartyA: `${mpesa_num}`,
-        PartyB: "4405831",
+        PartyB: "4169059",
         PhoneNumber: `${mpesa_num}`,
         CallBackURL: `https://darajaapi-2.onrender.com/callback?number=${mpesa_num}&id=${ID}&amount=${amount_kes}`,
         AccountReference: "Rocketie",
