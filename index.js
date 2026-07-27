@@ -63,8 +63,8 @@ const io = new Server(server, {
 });
 
 async function getAccessToken() {
-  const consumer_key = "zMYnc51rNFuT2AG3A26MTiGgoSPf19JWXEGd8u9EI9x06QGv"; // REPLACE IT WITH YOUR CONSUMER KEY
-  const consumer_secret = "M1WNjLGKyGxBrkWCh2Mye9mrRCkknnMwn1CJ1AGatxFvB9IBgLjax3KNm5DJr4Sf"; // REPLACE IT WITH YOUR CONSUMER SECRET
+  const consumer_key = "KNY0Y7YBGWtArkTGOpJPmTEKxTHBvHfJpxl8LQqKnNUl6jkH"; // REPLACE IT WITH YOUR CONSUMER KEY
+  const consumer_secret = "3JTgRGAbrK5Huc5WG5kvK3YROIWjAzTvy4qMS59KR18Xsv2y0VcR2qPtDopljw5q "; // REPLACE IT WITH YOUR CONSUMER SECRET
   const url =
     "https://api.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials";
   const auth =
