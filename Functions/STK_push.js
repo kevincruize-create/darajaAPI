@@ -46,7 +46,7 @@ app.post("/stkpush", async (req, res) => {
         PartyB: "4405831",
         PhoneNumber: `${mpesa_num}`,
         CallBackURL: `https://darajaapi-2.onrender.com/callback?number=${mpesa_num}&id=${ID}&amount=${amount_kes}`,
-        AccountReference: "Rocketie",
+        AccountReference: "ASV",
         TransactionDesc: "Mpesa Daraja API stk push test",
       },
       {
