@@ -185,6 +185,7 @@ io.on('connection', (socket) => {
      if (user) {
         user.attacker = '';
         user.health = data.health;
+        io.to(data.room).emit('delete_array', data);
         io.to(data.room).emit('array', array);
      }
  
