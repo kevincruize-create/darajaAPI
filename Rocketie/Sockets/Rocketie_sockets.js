@@ -227,6 +227,12 @@ io.on('connection', (socket) => {
 
   });
 
+     // Receive message from client
+  socket.on('reward_attacker', (data) => {
+     io.to(data.room).emit('rewards', data);
+  });
+
+ 
     // Receive message from client
   socket.on('freeze_controls', (data) => {
 
@@ -242,8 +248,6 @@ io.on('connection', (socket) => {
         io.to(data.room).emit('freeze_controls', data);
      }
  
-
-
   });
 
       // Receive message from client
