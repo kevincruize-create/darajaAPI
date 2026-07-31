@@ -43,7 +43,7 @@ io.on('connection', (socket) => {
          shield:'',
          socketId: socket.id,
          eliminations: 0,
-         eliminated:''
+         eliminated:'no'
         });
             //console.log(playersInRoom.length);
            io.to(data.room).emit('array', array);
@@ -149,6 +149,34 @@ io.on('connection', (socket) => {
 
 
   });
+
+
+    socket.on('update_eliminated', (data) => {
+     console.log('revenge data', data.room)
+     
+     const user = array.find(item => item.room === data.room && item.myID === data.myID);
+     if(user)
+     {
+       user.eliminated = 'yes';
+       io.to(data.room).emit('array', array);
+       console.log('eliminated is yes')
+     }
+    
+    });
+
+    socket.on('update_eliminated_new', (data) => {
+     console.log('revenge data', data.room)
+     
+     const user = array.find(item => item.room === data.room && item.myID === data.myID);
+     if(user)
+     {
+       user.eliminated = 'no';
+       io.to(data.room).emit('array', array);
+       console.log('eliminated is no')
+     }
+    
+    });
+ 
 
     socket.on('revenge_data', (data) => {
      console.log('revenge data', data.room)
