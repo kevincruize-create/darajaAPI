@@ -42,7 +42,8 @@ io.on('connection', (socket) => {
          win:'',
          shield:'',
          socketId: socket.id,
-         eliminations: 0
+         eliminations: 0,
+         eliminated:''
         });
             //console.log(playersInRoom.length);
            io.to(data.room).emit('array', array);
