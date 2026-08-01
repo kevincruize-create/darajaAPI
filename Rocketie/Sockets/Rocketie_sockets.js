@@ -20,7 +20,11 @@ io.on('connection', (socket) => {
         console.log('room join', room)
     });
 
-  
+  socket.on('check_arr_number', (data) => {
+
+      io.to(data.room).emit('array', array);
+    
+   });
 
   socket.on('push_array', (data) => {
 
@@ -163,6 +167,9 @@ io.on('connection', (socket) => {
      if(user)
      {
        user.eliminated = 'yes';
+
+       io.to(data.room).emit('exit', data);
+      
        io.to(data.room).emit('array', array);
        console.log('eliminated is yes')
      }
