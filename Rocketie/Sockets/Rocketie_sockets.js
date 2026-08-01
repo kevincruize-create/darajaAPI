@@ -175,7 +175,20 @@ io.on('connection', (socket) => {
      }
     
     });
-
+     
+     socket.on('update_eliminated_vengence', (data) => {
+     console.log('revenge data', data.room)
+     
+     const user = array.find(item => item.room === data.room && item.myID === data.myID);
+     if(user)
+     {
+       user.eliminated = 'yes';
+       io.to(data.room).emit('array', array);
+       console.log('eliminated is no')
+     }
+    
+    });
+ 
     socket.on('update_eliminated_new', (data) => {
      console.log('revenge data', data.room)
      
