@@ -184,7 +184,7 @@ io.on('connection', (socket) => {
      {
        user.eliminated = 'yes';
        io.to(data.room).emit('array', array);
-       console.log('eliminated is no')
+       console.log('eliminated is yes for vengence')
      }
     
     });
