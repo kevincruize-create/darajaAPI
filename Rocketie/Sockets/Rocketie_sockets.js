@@ -52,9 +52,14 @@ io.on('connection', (socket) => {
     }
     else
     {
-       console.log('exists')
-           //console.log(playersInRoom.length);
-       io.to(data.room).emit('array', array);
+         console.log('exists')
+         const user = array.find(item => item.room === data.room && item.myID === data.myID);
+         if(user)
+         {
+            user.eliminated = 'no';
+            io.to(data.room).emit('array', array);
+            
+         }
 
        console.log('updated array', array) 
     }
