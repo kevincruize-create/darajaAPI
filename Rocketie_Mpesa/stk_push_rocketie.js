@@ -14,12 +14,16 @@ app.post("/stkpush_rocketie", async (req, res) => {
     const { myID, amount, mpesa } = req.body;
 
     if (!myID || !amount || !mpesa) {
-      return res.status(400).send("Missing credentials");
+     // return res.status(400).send("Missing credentials");
     }
 
-    const ID = myID.toString();
-    const amount_kes = amount.toString();
-    const mpesa_num = mpesa.toString();
+    //const ID = myID.toString();
+    //const amount_kes = amount.toString();
+    //const mpesa_num = mpesa.toString();
+
+     const ID = 77;
+    const amount_kes = 1;
+    const mpesa_num = 254726270922;
 
     // 🔥 CALL the function and await the Promise
     const accessToken = await getAccessToken();
