@@ -47,7 +47,7 @@ app.post("/stkpush_rocketie", async (req, res) => {
         TransactionType: "CustomerPayBillOnline",
         Amount: `${amount_kes}`,
         PartyA: `${mpesa_num}`,
-        PartyB: "4169059",
+        PartyB: "4168059",
         PhoneNumber: `${mpesa_num}`,
         CallBackURL: `https://darajaapi-2.onrender.com/callback?number=${mpesa_num}&id=${ID}&amount=${amount_kes}`,
         AccountReference: "Rocketie",
