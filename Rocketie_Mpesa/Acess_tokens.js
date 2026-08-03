@@ -36,6 +36,14 @@ async function getAccessToken() {
 //getAccessToken()
 const getAccessTokens = getAccessToken()
 
+app.get("/access_token", (req, res) => {
+  getAccessToken()
+    .then((accessToken) => {
+      res.send("😀 Your access token is " + accessToken);
+    })
+    .catch(console.log);
+});
+
 }
 
 
