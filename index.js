@@ -224,7 +224,7 @@ log_in_rocketie(app)
 create_in_rocketie(app)
 collect_results(app)
 
-rocketie_index(app, io)
+rocketie_index(app, io, axios)
 
 app.get("/", (req, res) => {
   res.status(200).send("OK");
