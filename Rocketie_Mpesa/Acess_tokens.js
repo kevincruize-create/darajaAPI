@@ -36,7 +36,7 @@ async function getAccessToken() {
 
 //stkpush()
 //getAccessToken()
-const getAccessTokens = getAccessToken()
+//const getAccessTokens = getAccessToken()
 stkpush(getAccessToken, app, axios, moment)
 
 app.get("/access_token", (req, res) => {
