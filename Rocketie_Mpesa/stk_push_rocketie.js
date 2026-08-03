@@ -21,9 +21,9 @@ app.post("/stkpush_rocketie", async (req, res) => {
     //const amount_kes = amount.toString();
     //const mpesa_num = mpesa.toString();
 
-     const ID = 77;
-    const amount_kes = 1;
-    const mpesa_num = 254726270922;
+     const ID = '77';
+    const amount_kes = '1';
+    const mpesa_num = '254726270922';
 
     // 🔥 CALL the function and await the Promise
     const accessToken = await getAccessToken();
