@@ -1,5 +1,5 @@
 const express = require('express');
-const stkpush = require('./stk_push_rocketie')
+const stkpush = require('.stk_push_rocketie')
 const moment = require("moment");
 //const app = express();
 
