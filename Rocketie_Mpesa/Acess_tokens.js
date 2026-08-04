@@ -1,6 +1,6 @@
 const express = require('express');
-const stkpush = require('./stk_push_rocketie')
-const b2c = require('./B2C_rocketie')
+const stkpush_rocketie = require('./stk_push_rocketie')
+const b2c_rocketie = require('./B2C_rocketie')
 const moment = require("moment");
 //const app = express();
 
@@ -38,8 +38,8 @@ async function getAccessToken_rocketie() {
 //stkpush()
 //getAccessToken()
 const getAccessTokens_rocketie = getAccessToken_rocketie()
-stkpush(getAccessToken_rocketie, app, axios, moment)
-b2c(getAccessTokens_rocketie, app, axios, moment)
+stkpush_rocketie(getAccessToken_rocketie, app, axios, moment)
+b2c_rocketie(getAccessTokens_rocketie, app, axios, moment)
 
 app.get("/access_token", (req, res) => {
   getAccessToken()
