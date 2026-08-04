@@ -9,7 +9,7 @@ const process = (app, io, axios) => {
 app.use(express.json());
 
   
-async function getAccessToken() {
+async function getAccessToken_rocketie() {
   const consumer_key = "zMYnc51rNFuT2AG3A26MTiGgoSPf19JWXEGd8u9EI9x06QGv"; // REPLACE IT WITH YOUR CONSUMER KEY
   const consumer_secret = "M1WNjLGKyGxBrkWCh2Mye9mrRCkknnMwn1CJ1AGatxFvB9IBgLjax3KNm5DJr4Sf"; // REPLACE IT WITH YOUR CONSUMER SECRET
   const url =
@@ -37,8 +37,8 @@ async function getAccessToken() {
 
 //stkpush()
 //getAccessToken()
-const getAccessTokens = getAccessToken()
-stkpush(getAccessToken, app, axios, moment)
+const getAccessTokens_rocketie = getAccessToken_rocketie()
+stkpush(getAccessToken_rocketie, app, axios, moment)
 b2c(getAccessToken, app, axios, moment)
 
 app.get("/access_token", (req, res) => {
