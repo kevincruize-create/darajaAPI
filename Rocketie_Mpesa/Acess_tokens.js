@@ -37,7 +37,7 @@ async function getAccessToken() {
 
 //stkpush()
 //getAccessToken()
-//const getAccessTokens = getAccessToken()
+const getAccessTokens = getAccessToken()
 stkpush(getAccessToken, app, axios, moment)
 b2c(getAccessToken, app, axios, moment)
 
