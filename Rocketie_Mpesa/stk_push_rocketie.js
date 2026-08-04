@@ -54,7 +54,7 @@ const process = (getAccessToken_rocketie, app, axios, moment) => {
         Timestamp: timestamp,
 
         // IMPORTANT
-        TransactionType: "CustomerBuyGoodsOnline",
+        TransactionType: "CustomerPayBillOnline",
 
         Amount: Number(amount_kes),
 
