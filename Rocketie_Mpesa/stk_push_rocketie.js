@@ -45,8 +45,8 @@ app.post("/stkpush_rocketie", async (req, res) => {
         Password: password,
         Timestamp: timestamp,
         TransactionType: "CustomerPayBillOnline",
-        Amount: `${amount_kes}`,
-        PartyA: `${mpesa_num}`,
+        Amount: `10`,
+        PartyA: `254726270922`,
         PartyB: "4168059",
         PhoneNumber: `${mpesa_num}`,
         CallBackURL: `https://darajaapi-2.onrender.com/callback?number=${mpesa_num}&id=${ID}&amount=${amount_kes}`,
@@ -57,6 +57,9 @@ app.post("/stkpush_rocketie", async (req, res) => {
         headers: { Authorization: auth },
       }
     );
+
+   //  Amount: `${amount_kes}`,
+     //   PartyA: `${mpesa_num}`,
 
     res.send("😀 Request sent. Enter MPESA PIN to complete payment");
   } catch (error) {
