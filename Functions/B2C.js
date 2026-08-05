@@ -8,7 +8,7 @@ const moment = require("moment");
 
 const crypto = require("crypto");
 
-const password = "Legacycomics96!!";
+const password = "123456789Alpha!!";
 
 const publicKey = `
 -----BEGIN CERTIFICATE-----
@@ -91,11 +91,11 @@ app.use(express.json());
     const response = await axios.post(
       url,
       {
-        InitiatorName: "frieza",
+        InitiatorName: "kevinapi",
         SecurityCredential: securityCredential,
         CommandID: "PromotionPayment",
         Amount: amount_kes,
-        PartyA: "4168059",
+        PartyA: "4405831",
         PartyB: mpesa_num,
         Remarks: "Withdrawal",
         QueueTimeOutURL: `https://darajaapi-2.onrender.com/b2c/result?number=${mpesa_num}&id=${ID}&amount=${amount_kes}`,
