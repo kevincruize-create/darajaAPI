@@ -7,6 +7,10 @@ const fs = require("fs");
 const moment = require("moment");
 const stkpush = require('./Functions/STK_push')
 const B2C = require('./Functions/B2C')
+
+const stkpush_rocketie = require('./Rocketie_Mpesa/stk_push_rocketie')
+const b2c_rocketie = require('./Rocketie_Mpesa/B2C_rocketie')
+
 const path = require('path');
 //const fs = require("fs");
 const { Server } = require("socket.io");;
@@ -120,6 +124,9 @@ async function getAccessToken_rocketie() {
     throw error;
   }
 }
+
+stkpush_rocketie(getAccessToken_rocketie, app, axios, moment)
+b2c_rocketie(getAccessToken_rocketie, app, axios, moment)
 
 app.get("/access_token", (req, res) => {
   getAccessToken()
@@ -250,7 +257,7 @@ log_in_rocketie(app)
 create_in_rocketie(app)
 collect_results(app)
 
-rocketie_index(app, io, axios, getAccessToken_rocketie)
+//rocketie_index(app, io, axios, getAccessToken_rocketie)
 
 app.get("/", (req, res) => {
   res.status(200).send("OK");
