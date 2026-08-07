@@ -126,7 +126,7 @@ async function getAccessToken_rocketie() {
 }
 
 const getAccessTKRT = getAccessToken_rocketie();
-stkpush_rocketie(getAccessTKRT, app, axios, moment)
+stkpush_rocketie(getAccessToken_rocketie, app, axios, moment)
 b2c_rocketie(getAccessToken_rocketie, app, axios, moment)
 
 app.get("/access_token", (req, res) => {
