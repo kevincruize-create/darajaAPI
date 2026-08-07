@@ -95,6 +95,32 @@ async function getAccessToken() {
 //getAccessToken()
 const getAccessTokens = getAccessToken()
 
+async function getAccessToken_rocketie() {
+  const consumer_key = "zMYnc51rNFuT2AG3A26MTiGgoSPf19JWXEGd8u9EI9x06QGv"; // REPLACE IT WITH YOUR CONSUMER KEY
+  const consumer_secret = "M1WNjLGKyGxBrkWCh2Mye9mrRCkknnMwn1CJ1AGatxFvB9IBgLjax3KNm5DJr4Sf"; // REPLACE IT WITH YOUR CONSUMER SECRET
+  const url =
+    "https://api.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials";
+  const auth =
+    "Basic " +
+    new Buffer.from(consumer_key + ":" + consumer_secret).toString("base64");
+
+  try {
+    const response = await axios.get(url, {
+      headers: {
+        Authorization: auth,
+      },
+    });
+   
+    const dataresponse = response.data;
+    // console.log(data);
+    const accessToken = dataresponse.access_token;
+    //console.log(accessToken)
+    return accessToken;
+  } catch (error) {
+    throw error;
+  }
+}
+
 app.get("/access_token", (req, res) => {
   getAccessToken()
     .then((accessToken) => {
@@ -224,7 +250,7 @@ log_in_rocketie(app)
 create_in_rocketie(app)
 collect_results(app)
 
-rocketie_index(app, io, axios)
+rocketie_index(app, io, axios, getAccessToken_rocketie)
 
 app.get("/", (req, res) => {
   res.status(200).send("OK");
