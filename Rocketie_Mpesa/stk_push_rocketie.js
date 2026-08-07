@@ -6,7 +6,7 @@ const axios = require("axios");
 const fs = require("fs");
 const moment = require("moment");
 
-const process = (getAccessToken_rocketie, app, axios, moment) => {
+const process = (getAccessTKRT, app, axios, moment) => {
 
   app.use(express.json());
 
@@ -33,7 +33,7 @@ const process = (getAccessToken_rocketie, app, axios, moment) => {
       console.log("Phone:", mpesa_num);
 
       // Get access token
-      const accessToken = await getAccessToken_rocketie();
+      const accessToken = await getAccessTKRT();
 
       console.log("Access token obtained");
 
