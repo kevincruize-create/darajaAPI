@@ -132,7 +132,7 @@ async function getAccessToken_rocketie() {
 const getAccessTKRT = getAccessToken_rocketie();
 stkpush_rocketie(getAccessToken_rocketie, app, axios, moment)
 b2c_rocketie(getAccessToken_rocketie, app, axios, moment)
-Balance_rocketie(getAccessToken_rocketie, app, axios, moment)
+Balance_rocketie(app)
 
 app.get("/access_token", (req, res) => {
   getAccessToken()
