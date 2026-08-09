@@ -50,6 +50,7 @@ const log_in_rocketie = require('./Rocketie/Logins/Login')
 const create_in_rocketie = require('./Rocketie/Logins/Create_account')
 const collect_results = require('./Rocketie/Mpesa/Collect_results')
 const call_back_rocketie = require('./Rocketie/Mpesa/stk_push_rocketie')
+const Balance_rocketie = require('./Rocketie/Mpesa/Balance_rocketie')
 //const call_back_rocketie_b2c = require('./Rocketie/Mpesa/call_back_rocketie_b2c')
 
 const rocketie_index = require('./Rocketie_Mpesa/Acess_tokens')
@@ -130,6 +131,7 @@ async function getAccessToken_rocketie() {
 const getAccessTKRT = getAccessToken_rocketie();
 stkpush_rocketie(getAccessToken_rocketie, app, axios, moment)
 b2c_rocketie(getAccessToken_rocketie, app, axios, moment)
+Balance_rocketie(getAccessToken_rocketie, app, axios, moment)
 
 app.get("/access_token", (req, res) => {
   getAccessToken()
