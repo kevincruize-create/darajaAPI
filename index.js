@@ -50,7 +50,7 @@ const log_in_rocketie = require('./Rocketie/Logins/Login')
 const create_in_rocketie = require('./Rocketie/Logins/Create_account')
 const collect_results = require('./Rocketie/Mpesa/Collect_results')
 
-const Balance_rocketie = require('./Rocketie_Mpesa/Mpesa/Balance_rocketie')
+const Balance_rocketie = require('./Rocketie_Mpesa/Balance_rocketie')
 
 //const call_back_rocketie_b2c = require('./Rocketie/Mpesa/call_back_rocketie_b2c')
 
