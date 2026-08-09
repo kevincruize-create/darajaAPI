@@ -147,7 +147,7 @@ app.get("/access_token_2", (req, res) => {
 });
 stkpush(getAccessToken, app, axios, moment)
 B2C(getAccessToken, app, axios, moment)
-call_back_rocketie(getAccessToken, app, axios, moment)
+//call_back_rocketie(getAccessToken, app, axios, moment)
 //call_back_rocketie_b2c(getAccessToken, app, axios, moment)
 
 app.post("/callback_2", express.json(), async (req, res) => {
