@@ -50,7 +50,7 @@ const log_in_rocketie = require('./Rocketie/Logins/Login')
 const create_in_rocketie = require('./Rocketie/Logins/Create_account')
 const collect_results = require('./Rocketie/Mpesa/Collect_results')
 const call_back_rocketie = require('./Rocketie/Mpesa/stk_push_rocketie')
-const call_back_rocketie_b2c = require('./Rocketie/Mpesa/call_back_rocketie_b2c')
+//const call_back_rocketie_b2c = require('./Rocketie/Mpesa/call_back_rocketie_b2c')
 
 const rocketie_index = require('./Rocketie_Mpesa/Acess_tokens')
 
@@ -145,7 +145,7 @@ app.get("/access_token_2", (req, res) => {
 stkpush(getAccessToken, app, axios, moment)
 B2C(getAccessToken, app, axios, moment)
 call_back_rocketie(getAccessToken, app, axios, moment)
-call_back_rocketie_b2c(getAccessToken, app, axios, moment)
+//call_back_rocketie_b2c(getAccessToken, app, axios, moment)
 
 app.post("/callback_2", express.json(), async (req, res) => {
    console.log("STK PUSH CALLBACK RECEIVED");
@@ -182,6 +182,33 @@ app.post("/callback_2", express.json(), async (req, res) => {
   res.sendStatus(200); // VERY IMPORTANT: always respond 200 to Safaricom
 
 });
+
+app.post("/b2c/result_rocketie", express.json(), async (req, res) => {
+    const number = req.query.number;
+  const id = req.query.id;
+  const amount = req.query.amount;
+  console.log(number, id, amount)
+
+  try {
+    await axios.post(
+      "http://forexapi.atwebpages.com/Rocketie/Mpesa/Witdrawn.php",
+      { number, id, amount },
+      {
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+  } catch (error) {
+    console.error("Failed to send to PHP:", error.message);
+  }
+
+  // ⚠️ Always respond OK to Safaricom
+  res.status(200).json({
+    ResultCode: 0,
+    ResultDesc: "Accepted",
+  });
+
+});
+
 
 
 app.post("/b2c/result", express.json(), async (req, res) => {
