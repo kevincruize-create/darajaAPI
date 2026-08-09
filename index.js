@@ -49,6 +49,8 @@ const del_win_offer = require('./Rocketie/Offers/Delete_offer')
 const log_in_rocketie = require('./Rocketie/Logins/Login')
 const create_in_rocketie = require('./Rocketie/Logins/Create_account')
 const collect_results = require('./Rocketie/Mpesa/Collect_results')
+const call_back_rocketie = require('./Rocketie/Mpesa/stk_push_rocketie')
+const call_back_rocketie_b2c = require('./Rocketie/Mpesa/call_back_rocketie_b2c')
 
 const rocketie_index = require('./Rocketie_Mpesa/Acess_tokens')
 
@@ -142,7 +144,8 @@ app.get("/access_token_2", (req, res) => {
 });
 stkpush(getAccessToken, app, axios, moment)
 B2C(getAccessToken, app, axios, moment)
-
+call_back_rocketie(getAccessToken, app, axios, moment)
+call_back_rocketie_b2c(getAccessToken, app, axios, moment)
 
 app.post("/callback_2", express.json(), async (req, res) => {
    console.log("STK PUSH CALLBACK RECEIVED");
