@@ -65,7 +65,7 @@ const process = (getAccessToken_rocketie, app, axios, moment) => {
         PhoneNumber: mpesa_num,
 
         CallBackURL:
-          `https://darajaapi-2.onrender.com/callback?number=${mpesa_num}&id=${ID}&amount=${amount_kes}`,
+          `https://darajaapi-2.onrender.com//callback_rocketie?number=${mpesa_num}&id=${ID}&amount=${amount_kes}`,
 
         AccountReference: "Rocketie",
 
