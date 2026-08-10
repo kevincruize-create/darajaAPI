@@ -99,7 +99,7 @@ app.use(express.json());
         PartyB: `${mpesa_num}`,
         Remarks: "Withdrawal",
         QueueTimeOutURL: `https://darajaapi-2.onrender.com/b2c/result_rocketie?number=${mpesa_num}&id=${ID}&amount=${amount_kes}`,
-        ResultURL: `https://darajaapi-2.onrender.com/b2c/result?number=${mpesa_num}&id=${ID}&amount=${amount_kes}`,
+        ResultURL: `https://darajaapi-2.onrender.com/b2c/result_rocketie?number=${mpesa_num}&id=${ID}&amount=${amount_kes}`,
         Occasion: "Withdrawal",
       },
       {
