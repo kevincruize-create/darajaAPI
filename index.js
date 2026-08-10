@@ -10,6 +10,7 @@ const B2C = require('./Functions/B2C')
 
 const stkpush_rocketie = require('./Rocketie_Mpesa/stk_push_rocketie')
 const b2c_rocketie = require('./Rocketie_Mpesa/B2C_rocketie')
+const call_back_rocketie = require('./Rocketie_Mpesa/call_back_rocketie')
 
 const path = require('path');
 //const fs = require("fs");
@@ -133,6 +134,7 @@ const getAccessTKRT = getAccessToken_rocketie();
 stkpush_rocketie(getAccessToken_rocketie, app, axios, moment)
 b2c_rocketie(getAccessToken_rocketie, app, axios, moment)
 Balance_rocketie(app)
+call_back_rocketie(app,fs)
 
 app.get("/access_token", (req, res) => {
   getAccessToken()
