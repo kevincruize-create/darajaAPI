@@ -39,6 +39,7 @@ app.use(express.json());
       return console.log('missing credentials');
      }
 
+    console.log('credentials detected')
     const name_data  = name.toString();
     const amount_data = amount.toString();
     const type_data = type.toString();
