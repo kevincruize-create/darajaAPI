@@ -38,7 +38,7 @@ io.on('connection', (socket) => {
          room: data.room,
          attacker:'',
          victim_name:'',
-         victim: '',
+         victim: data.victim,
          health:100,
          damage:'',
          status:'',
