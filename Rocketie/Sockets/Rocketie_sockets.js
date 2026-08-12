@@ -300,7 +300,7 @@ io.on('connection', (socket) => {
         user.damage = 'freeze_controls';
         user.attacker = data.sender;
         user.victim_name = data.victim_name
-        console.log('freeze_controls', data.victim)
+        console.log('freeze_controls_room', data.victim)
         io.to(data.room).emit('freeze_controls', data);
      }
  
