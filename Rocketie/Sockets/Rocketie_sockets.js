@@ -293,7 +293,7 @@ io.on('connection', (socket) => {
 
     // update where array contains the details of the enemy then send data to that enemy.
 
-    const user = array.find(item => item.myID === data.victim);
+    const user = array.find(item => item.myID === data.victim && item.room === data.room);
 
      if (user) {
         user.damage = 'freeze_controls';
