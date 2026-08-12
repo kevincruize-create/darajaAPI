@@ -61,6 +61,7 @@ io.on('connection', (socket) => {
          if(user)
          {
             user.eliminated = 'no';
+            user.victim = data.victim;
             io.to(data.room).emit('array', array);
             
          }
