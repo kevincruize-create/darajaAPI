@@ -52,7 +52,7 @@ io.on('connection', (socket) => {
             //console.log(playersInRoom.length);
            io.to(data.room).emit('array', array);
 
-           console.log('updated array', array) 
+          // console.log('updated array', array) 
     }
     else
     {
@@ -66,7 +66,7 @@ io.on('connection', (socket) => {
             
          }
 
-       console.log('updated array', array) 
+      // console.log('updated array', array) 
     }
 
     const playersInRoom = array.filter(item => item.room === data.room);
@@ -82,7 +82,7 @@ io.on('connection', (socket) => {
       //console.log(playersInRoom.length);
      io.to(data.room).emit('array', array);
 
-     console.log('updated array', array) 
+  //   console.log('updated array', array) 
     }
 
 
@@ -292,6 +292,7 @@ io.on('connection', (socket) => {
   socket.on('freeze_controls', (data) => {
 
     // update where array contains the details of the enemy then send data to that enemy.
+   console.log('freeze_controls', data.victim)
 
     const user = array.find(item => item.myID === data.victim && item.room === data.room);
 
