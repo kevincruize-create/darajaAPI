@@ -136,7 +136,7 @@ io.on('connection', (socket) => {
 
     
 
-    const user = array.find(item => item.myID === data.victim);
+    const user = array.find(item => item.myID === data.victim && item.room === data.room);
     // console.log('bomb', data.room)
      if (user) {
 
