@@ -67,11 +67,7 @@ io.on('connection', (socket) => {
     {
          console.log('exists')
             
-          const getPlayersInRoom = (room) => {
-              return array.filter(player => String(player.room) === String(room));
-          };
-
-          io.to(data.room).emit('array', getPlayersInRoom(data.room));
+    
      
          const user = array.find(item => item.room === data.room && item.myID === data.myID);
          if(user)
@@ -79,7 +75,11 @@ io.on('connection', (socket) => {
            
             user.eliminated = 'no';
             user.victim = data.victim;
-            io.to(data.room).emit('array', array);
+               const getPlayersInRoom = (room) => {
+                   return array.filter(player => String(player.room) === String(room));
+                  };
+
+                io.to(data.room).emit('array', getPlayersInRoom(data.room));
             console.log('room', data.room)
             
          }
@@ -314,7 +314,11 @@ io.on('connection', (socket) => {
      if (user) {
         user.shield = 'on';
        
-        io.to(data.room).emit('array', array);
+          const getPlayersInRoom = (room) => {
+                   return array.filter(player => String(player.room) === String(room));
+                  };
+
+                io.to(data.room).emit('array', getPlayersInRoom(data.room));
      }
  
 
@@ -330,7 +334,11 @@ io.on('connection', (socket) => {
      if (user) {
         user.shield = 'off';
        
-        io.to(data.room).emit('array', array);
+          const getPlayersInRoom = (room) => {
+                   return array.filter(player => String(player.room) === String(room));
+                  };
+
+                io.to(data.room).emit('array', getPlayersInRoom(data.room));
      }
  
 
@@ -339,7 +347,11 @@ io.on('connection', (socket) => {
 
      // Receive message from client
   socket.on('reward_attacker', (data) => {
-     io.to(data.room).emit('rewards', data);
+       const getPlayersInRoom = (room) => {
+                   return array.filter(player => String(player.room) === String(room));
+                  };
+
+                io.to(data.room).emit('array', getPlayersInRoom(data.room));
   });
 
  
@@ -405,7 +417,11 @@ io.on('connection', (socket) => {
 
             console.log('take coins', data)//
             io.to(data.room).emit('receive_coins', data);
-            io.to(data.room).emit('array', array);
+              const getPlayersInRoom = (room) => {
+                   return array.filter(player => String(player.room) === String(room));
+                  };
+
+                io.to(data.room).emit('array', getPlayersInRoom(data.room));
      }
 
 
