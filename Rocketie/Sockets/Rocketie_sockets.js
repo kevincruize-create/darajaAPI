@@ -76,6 +76,7 @@ io.on('connection', (socket) => {
          const user = array.find(item => item.room === data.room && item.myID === data.myID);
          if(user)
          {
+           
             user.eliminated = 'no';
             user.victim = data.victim;
             io.to(data.room).emit('array', array);
@@ -129,9 +130,16 @@ io.on('connection', (socket) => {
                  io.to(data.room).emit('eliminator', data);
                  array.splice(user, 1);
                  console.log('loss', array)
-                 io.to(data.room).emit('array', array);
+                  const getPlayersInRoom = (room) => {
+                   return array.filter(player => String(player.room) === String(room));
+                  };
+
+                io.to(data.room).emit('array', getPlayersInRoom(data.room));
+               //  io.to(data.room).emit('array', array);
 
                }
+
+        
       }
 
        else{
@@ -164,8 +172,13 @@ io.on('connection', (socket) => {
         user.victim_name = data.victim_name
            // emit player array
         console.log('bomb', array)
+           const getPlayersInRoom = (room) => {
+                   return array.filter(player => String(player.room) === String(room));
+                  };
+
+                io.to(data.room).emit('array', getPlayersInRoom(data.room));
         io.to(data.room).emit('bomb', data);
-        io.to(data.room).emit('array', array);
+        //io.to(data.room).emit('array', getPlayersInRoom(data.room));
      }
      else{
         console.log('bomb victim no exists')
@@ -187,8 +200,13 @@ io.on('connection', (socket) => {
        user.eliminated = 'yes';
 
        io.to(data.room).emit('exit', data);
-      
-       io.to(data.room).emit('array', array);
+
+       
+              const getPlayersInRoom = (room) => {
+                   return array.filter(player => String(player.room) === String(room));
+                  };
+
+                io.to(data.room).emit('array', getPlayersInRoom(data.room));
        console.log('eliminated is yes')
      }
     
@@ -201,7 +219,11 @@ io.on('connection', (socket) => {
      if(user)
      {
        user.eliminated = 'yes';
-       io.to(data.room).emit('array', array);
+              const getPlayersInRoom = (room) => {
+                   return array.filter(player => String(player.room) === String(room));
+                  };
+
+                io.to(data.room).emit('array', getPlayersInRoom(data.room));
        console.log('eliminated is yes for vengence')
      }
     
@@ -214,7 +236,11 @@ io.on('connection', (socket) => {
      if(user)
      {
        user.eliminated = 'no';
-       io.to(data.room).emit('array', array);
+              const getPlayersInRoom = (room) => {
+                   return array.filter(player => String(player.room) === String(room));
+                  };
+
+                io.to(data.room).emit('array', getPlayersInRoom(data.room));
        console.log('eliminated is no')
      }
     
@@ -227,7 +253,11 @@ io.on('connection', (socket) => {
      const user = array.find(item => item.room === data.room);
      if(user)
      {
-       io.to(data.room).emit('array', array);
+              const getPlayersInRoom = (room) => {
+                   return array.filter(player => String(player.room) === String(room));
+                  };
+
+                io.to(data.room).emit('array', getPlayersInRoom(data.room));
      }
     
     });
@@ -240,7 +270,11 @@ io.on('connection', (socket) => {
 
      if (user) {
          user.damage = '';
-         io.to(data.room).emit('array', array);
+                const getPlayersInRoom = (room) => {
+                   return array.filter(player => String(player.room) === String(room));
+                  };
+
+                io.to(data.room).emit('array', getPlayersInRoom(data.room));
      }
  
 
@@ -258,7 +292,11 @@ io.on('connection', (socket) => {
         user.attacker = '';
         user.health = data.health;
         io.to(data.room).emit('delete_array', data);
-        io.to(data.room).emit('array', array);
+               const getPlayersInRoom = (room) => {
+                   return array.filter(player => String(player.room) === String(room));
+                  };
+
+                io.to(data.room).emit('array', getPlayersInRoom(data.room));
      }
  
 
@@ -342,7 +380,11 @@ io.on('connection', (socket) => {
 
    //  io.emit('array', array);
 
-        io.to(data.room).emit('array', array);
+               const getPlayersInRoom = (room) => {
+                   return array.filter(player => String(player.room) === String(room));
+                  };
+
+                io.to(data.room).emit('array', getPlayersInRoom(data.room));
    // io.emit('freeze_controls', data);
 
   });
@@ -384,7 +426,11 @@ io.on('connection', (socket) => {
              //console.log('coins')
     
      }
-        io.to(data.room).emit('array', array);
+               const getPlayersInRoom = (room) => {
+                   return array.filter(player => String(player.room) === String(room));
+                  };
+
+                io.to(data.room).emit('array', getPlayersInRoom(data.room));
 
 
   });
