@@ -50,9 +50,14 @@ io.on('connection', (socket) => {
          eliminated:'no'
         });
             //console.log(playersInRoom.length);
-           io.to(data.room).emit('array', array);
+         const user = array.find(item => item.room === data.room && item.myID === data.myID);
+         if(user)
+         {
+             io.to(data.room).emit('array', array);
 
           // console.log('updated array', array) 
+         }
+           
     }
     else
     {
