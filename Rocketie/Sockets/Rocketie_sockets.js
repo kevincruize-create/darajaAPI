@@ -98,7 +98,11 @@ io.on('connection', (socket) => {
        });
 
       //console.log(playersInRoom.length);
-     io.to(data.room).emit('array', array);
+      const getPlayersInRoom = (room) => {
+                   return array.filter(player => String(player.room) === String(room));
+                  };
+
+                io.to(data.room).emit('array', getPlayersInRoom(data.room));
 
   //   console.log('updated array', array) 
     }
@@ -119,7 +123,11 @@ io.on('connection', (socket) => {
               
           player.eliminations = player.eliminations + 1;  
           console.log('update elimination', array)
-          io.to(data.room).emit('array', array);
+            const getPlayersInRoom = (room) => {
+                   return array.filter(player => String(player.room) === String(room));
+                  };
+
+                io.to(data.room).emit('array', getPlayersInRoom(data.room));
         
               const user = array.find(item => item.myID === data.myID && item.room === data.room);
 
