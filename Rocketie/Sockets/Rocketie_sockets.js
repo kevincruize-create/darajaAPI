@@ -71,7 +71,7 @@ io.on('connection', (socket) => {
             
          }
 
-      console.log('updated array', array) 
+      console.log('updated array', array)  //
     }
 
     const playersInRoom = array.filter(item => item.room === data.room);
