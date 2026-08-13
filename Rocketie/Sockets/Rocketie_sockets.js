@@ -56,6 +56,8 @@ io.on('connection', (socket) => {
              io.to(data.room).emit('array', array);
 
           console.log('updated array', array) 
+
+          console.log('room', data.room)
          }
            
     }
@@ -68,10 +70,11 @@ io.on('connection', (socket) => {
             user.eliminated = 'no';
             user.victim = data.victim;
             io.to(data.room).emit('array', array);
+            console.log('room', data.room)
             
          }
 
-      console.log('updated array', array)  //
+    //  console.log('updated array', array)  //
     }
 
     const playersInRoom = array.filter(item => item.room === data.room);
