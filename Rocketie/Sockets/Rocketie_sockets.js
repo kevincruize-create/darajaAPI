@@ -392,20 +392,20 @@ io.on('connection', (socket) => {
       
          user.health = data.health;
          //console.log('health')
+
+        const getPlayersInRoom = (room) => {
+                   return array.filter(player => String(player.room) === String(room));
+        };
+
+                io.to(data.room).emit('array', getPlayersInRoom(data.room));
     
         
      }
 
-    //console.log(data.room, data.myID)
 
-   //  io.emit('array', array);
 
-               const getPlayersInRoom = (room) => {
-                   return array.filter(player => String(player.room) === String(room));
-                  };
-
-                io.to(data.room).emit('array', getPlayersInRoom(data.room));
-   // io.emit('freeze_controls', data);
+               
+  
 
   });
 
@@ -446,15 +446,14 @@ io.on('connection', (socket) => {
         
         
         user.coins = data.coins + 5;
-      //  console.log('coins update')
-             //console.log('coins')
+        const getPlayersInRoom = (room) => {
+           return array.filter(player => String(player.room) === String(room));
+        };
+
+        io.to(data.room).emit('array', getPlayersInRoom(data.room));
     
      }
-               const getPlayersInRoom = (room) => {
-                   return array.filter(player => String(player.room) === String(room));
-                  };
-
-                io.to(data.room).emit('array', getPlayersInRoom(data.room));
+              
 
 
   });
