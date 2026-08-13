@@ -50,20 +50,29 @@ io.on('connection', (socket) => {
          eliminated:'no'
         });
             //console.log(playersInRoom.length);
-         const user = array.find(item => item.room === data.room && item.myID === data.myID);
-         if(user)
-         {
-             io.to(data.room).emit('array', array);
+         const getPlayersInRoom = (room) => {
+              return array.filter(player => String(player.room) === String(room));
+          };
+
+          io.to(data.room).emit('array', getPlayersInRoom(data.room));
+       
 
           console.log('updated array', array) 
 
           console.log('room', data.room)
-         }
+         
            
     }
     else
     {
          console.log('exists')
+            
+          const getPlayersInRoom = (room) => {
+              return array.filter(player => String(player.room) === String(room));
+          };
+
+          io.to(data.room).emit('array', getPlayersInRoom(data.room));
+     
          const user = array.find(item => item.room === data.room && item.myID === data.myID);
          if(user)
          {
