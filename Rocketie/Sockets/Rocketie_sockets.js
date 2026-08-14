@@ -355,6 +355,8 @@ io.on('connection', (socket) => {
 
      // Receive message from client
   socket.on('reward_attacker', (data) => {
+
+   io.to(data.room).emit('rewards', data);
        const getPlayersInRoom = (room) => {
                    return array.filter(player => String(player.room) === String(room));
                   };
