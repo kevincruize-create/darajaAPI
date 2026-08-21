@@ -50,6 +50,7 @@ const del_win_offer = require('./Rocketie/Offers/Delete_offer')
 const log_in_rocketie = require('./Rocketie/Logins/Login')
 const create_in_rocketie = require('./Rocketie/Logins/Create_account')
 const collect_results = require('./Rocketie/Mpesa/Collect_results')
+const TestNotification = require("./Rocketie/TestNotification");
 //const notfs = require('./Rocketie/SendNotification')
 
 const Balance_rocketie = require('./Rocketie_Mpesa/Balance_rocketie')
@@ -293,6 +294,7 @@ del_win_offer(app)
 log_in_rocketie(app)
 create_in_rocketie(app)
 collect_results(app)
+TestNotification(app);
 //notfs(app)
 
 //rocketie_index(app, io, axios, getAccessToken_rocketie)
