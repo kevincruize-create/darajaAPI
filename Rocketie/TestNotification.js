@@ -24,7 +24,7 @@ function TestNotification(app) {
           await sendNotification(
             "ExponentPushToken[rPV5ohJD-g3iVoLqV3uJZ1]",
             "🚀 Rocketie",
-            "This notification was sent from the React button!",
+            "KevoJonasi has created a room in the earner section. Price per elimination is 10 coins.",
             {
               type: "TEST_NOTIFICATION",
             }
