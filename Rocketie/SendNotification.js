@@ -1,39 +1,29 @@
-const { Expo } = require("expo-server-sdk");
+const sendNotification = require("./Rocketie/SendNotification");
 
-const expo = new Expo();
-
-async function sendNotification() {
-  const pushToken = "ExponentPushToken[rPV5ohJD-g3iVoLqV3uJZ1]";
-
-  if (!Expo.isExpoPushToken(pushToken)) {
-    console.log("Invalid Expo Push Token");
-    return;
-  }
-
-  const message = {
-    to: pushToken,
-    sound: "default",
-    title: "🚀 Rocketie",
-    body: "A new Rocketie room has been created!",
-    data: {
-      type: "ROOM_AVAILABLE",
-      roomId: "12345",
-    },
-  };
-
+app.post("/test-notification", async (req, res) => {
   try {
-    const tickets = await expo.sendPushNotificationsAsync([
-      message,
-    ]);
+    const result = await sendNotification(
+      "ExponentPushToken[rPV5ohJD-g3iVoLqV3uJZ1]",
+      "🚀 Rocketie",
+      "This notification was sent from the React button!",
+      {
+        type: "TEST_NOTIFICATION",
+      }
+    );
 
-    console.log("Notification tickets:");
-    console.log(tickets);
+    res.status(200).json({
+      success: true,
+      message: "Notification sent",
+      result,
+    });
+
   } catch (error) {
-    console.error("Error sending notification:");
-    console.error(error);
+    console.error("Notification error:", error);
+
+    res.status(500).json({
+      success: false,
+      message: "Failed to send notification",
+      error: error.message,
+    });
   }
-}
-
-sendNotification();
-
-module.exports = sendNotification;
+});
