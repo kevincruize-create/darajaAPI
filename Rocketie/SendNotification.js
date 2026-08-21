@@ -1,21 +1,12 @@
-const express = require('express');
-
-
-const process = (app) => {
-app.use(express.json());
 const { Expo } = require("expo-server-sdk");
 
 const expo = new Expo();
-const fetchData = async (phone) => {
- 
-
 
 async function sendNotification() {
   const pushToken = "ExponentPushToken[rPV5ohJD-g3iVoLqV3uJZ1]";
 
-  // Check that the token is valid
   if (!Expo.isExpoPushToken(pushToken)) {
-    console.log("❌ Invalid Expo Push Token");
+    console.log("Invalid Expo Push Token");
     return;
   }
 
@@ -23,29 +14,26 @@ async function sendNotification() {
     to: pushToken,
     sound: "default",
     title: "🚀 Rocketie",
-    body: "A new room has been created!",
+    body: "A new Rocketie room has been created!",
     data: {
+      type: "ROOM_AVAILABLE",
       roomId: "12345",
     },
   };
 
   try {
-    const ticket = await expo.sendPushNotificationsAsync([
+    const tickets = await expo.sendPushNotificationsAsync([
       message,
     ]);
 
-    console.log("Notification sent!");
-    console.log(ticket);
-
+    console.log("Notification tickets:");
+    console.log(tickets);
   } catch (error) {
-    console.error("Error sending notification:", error);
+    console.error("Error sending notification:");
+    console.error(error);
   }
 }
 
 sendNotification();
- 
 
-}
-
-
-module.exports = process;
+module.exports = sendNotification;
