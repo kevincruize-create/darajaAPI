@@ -4,7 +4,10 @@ const sendNotifications =
   require("./SendNotification");
 
 
-async function sendRoomNotification() {
+async function sendRoomNotification(
+  room_name,
+  coin
+) {
 
   try {
 
@@ -59,18 +62,33 @@ async function sendRoomNotification() {
     }
 
 
+    // ⭐ YOUR NOTIFICATION MESSAGE
+    const notificationMessage =
+      `${room_name} has placed an offer of ${coin}`;
+
+
+    console.log(
+      "Notification message:",
+      notificationMessage
+    );
+
+
     // Send notification
     const result =
       await sendNotifications(
+
         tokens,
 
-        "🚀 New Rocketie Room",
+        "🚀 Rocketie",
 
-        "A new room has been created. Join now!",
+        notificationMessage,
 
         {
-          type: "NEW_ROOM"
+          type: "NEW_OFFER",
+          room_name: room_name,
+          coin: coin
         }
+
       );
 
 
