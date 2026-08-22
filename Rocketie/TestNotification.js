@@ -7,56 +7,37 @@ function TestNotification(app) {
     "/test-notification",
     async (req, res) => {
 
-      console.log(
-        "================================"
-      );
-
-      console.log(
-        "TEST NOTIFICATION REQUEST RECEIVED"
-      );
-
-      console.log(
-        "================================"
-      );
-
       try {
 
-        const { message } = req.body;
-
-        console.log(
-          "Message received from frontend:",
-          message
-        );
-
-        if (!message) {
-
-          return res.status(400).json({
-            success: false,
-            message: "Notification message is required"
-          });
-
-        }
+        const {
+          room_name,
+          coin
+        } = req.body;
 
         const result =
-          await sendRoomNotification(message);
+          await sendRoomNotification(
+            room_name,
+            coin
+          );
 
         res.status(200).json({
           success: true,
-          message: "Notifications sent successfully",
+          message:
+            "Notifications sent successfully",
           result
         });
 
       } catch (error) {
 
         console.error(
-          "TEST NOTIFICATION ERROR:"
+          "TEST NOTIFICATION ERROR:",
+          error
         );
-
-        console.error(error);
 
         res.status(500).json({
           success: false,
-          message: "Failed to send notifications",
+          message:
+            "Failed to send notifications",
           error: error.message
         });
       }
