@@ -1,5 +1,6 @@
 const sendRoomNotification =
-  require("./SendNotification");
+  require("./SendRoomNotification");
+
 
 function TestNotification(app) {
 
@@ -19,22 +20,30 @@ function TestNotification(app) {
         "================================"
       );
 
+
       try {
 
         const result =
           await sendRoomNotification();
+
 
         console.log(
           "Notification result:",
           result
         );
 
+
         res.status(200).json({
+
           success: true,
+
           message:
             "Notifications sent successfully",
+
           result: result
+
         });
+
 
       } catch (error) {
 
@@ -42,22 +51,34 @@ function TestNotification(app) {
           "TEST NOTIFICATION ERROR:"
         );
 
-        console.error(error);
+        console.error(
+          error
+        );
+
 
         res.status(500).json({
+
           success: false,
+
           message:
             "Failed to send notifications",
-          error: error.message,
+
+          error:
+            error.message,
 
           details:
-            error.response?.data || null
+            error.response?.data ||
+            null
+
         });
+
       }
+
     }
   );
 
 }
+
 
 module.exports =
   TestNotification;
