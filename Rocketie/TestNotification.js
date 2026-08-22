@@ -1,66 +1,57 @@
-const sendNotification = require("./SendNotification");
+const axios = require("axios");
 
-function TestNotification(app) {
+const sendNotifications = require("./SendNotification");
 
-  app.post(
-    "/test-notification",
-    async (req, res) => {
+async function sendRoomNotification() {
 
-      console.log(
-        "================================"
+  try {
+
+    // Fetch tokens from PHP
+    const response = await axios.get(
+      "http://forexapi.atwebpages.com/Rocketie/Log_in/Display_notf_codes.php"
+    );
+
+    const users = response.data;
+
+    console.log(
+      "Users received:",
+      users.length
+    );
+
+    // Extract tokens
+    const tokens = users
+      .map(user => user.push_token)
+      .filter(Boolean);
+
+    console.log(
+      "Tokens found:",
+      tokens.length
+    );
+
+    // Send notification
+    const result =
+      await sendNotifications(
+        tokens,
+        "🚀 New Rocketie Room",
+        "A new room has been created. Join now!",
+        {
+          type: "NEW_ROOM"
+        }
       );
 
-      console.log(
-        "TEST NOTIFICATION REQUEST RECEIVED"
-      );
+    return result;
 
-      console.log(
-        "================================"
-      );
+  } catch (error) {
 
-      try {
+    console.error(
+      "Failed to send room notifications:",
+      error.response?.data ||
+      error.message
+    );
 
-        const result =
-          await sendNotification(
-            "ExponentPushToken[rPV5ohJD-g3iVoLqV3uJZ1]",
-            "🚀 Rocketie",
-            "KevoJonasi has created a room in the earner section. Price per elimination is 10 coins.",
-            {
-              type: "TEST_NOTIFICATION",
-            }
-          );
-
-        console.log(
-          "Notification result:",
-          result
-        );
-
-        res.status(200).json({
-          success: true,
-          message:
-            "Notification sent successfully",
-          result,
-        });
-
-      } catch (error) {
-
-        console.error(
-          "Notification error:",
-          error
-        );
-
-        res.status(500).json({
-          success: false,
-          message:
-            "Failed to send notification",
-          error: error.message,
-          details:
-            error.response?.data || null,
-        });
-      }
-    }
-  );
-
+    throw error;
+  }
 }
 
-module.exports = TestNotification;
+module.exports =
+  sendRoomNotification;
