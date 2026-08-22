@@ -4,9 +4,7 @@ const sendNotifications =
   require("./SendNotification");
 
 
-async function sendRoomNotification(
- message
-) {
+async function sendRoomNotification(message) {
 
   try {
 
@@ -25,7 +23,6 @@ async function sendRoomNotification(
 
     const users = response.data;
 
-    // Make sure PHP returned an array
     if (!Array.isArray(users)) {
 
       throw new Error(
@@ -39,7 +36,6 @@ async function sendRoomNotification(
     );
 
 
-    // Extract push tokens
     const tokens = users
       .map(
         user => user.push_token
@@ -56,14 +52,13 @@ async function sendRoomNotification(
     if (tokens.length === 0) {
 
       throw new Error(
-        "No push tokens were found in the PHP response"
+        "No push tokens were found"
       );
     }
 
 
-    // ⭐ YOUR NOTIFICATION MESSAGE
-    const notificationMessage =
-      `${message}`;
+    // This is the EXACT message from React
+    const notificationMessage = message;
 
 
     console.log(
@@ -72,7 +67,6 @@ async function sendRoomNotification(
     );
 
 
-    // Send notification
     const result =
       await sendNotifications(
 
@@ -83,8 +77,7 @@ async function sendRoomNotification(
         notificationMessage,
 
         {
-          type: "NEW_OFFER",
-       
+          type: "NEW_OFFER"
         }
 
       );
