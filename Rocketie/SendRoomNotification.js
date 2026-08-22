@@ -84,8 +84,7 @@ async function sendRoomNotification(
 
         {
           type: "NEW_OFFER",
-          room_name: room_name,
-          coin: coin
+       
         }
 
       );
