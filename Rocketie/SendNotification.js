@@ -2,14 +2,31 @@ const { Expo } = require("expo-server-sdk");
 
 const expo = new Expo();
 
-async function sendNotifications(tokens, title, body, data = {}) {
+async function sendNotifications(
+  tokens,
+  title,
+  body,
+  data = {}
+) {
+
+  // Make sure tokens is an array
+  if (!Array.isArray(tokens)) {
+    throw new Error(
+      "Push tokens must be an array"
+    );
+  }
 
   const messages = [];
 
   for (const token of tokens) {
 
     if (!Expo.isExpoPushToken(token)) {
-      console.log("Invalid token:", token);
+
+      console.log(
+        "Invalid token:",
+        token
+      );
+
       continue;
     }
 
@@ -23,13 +40,18 @@ async function sendNotifications(tokens, title, body, data = {}) {
   }
 
   if (messages.length === 0) {
-    throw new Error("No valid push tokens found");
+
+    throw new Error(
+      "No valid push tokens found"
+    );
   }
 
   try {
 
     const chunks =
-      expo.chunkPushNotifications(messages);
+      expo.chunkPushNotifications(
+        messages
+      );
 
     const tickets = [];
 
@@ -40,7 +62,9 @@ async function sendNotifications(tokens, title, body, data = {}) {
           chunk
         );
 
-      tickets.push(...ticketChunk);
+      tickets.push(
+        ...ticketChunk
+      );
     }
 
     console.log(
@@ -61,4 +85,5 @@ async function sendNotifications(tokens, title, body, data = {}) {
   }
 }
 
-module.exports = sendNotifications;
+module.exports =
+  sendNotifications;
