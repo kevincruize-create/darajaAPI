@@ -5,8 +5,7 @@ const sendNotifications =
 
 
 async function sendRoomNotification(
-  room_name,
-  coin
+ message
 ) {
 
   try {
@@ -64,7 +63,7 @@ async function sendRoomNotification(
 
     // ⭐ YOUR NOTIFICATION MESSAGE
     const notificationMessage =
-      `${room_name} has placed an offer of ${coin}`;
+      `${message}`;
 
 
     console.log(
