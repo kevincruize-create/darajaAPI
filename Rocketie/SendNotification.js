@@ -32,7 +32,7 @@ async function sendNotifications(
 
     messages.push({
       to: token,
-      sound: "default",
+      sound: "rocketie_notification",
       title: title,
       body: body,
       data: data,
