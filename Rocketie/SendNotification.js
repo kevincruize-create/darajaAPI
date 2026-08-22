@@ -37,8 +37,9 @@ async function sendNotifications(
       body: body,
       data: data,
        // 1. Target the high importance channel you created on the client
-      channelId: 'default', 
-      priority: 'high', // For Android
+       channelId: 'default', 
+       priority: 'high', // For Android
+      _displayInForeground: true, 
     });
   }
 
