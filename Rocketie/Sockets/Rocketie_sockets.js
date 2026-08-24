@@ -113,6 +113,23 @@ io.on('connection', (socket) => {
   })
 
     // Receive message from client
+    socket.on('update_spins', (data) => {
+     console.log('revenge data', data.room)
+     
+     const user = array.find(item => item.myID === data.myID && item.room === data.room);
+     if(user)
+     {
+            user.Spins = data.Spins;
+            user.coins = data.coins;
+              const getPlayersInRoom = (room) => {
+                 return array.filter(player => String(player.room) === String(room));
+               };
+
+                io.to(data.room).emit('array', getPlayersInRoom(data.room));
+     }
+    
+    });
+
   socket.on('update_loss', (data) => {
 
     // update where array contains the details of the enemy then send data to that enemy.
