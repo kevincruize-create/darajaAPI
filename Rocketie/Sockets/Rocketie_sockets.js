@@ -47,7 +47,8 @@ io.on('connection', (socket) => {
          shield:'',
          socketId: socket.id,
          eliminations: 0,
-         eliminated:'no'
+         eliminated:'no',
+         Spins:''
         });
             //console.log(playersInRoom.length);
          const getPlayersInRoom = (room) => {
