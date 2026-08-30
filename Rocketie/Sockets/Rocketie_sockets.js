@@ -121,11 +121,12 @@ io.on('connection', (socket) => {
      {
             user.Spins = data.Spins;
             user.coins = data.coins;
-              const getPlayersInRoom = (room) => {
+            const getPlayersInRoom = (room) =>{
                  return array.filter(player => String(player.room) === String(room));
-               };
+            };
 
-                io.to(data.room).emit('array', getPlayersInRoom(data.room));
+            io.to(data.room).emit('spin_sound', data);
+            io.to(data.room).emit('array', getPlayersInRoom(data.room));
      }
     
     });
