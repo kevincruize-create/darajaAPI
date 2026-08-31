@@ -505,8 +505,10 @@ socket.on('disconnect', () => {
 
         send_player_update(app, type, room);
     }
+
 });
-    
+});
+
 
 
 }
