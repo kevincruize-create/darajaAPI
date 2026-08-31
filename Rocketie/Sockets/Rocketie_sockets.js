@@ -61,6 +61,9 @@ io.on('connection', (socket) => {
           console.log('updated array', array) 
 
           console.log('room', data.room)
+          let type = 'add';
+          let room = data.room;
+          send_player_update(app, type, room);
          
            
     }
