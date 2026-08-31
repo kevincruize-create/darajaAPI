@@ -9,7 +9,7 @@ app.use(express.json());
 
 //const phone = 254726270922
 
-  const fetchData = async (phone) => {
+  const fetchData = async (data, notf_data) => {
     try {
       const response = await fetch("http://forexapi.atwebpages.com/Rocketie/Log_in/Log_in.php", {
         method: "POST",
@@ -18,6 +18,7 @@ app.use(express.json());
         },
         body: JSON.stringify({
           phone,
+          notf: notf_data
          }),
       });
 
@@ -32,14 +33,15 @@ app.use(express.json());
 
   app.post("/Log_in_rocketie", async (req, res) => {
   
-   const { phone } = req.body;
-     if (!phone) {
+   const { phone, notf } = req.body;
+     if (!phone || !notf) {
       return console.log('missing credentials');
      }
     
     const data = await fetchData(phone);   // call your function
+    const notf_data = await fetchData(notf);
 
-    res.json(data);                   // send to browser
+    res.json(data, notf_data);                   // send to browser
 
   });
 
