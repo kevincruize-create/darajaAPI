@@ -7,7 +7,7 @@ app.use(express.json());
 //const names = 'Joe Allan Joe'
 //const whatsapp = 4455667
 
-  const fetchData = async (phone_num, names_selected) => {
+  const fetchData = async (phone_num, names_selected, notf_data) => {
     try {
 
       const response = await fetch("http://forexapi.atwebpages.com/Rocketie/Log_in/create_acc.php", {
@@ -18,6 +18,7 @@ app.use(express.json());
         body: JSON.stringify({
           phone: phone_num,
           names: names_selected,
+          notf: notf_data
          }),
       });
 
@@ -31,8 +32,8 @@ app.use(express.json());
   };
 
   app.post("/create_account_rocketie", async (req, res) => {
-   const { names, phone } = req.body;
-    if (!names || !phone ) {
+   const { names, phone, notf } = req.body;
+    if (!names || !phone || !notf ) {
        return console.log('missing credentials');
     }
     //const phone = 4556;
@@ -40,10 +41,10 @@ app.use(express.json());
   //const whatsapp = 4455667
     const phone_num  = phone.toString();
     const names_selected = names.toString();
-    
+    const notf_data = notf.toString();
 
     
-    const data = await fetchData(phone_num, names_selected);   // call your function
+    const data = await fetchData(phone_num, names_selected, notf_data);   // call your function
 
     res.json(data);                   // send to browser
 
