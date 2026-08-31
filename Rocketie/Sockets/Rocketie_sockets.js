@@ -1,6 +1,6 @@
 const express = require('express');
 //const app = express();
-
+const send_player_update = require("./update_room_players");
 
 const process = (app, io) => {
 
@@ -484,18 +484,27 @@ io.on('connection', (socket) => {
 
 
 
-  socket.on('disconnect', () => {
+socket.on('disconnect', () => {
     console.log('User disconnected:', socket.id);
 
     const index = array.findIndex(
         p => p.socketId === socket.id
     );
 
-    if(index !== -1){
-        array.splice(index,1);
-    }
+    if (index !== -1) {
 
-   });
+        // Get the room BEFORE removing the player
+        const room = array[index].room;
+
+        // Remove the disconnected player
+        array.splice(index, 1);
+
+        console.log('Disconnected player was in room:', room);
+
+        let type = 'minus';
+
+        send_player_update(app, type, room);
+    }
 });
     
 
