@@ -17,7 +17,7 @@ app.use(express.json());
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          phone,
+          phone: data,
           notf: notf_data
          }),
       });
