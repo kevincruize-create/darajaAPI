@@ -238,6 +238,9 @@ io.on('connection', (socket) => {
 
                 io.to(data.room).emit('array', getPlayersInRoom(data.room));
        console.log('eliminated is yes')
+          let type = 'minus';
+          let room = data.room;
+          send_player_update(app, room, type);
      }
     
     });
