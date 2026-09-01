@@ -1,53 +1,60 @@
 const express = require('express');
-//const app = express();
-//app.use(express.json());
 
 const process = (app) => {
-app.use(express.json());
-//const name = 'Kevin Mukoya'
-//const mpesa = 254726270922
+  app.use(express.json());
 
-//const phone = 254726270922
-
-  const fetchData = async (data, notf_data) => {
+  const fetchData = async (phone, notf_data) => {
     try {
-      const response = await fetch("http://forexapi.atwebpages.com/Rocketie/Log_in/Log_in.php", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          phone: data,
-          notf: notf_data
-         }),
-      });
+      const response = await fetch(
+        "http://forexapi.atwebpages.com/Rocketie/Log_in/Log_in.php",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            phone: phone,
+            notf: notf_data
+          }),
+        }
+      );
 
-      const data = await response.json();
+      const result = await response.json();
 
-      return data;
+      return result;
 
     } catch (error) {
-      console.error(error);
+      console.error("Fetch error:", error);
+      throw error;
     }
   };
 
   app.post("/Log_in_rocketie", async (req, res) => {
-  
-   const { phone, notf } = req.body;
-     if (!phone || !notf) {
-      return console.log('missing credentials');
-     }
-    
-    const data = await fetchData(phone);   // call your function
-    const notf_data = await fetchData(notf);
+    try {
+      const { phone, notf } = req.body;
 
-    res.json(data, notf_data);                   // send to browser
+      if (!phone || !notf) {
+        return res.status(400).json({
+          success: false,
+          message: "Missing phone or notification data"
+        });
+      }
 
+      // Send BOTH phone and notification data in one request
+      const data = await fetchData(phone, notf);
+
+      // Send the PHP response back to your React Native app
+      res.json(data);
+
+    } catch (error) {
+      console.error("Login error:", error);
+
+      res.status(500).json({
+        success: false,
+        message: "Server error"
+      });
+    }
   });
-
-
-}
-
+};
 
 module.exports = process;
-
