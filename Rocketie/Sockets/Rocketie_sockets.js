@@ -63,7 +63,7 @@ io.on('connection', (socket) => {
           console.log('room', data.room)
           let type = 'add';
           let room = data.room;
-          send_player_update(app, type, room);
+          send_player_update(app, room, type);
          
            
     }
@@ -506,7 +506,7 @@ socket.on('disconnect', () => {
 
         let type = 'minus';
 
-        send_player_update(app, type, room);
+        send_player_update(app, room, type);
     }
 
 });
