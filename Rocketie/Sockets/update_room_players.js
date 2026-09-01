@@ -1,8 +1,9 @@
+
 const process = (app, room, type) => {
-    app.use(express.json());
 
     const fetchData = async () => {
         try {
+
             const response = await fetch(
                 "http://forexapi.atwebpages.com/Rocketie/Offers/Update_room_num.php",
                 {
@@ -19,7 +20,7 @@ const process = (app, room, type) => {
 
             const data = await response.json();
 
-            console.log("update", data);
+            console.log("Room player update:", data);
 
             return data;
 
