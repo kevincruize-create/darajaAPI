@@ -23,6 +23,7 @@ app.use(express.json());
       });
 
       const data = await response.json();
+      console.log('update', data)
 
       return data;
 
