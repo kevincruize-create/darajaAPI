@@ -33,7 +33,7 @@ app.use(express.json());
 
   app.post("/create_account_rocketie", async (req, res) => {
    const { names, phone, notf } = req.body;
-    if (!names || !phone || !notf ) {
+    if (!names || !phone  ) {
        return console.log('missing credentials');
     }
     //const phone = 4556;
