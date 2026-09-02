@@ -33,7 +33,7 @@ const process = (app) => {
     try {
       const { phone, notf } = req.body;
 
-      if (!phone || !notf) {
+      if (!phone) {
         return res.status(400).json({
           success: false,
           message: "Missing phone or notification data"
