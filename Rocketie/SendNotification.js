@@ -41,7 +41,7 @@ async function sendNotifications(
   data: {
     type: "TEST"
   },
-  channelId: "rocketie-test",
+  channelId: "rocketie",
   priority: "high"
 });
   }
