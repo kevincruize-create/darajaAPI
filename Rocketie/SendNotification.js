@@ -11,40 +11,54 @@ async function sendNotifications(
 
   // Make sure tokens is an array
   if (!Array.isArray(tokens)) {
-    throw new Error(
-      "Push tokens must be an array"
-    );
+    throw new Error("Push tokens must be an array");
   }
 
   const messages = [];
 
   for (const token of tokens) {
 
+    // Check whether token is valid
     if (!Expo.isExpoPushToken(token)) {
 
       console.log(
-        "Invalid token:",
+        "Invalid Expo push token:",
         token
       );
 
       continue;
     }
 
+    console.log(
+      "Preparing notification for token:",
+      token
+    );
+
     messages.push({
-      to: tokens,
-      sound: "rocketie_notification",
+
+      // IMPORTANT:
+      // Use the individual token, NOT the entire tokens array
+      to: token,
+
       title: title,
+
       body: body,
+
       data: data,
-       // 1. Target the high importance channel you created on the client
-       channelId: 'default', 
-       priority: 'high', // For Android
-      _displayInForeground: true, 
+
+      // Must match the Android notification channel
+      channelId: "default",
+
+      // High priority
+      priority: "high",
+
+      // For now, DON'T specify a custom sound.
+      // We are testing basic notification delivery first.
     });
   }
 
+  // No valid tokens
   if (messages.length === 0) {
-
     throw new Error(
       "No valid push tokens found"
     );
@@ -52,19 +66,32 @@ async function sendNotifications(
 
   try {
 
+    console.log(
+      "Messages being sent to Expo:",
+      JSON.stringify(messages, null, 2)
+    );
+
+    // Split messages into Expo chunks
     const chunks =
-      expo.chunkPushNotifications(
-        messages
-      );
+      expo.chunkPushNotifications(messages);
 
     const tickets = [];
 
     for (const chunk of chunks) {
 
+      console.log(
+        "Sending notification chunk..."
+      );
+
       const ticketChunk =
         await expo.sendPushNotificationsAsync(
           chunk
         );
+
+      console.log(
+        "Expo ticket response:",
+        ticketChunk
+      );
 
       tickets.push(
         ...ticketChunk
@@ -81,13 +108,13 @@ async function sendNotifications(
   } catch (error) {
 
     console.error(
-      "Notification error:",
-      error
+      "Notification error:"
     );
+
+    console.error(error);
 
     throw error;
   }
 }
 
-module.exports =
-  sendNotifications;
+module.exports = sendNotifications;
