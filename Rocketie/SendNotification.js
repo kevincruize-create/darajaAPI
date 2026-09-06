@@ -36,11 +36,13 @@ async function sendNotifications(
 
   messages.push({
   to: token,
-  title: title,
-  body: body,
-  data: data,
-  channelId: "rocketie",
-  priority: "high",
+  title: "🚀 Rocketie TEST",
+  body: "This is a remote notification test",
+  data: {
+    type: "TEST"
+  },
+  channelId: "rocketie-test",
+  priority: "high"
 });
   }
 
