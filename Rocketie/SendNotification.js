@@ -34,27 +34,14 @@ async function sendNotifications(
       token
     );
 
-    messages.push({
-
-      // IMPORTANT:
-      // Use the individual token, NOT the entire tokens array
-      to: token,
-
-      title: title,
-
-      body: body,
-
-      data: data,
-
-      // Must match the Android notification channel
-      channelId: "default",
-
-      // High priority
-      priority: "high",
-
-      // For now, DON'T specify a custom sound.
-      // We are testing basic notification delivery first.
-    });
+  messages.push({
+  to: token,
+  title: title,
+  body: body,
+  data: data,
+  channelId: "rocketie",
+  priority: "high",
+});
   }
 
   // No valid tokens
