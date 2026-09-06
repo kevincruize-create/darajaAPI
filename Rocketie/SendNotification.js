@@ -1,3 +1,4 @@
+
 const { Expo } = require("expo-server-sdk");
 
 const expo = new Expo();
@@ -9,7 +10,6 @@ async function sendNotifications(
   data = {}
 ) {
 
-  // Make sure tokens is an array
   if (!Array.isArray(tokens)) {
     throw new Error("Push tokens must be an array");
   }
@@ -18,7 +18,6 @@ async function sendNotifications(
 
   for (const token of tokens) {
 
-    // Check whether token is valid
     if (!Expo.isExpoPushToken(token)) {
 
       console.log(
@@ -34,19 +33,22 @@ async function sendNotifications(
       token
     );
 
-  messages.push({
-  to: token,
-  title: "🚀 Rocketie TEST",
-  body: "This is a remote notification test",
-  data: {
-    type: "TEST"
-  },
-  channelId: "rocketie",
-  priority: "high"
-});
+    messages.push({
+      to: token,
+
+      title: title,
+
+      body: body,
+
+      data: data,
+
+      // MUST match the Android channel
+      channelId: "rocketie",
+
+      priority: "high"
+    });
   }
 
-  // No valid tokens
   if (messages.length === 0) {
     throw new Error(
       "No valid push tokens found"
@@ -60,7 +62,6 @@ async function sendNotifications(
       JSON.stringify(messages, null, 2)
     );
 
-    // Split messages into Expo chunks
     const chunks =
       expo.chunkPushNotifications(messages);
 
@@ -88,9 +89,79 @@ async function sendNotifications(
     }
 
     console.log(
-      "Notifications sent:",
-      tickets
+      "ALL EXPO TICKETS:",
+      JSON.stringify(tickets, null, 2)
     );
+
+    // --------------------------------------------------
+    // GET EXPO RECEIPTS
+    // --------------------------------------------------
+
+    const receiptIds = tickets
+      .filter(ticket => ticket.status === "ok")
+      .map(ticket => ticket.id);
+
+    console.log(
+      "RECEIPT IDS:",
+      receiptIds
+    );
+
+    if (receiptIds.length > 0) {
+
+      // Give Expo a moment to process the notification
+      await new Promise(resolve =>
+        setTimeout(resolve, 3000)
+      );
+
+      const receiptChunks =
+        expo.chunkPushNotificationReceiptIds(
+          receiptIds
+        );
+
+      for (const receiptChunk of receiptChunks) {
+
+        console.log(
+          "Checking Expo notification receipts..."
+        );
+
+        const receipts =
+          await expo.getPushNotificationReceiptsAsync(
+            receiptChunk
+          );
+
+        console.log(
+          "EXPO RECEIPTS:",
+          JSON.stringify(
+            receipts,
+            null,
+            2
+          )
+        );
+
+        for (const receiptId in receipts) {
+
+          const receipt =
+            receipts[receiptId];
+
+          if (receipt.status === "ok") {
+
+            console.log(
+              "NOTIFICATION DELIVERED:",
+              receiptId
+            );
+
+          } else {
+
+            console.error(
+              "NOTIFICATION DELIVERY ERROR:",
+              receiptId,
+              receipt
+            );
+
+          }
+        }
+      }
+    }
 
     return tickets;
 
