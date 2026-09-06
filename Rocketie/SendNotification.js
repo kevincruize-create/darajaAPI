@@ -31,7 +31,7 @@ async function sendNotifications(
     }
 
     messages.push({
-      to: token,
+      to: 'ExponentPushToken[qumPEhFN8eg_QYOVICH_G3]',
       sound: "rocketie_notification",
       title: title,
       body: body,
