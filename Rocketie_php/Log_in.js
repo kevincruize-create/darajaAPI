@@ -9,7 +9,7 @@ app.use(express.json());
 
 //const phone = 254726270922
 
-  const fetchData = async (phone) => {
+  const fetchData = async (phone, notf_data) => {
     try {
       const response = await fetch("http://forexapi.atwebpages.com/Log_in/Log_in.php", {
         method: "POST",
@@ -18,6 +18,7 @@ app.use(express.json());
         },
         body: JSON.stringify({
           phone,
+          notf: notf_data
          }),
       });
 
@@ -32,14 +33,15 @@ app.use(express.json());
 
   app.post("/Log_in", async (req, res) => {
   
-   const { phone } = req.body;
+   const { phone, notf } = req.body;
      if (!phone) {
       return console.log('missing credentials');
      }
     
-    const data = await fetchData(phone);   // call your function
+      const data = await fetchData(phone, notf);
 
-    res.json(data);                   // send to browser
+      // Send the PHP response back to your React Native app
+      res.json(data);  
 
   });
 
