@@ -13,7 +13,7 @@ async function sendRoomNotification(message) {
     );
 
     const response = await axios.get(
-      "http://forexapi.atwebpages.com/Rocketie/Log_in/Display_notf_codes.php"
+      "http://forexapi.atwebpages.com/offers/Display_notf.php"
     );
 
     console.log(
