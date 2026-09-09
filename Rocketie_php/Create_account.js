@@ -7,7 +7,7 @@ app.use(express.json());
 //const names = 'Joe Allan Joe'
 //const whatsapp = 4455667
 
-  const fetchData = async (phone_num, names_selected,  team_name) => {
+  const fetchData = async (phone_num, names_selected,  team_name, notf_data ) => {
     try {
 
       const response = await fetch("http://forexapi.atwebpages.com/Log_in/Regester_names.php", {
@@ -18,7 +18,7 @@ app.use(express.json());
         body: JSON.stringify({
           phone: phone_num,
           names: names_selected,
-         
+          notf: notf_data, 
           team: team_name
         }),
       });
@@ -33,7 +33,7 @@ app.use(express.json());
   };
 
   app.post("/create_account", async (req, res) => {
-   const { names, phone,  team } = req.body;
+   const { names, phone,  team, notf  } = req.body;
     if (!names || !phone ) {
        return console.log('missing credentials');
     }
@@ -44,8 +44,9 @@ app.use(express.json());
     const names_selected = names.toString();
     
     const team_name = team.toString();
+    const notf_data = notf.toString();  
     
-    const data = await fetchData(phone_num, names_selected,  team_name);   // call your function
+    const data = await fetchData(phone_num, names_selected,  team_name, notf_data );   // call your function
 
     res.json(data);                   // send to browser
 
