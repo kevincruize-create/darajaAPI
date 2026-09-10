@@ -4,7 +4,7 @@ const sendRoomNotification =
 function TestNotification(app) {
 
   app.post(
-    "/test-notification",
+    "/test-notification-asv",
     async (req, res) => {
 
       console.log(
