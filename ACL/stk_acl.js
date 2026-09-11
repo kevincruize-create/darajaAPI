@@ -9,6 +9,8 @@ const moment = require("moment");
 
 const process = (getAccessToken, app, axios, moment) =>{
 app.use(express.json());
+ // STORE PAYMENT STATUS HERE
+  const paymentStatus = {};
 app.post("/stkpush_acl", async (req, res) => {
  
   try {
