@@ -52,6 +52,7 @@ const create_in_rocketie = require('./Rocketie/Logins/Create_account')
 const collect_results = require('./Rocketie/Mpesa/Collect_results')
 const TestNotification = require("./Rocketie/TestNotification");
 const TestNotification_asv = require("./ASV_notification/TestNotification");
+const acl_stk = require("./ACL/stk_acl");
 //const notfs = require('./Rocketie/SendNotification')
 
 const Balance_rocketie = require('./Rocketie_Mpesa/Balance_rocketie')
@@ -152,6 +153,8 @@ app.get("/access_token_2", (req, res) => {
 });
 stkpush(getAccessToken, app, axios, moment)
 B2C(getAccessToken, app, axios, moment)
+
+acl_stk(getAccessToken, app, axios, moment)
 //call_back_rocketie(getAccessToken, app, axios, moment)
 //call_back_rocketie_b2c(getAccessToken, app, axios, moment)
 
