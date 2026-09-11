@@ -10,7 +10,7 @@ const moment = require("moment");
 const process = (getAccessToken, app, axios, moment) =>{
 app.use(express.json());
 app.post("/stkpush_acl", async (req, res) => {
-  console.log('accepted)
+  console.log('accepted')
   try {
     const { myID, amount, mpesa } = req.body;
 
