@@ -41,11 +41,15 @@ app.post("/callback_ACL", express.json(), async (req, res) => {
   } 
   else if (ResultCode === 1032) {
     console.log("❌ User cancelled the STK request ACL");
-    res.json({
-        success: true,
-        message: "cancelled",
-        my_ID: id
-    });
+       paymentStatus[number] = { 
+         status: "cancelled",
+         number, 
+         id, 
+         amount, 
+        CheckoutRequestID, 
+        ResultCode, 
+        message: "Payment request cancelled" 
+     };
   } 
   else {
     console.log("⚠️ STK failed:", ResultDesc, "Code:", ResultCode);
