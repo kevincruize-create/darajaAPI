@@ -36,11 +36,11 @@ app.post("/callback_ACL", express.json(), async (req, res) => {
   const { CheckoutRequestID, ResultCode, ResultDesc } = stkCallback;
 
   if (ResultCode === 0) {
-    console.log("✅ Payment successful");
+    console.log("✅ Payment successful ACL");
     send()
   } 
   else if (ResultCode === 1032) {
-    console.log("❌ User cancelled the STK request");
+    console.log("❌ User cancelled the STK request ACL");
   } 
   else {
     console.log("⚠️ STK failed:", ResultDesc, "Code:", ResultCode);
