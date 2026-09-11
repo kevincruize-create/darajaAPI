@@ -41,9 +41,20 @@ app.post("/callback_ACL", express.json(), async (req, res) => {
   } 
   else if (ResultCode === 1032) {
     console.log("❌ User cancelled the STK request ACL");
+    res.json({
+        success: true,
+        message: "cancelled",
+        my_ID: id
+    });
   } 
   else {
     console.log("⚠️ STK failed:", ResultDesc, "Code:", ResultCode);
+
+      res.json({
+        success: true,
+        message: "Failed",
+        my_ID: id
+      });
   }
 
   // Save callback to file (optional)
