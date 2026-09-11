@@ -6,12 +6,6 @@ const process = (app,fs) => {
 
 const paymentStatus = {};
 
-app.post("/callback_ACL", express.json(), async (req, res) => {
-  const number = req.query.number;
-  const id = req.query.id;
-  const amount = req.query.amount;
-  console.log(number, id, amount, 'received') //
-
   app.get("/payment-status", (req, res) => 
   { const number = req.query.number; 
    if (!number) 
@@ -23,6 +17,14 @@ app.post("/callback_ACL", express.json(), async (req, res) => {
    return res.json(payment); 
   
   });
+
+app.post("/callback_ACL", express.json(), async (req, res) => {
+  const number = req.query.number;
+  const id = req.query.id;
+  const amount = req.query.amount;
+  console.log(number, id, amount, 'received') //
+
+
 
    const send = async()=>{
       try {
