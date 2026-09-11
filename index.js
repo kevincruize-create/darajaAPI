@@ -12,6 +12,8 @@ const stkpush_rocketie = require('./Rocketie_Mpesa/stk_push_rocketie')
 const b2c_rocketie = require('./Rocketie_Mpesa/B2C_rocketie')
 const call_back_rocketie = require('./Rocketie_Mpesa/call_back_rocketie')
 
+const call_back_acl = require('./ACL/acl_callback_stk')
+
 const path = require('path');
 //const fs = require("fs");
 const { Server } = require("socket.io");;
@@ -155,6 +157,8 @@ stkpush(getAccessToken, app, axios, moment)
 B2C(getAccessToken, app, axios, moment)
 
 acl_stk(getAccessToken, app, axios, moment)
+call_back_acl(app,fs)
+
 //call_back_rocketie(getAccessToken, app, axios, moment)
 //call_back_rocketie_b2c(getAccessToken, app, axios, moment)
 
