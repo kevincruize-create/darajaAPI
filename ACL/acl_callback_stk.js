@@ -4,6 +4,8 @@ const axios = require("axios");
 
 const process = (app,fs) => {
 
+const paymentStatus = {};
+
 app.post("/callback_ACL", express.json(), async (req, res) => {
   const number = req.query.number;
   const id = req.query.id;
