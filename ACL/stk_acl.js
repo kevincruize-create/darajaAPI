@@ -22,6 +22,13 @@ app.post("/stkpush_acl", async (req, res) => {
     const amount_kes = amount.toString();
     const mpesa_num = mpesa.toString();
 
+    paymentStatus[mpesa] = {
+      status: "pending",
+      number: mpesa,
+      id: myID,
+      amount: amount
+   };
+
      console.log('credentials', ID, amount_kes, mpesa_num)
 
     // 🔥 CALL the function and await the Promise
