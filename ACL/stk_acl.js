@@ -10,7 +10,7 @@ const moment = require("moment");
 const process = (getAccessToken, app, axios, moment) =>{
 app.use(express.json());
 app.post("/stkpush_acl", async (req, res) => {
-  console.log('accepted')
+ 
   try {
     const { myID, amount, mpesa } = req.body;
 
@@ -21,6 +21,8 @@ app.post("/stkpush_acl", async (req, res) => {
     const ID = myID.toString();
     const amount_kes = amount.toString();
     const mpesa_num = mpesa.toString();
+
+     console.log('credentials', ID, amount_kes, mpesa_num)
 
     // 🔥 CALL the function and await the Promise
     const accessToken = await getAccessToken();
