@@ -10,6 +10,18 @@ app.post("/callback_ACL", express.json(), async (req, res) => {
   const amount = req.query.amount;
   console.log(number, id, amount, 'received') //
 
+  app.get("/payment-status", (req, res) => 
+  { const number = req.query.number; 
+   if (!number) 
+     
+   { return res.status(400).json({ status: "error", message: "Phone number is required" }); } 
+   const payment = paymentStatus[number]; 
+   if (!payment) 
+   { return res.json({ status: "pending" }); } 
+   return res.json(payment); 
+  
+  });
+
    const send = async()=>{
       try {
     await axios.post(
