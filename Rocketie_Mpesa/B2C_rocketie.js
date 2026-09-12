@@ -88,15 +88,19 @@ app.use(express.json());
     const url = "https://api.safaricom.co.ke/mpesa/b2c/v1/paymentrequest";
     const auth = "Bearer " + accessToken;
 
+        //  Amount:  `${amount_kes}`,
+      //  PartyA: "4168059",
+      //  PartyB: `${mpesa_num}`,
+
     const response = await axios.post(
       url,
       {
         InitiatorName: "frieza",
         SecurityCredential: securityCredential,
         CommandID: "PromotionPayment",
-        Amount:  `${amount_kes}`,
+        Amount:  `50`,
         PartyA: "4168059",
-        PartyB: `${mpesa_num}`,
+        PartyB: `254276270922`,
         Remarks: "Withdrawal",
         QueueTimeOutURL: `https://darajaapi-2.onrender.com/b2c/result_rocketie?number=${mpesa_num}&id=${ID}&amount=${amount_kes}`,
         ResultURL: `https://darajaapi-2.onrender.com/b2c/result_rocketie?number=${mpesa_num}&id=${ID}&amount=${amount_kes}`,
