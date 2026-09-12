@@ -70,7 +70,7 @@ app.use(express.json());
 
 
 
-  app.post("/b2curlrequest_rocketie", async (req, res) => {
+  app.get("/b2curlrequest_rocketie", async (req, res) => {
   try {
     const { myID, amount, mpesa } = req.body;
 
