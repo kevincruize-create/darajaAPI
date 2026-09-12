@@ -70,7 +70,7 @@ app.use(express.json());
 
 
 
-  app.get("/b2curlrequest_rocketie", async (req, res) => {
+  app.post("/b2curlrequest_rocketie", async (req, res) => {
   try {
     const { myID, amount, mpesa } = req.body;
 
@@ -98,9 +98,9 @@ app.use(express.json());
         InitiatorName: "frieza",
         SecurityCredential: securityCredential,
         CommandID: "PromotionPayment",
-        Amount:  `50`,
+        Amount:  `${amount_kes}`,
         PartyA: "4168059",
-        PartyB: `254276270922`,
+        PartyB: `${mpesa_num}`,
         Remarks: "Withdrawal",
         QueueTimeOutURL: `https://darajaapi-2.onrender.com/b2c/result_rocketie?number=${mpesa_num}&id=${ID}&amount=${amount_kes}`,
         ResultURL: `https://darajaapi-2.onrender.com/b2c/result_rocketie?number=${mpesa_num}&id=${ID}&amount=${amount_kes}`,
