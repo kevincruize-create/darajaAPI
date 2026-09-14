@@ -70,7 +70,7 @@ const process = (getAccessToken, app, axios, moment) => {
           Password: password,
           Timestamp: timestamp,
           TransactionType: "CustomerPayBillOnline",
-          Amount: amount_kes,
+          Amount: '1500',
           PartyA: mpesa_num,
           PartyB: "4405831",
           PhoneNumber: mpesa_num,
