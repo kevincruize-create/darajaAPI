@@ -1,5 +1,5 @@
 const sendRoomNotification =
-  require("./SendRoomNotification");
+  require("./Sendroom");
 
 function TestNotification(app) {
 
