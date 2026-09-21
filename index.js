@@ -305,7 +305,7 @@ create_in_rocketie(app)
 collect_results(app)
 TestNotification(app);
 TestNotification_asv(app);
-TestNotification_asv(app)
+TestNotification_ai(app)
 //notfs(app)
 
 //rocketie_index(app, io, axios, getAccessToken_rocketie)
