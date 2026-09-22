@@ -389,6 +389,61 @@ io.on('connection', (socket) => {
                 io.to(data.room).emit('array', getPlayersInRoom(data.room));
   });
 
+     // Receive message from client
+  socket.on('break_freeze', (data) => {
+
+    // update where array contains the details of the enemy then send data to that enemy.
+    console.log('break_freeze', data.victim)
+
+    const user = array.find(item => item.myID === data.victim && item.room === data.room);
+
+     if (user) {
+        user.damage = 'freeze_controls';
+        user.attacker = data.sender;
+        user.victim_name = data.victim_name
+        user.shield = 'off';
+        console.log('freeze_controls_room', data.victim)
+        io.to(data.room).emit('break_freeze', data);
+     }
+ 
+  });
+
+   socket.on('break_steal', (data) => {
+
+    // update where array contains the details of the enemy then send data to that enemy.
+    console.log('break_steal', data.victim)
+
+    const user = array.find(item => item.myID === data.victim && item.room === data.room);
+
+     if (user) {
+        user.damage = 'freeze_controls';
+        user.attacker = data.sender;
+        user.victim_name = data.victim_name
+        user.shield = 'off';
+        console.log('freeze_controls_room', data.victim)
+        io.to(data.room).emit('break_steal', data);
+     }
+ 
+  });
+
+   socket.on('break_only', (data) => {
+
+    // update where array contains the details of the enemy then send data to that enemy.
+    console.log('break_only', data.victim)
+
+    const user = array.find(item => item.myID === data.victim && item.room === data.room);
+
+     if (user) {
+        user.damage = 'freeze_controls';
+        user.attacker = data.sender;
+        user.victim_name = data.victim_name
+        user.shield = 'off';
+        console.log('freeze_controls_room', data.victim)
+        io.to(data.room).emit('break_only', data);
+     }
+ 
+  });
+
  
     // Receive message from client
   socket.on('freeze_controls', (data) => {
