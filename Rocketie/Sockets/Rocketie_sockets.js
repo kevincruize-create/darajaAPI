@@ -416,7 +416,7 @@ io.on('connection', (socket) => {
     const user = array.find(item => item.myID === data.victim && item.room === data.room);
 
      if (user) {
-        user.damage = 'freeze_controls';
+        
         user.attacker = data.sender;
         user.victim_name = data.victim_name
         user.shield = 'off';
@@ -434,7 +434,7 @@ io.on('connection', (socket) => {
     const user = array.find(item => item.myID === data.victim && item.room === data.room);
 
      if (user) {
-        user.damage = 'freeze_controls';
+      
         user.attacker = data.sender;
         user.victim_name = data.victim_name
         user.shield = 'off';
