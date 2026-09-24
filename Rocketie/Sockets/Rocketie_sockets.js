@@ -401,7 +401,7 @@ io.on('connection', (socket) => {
         user.damage = 'freeze_controls';
         user.attacker = data.sender;
         user.victim_name = data.victim_name
-        user.shield = 'off';
+       // user.shield = 'off';
         console.log('freeze_controls_room', data.victim)
         io.to(data.room).emit('break_freeze', data);
      }
@@ -419,7 +419,7 @@ io.on('connection', (socket) => {
         
         user.attacker = data.sender;
         user.victim_name = data.victim_name
-        user.shield = 'off';
+      //  user.shield = 'off';
         console.log('freeze_controls_room', data.victim)
         io.to(data.room).emit('break_steal', data);
      }
