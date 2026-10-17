@@ -318,7 +318,7 @@ app.get("/", (req, res) => {
   res.status(200).send("OK");
 });
 
-  app.post("/keep_awake", async (req, res) => {
+  app.get("/keep_awake", async (req, res) => {
     return 'cron jon working';
   });
 
