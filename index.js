@@ -57,6 +57,7 @@ const TestNotification_ai = require("./Offers/AI_notf/TestNotification");
 const TestNotification_ai_ben_winner = require("./Rocketie/Winners_notification/TestNotification");
 const TestNotification_asv = require("./ASV_notification/TestNotification");
 const acl_stk = require("./ACL/stk_acl");
+const auto_notf = require("./Rocketie/Winners_notification/Send_random");
 //const notfs = require('./Rocketie/SendNotification')
 
 const Balance_rocketie = require('./Rocketie_Mpesa/Balance_rocketie')
@@ -308,6 +309,7 @@ TestNotification(app);
 TestNotification_asv(app);
 TestNotification_ai(app)
 TestNotification_ai_ben_winner(app)
+auto_notf(app, io)
 //notfs(app)
 
 //rocketie_index(app, io, axios, getAccessToken_rocketie)
