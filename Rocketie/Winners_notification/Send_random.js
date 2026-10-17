@@ -178,6 +178,12 @@ const registerAutoNotificationRoutes = (app, io) => {
       });
     }
   });
+
+ app.get("/run-notification", (req, res) => {
+  res.status(200).send(
+    "Rocketie notification endpoint is online. Use POST to trigger it."
+  );
+});
 };
 
 module.exports = registerAutoNotificationRoutes;
