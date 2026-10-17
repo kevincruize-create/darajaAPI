@@ -3,7 +3,7 @@ const sendRoomNotification =
 
 function TestNotification(app) {
 
-  app.post( "/AI_ben",
+  app.post( "/AI_ben_earner",
     async (req, res) => {
 
       console.log(
