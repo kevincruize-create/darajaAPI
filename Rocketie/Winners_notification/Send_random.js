@@ -56,9 +56,9 @@ const registerAutoNotificationRoutes = (app, io) => {
     const randomNumber = Math.floor(Math.random() * 9) + 1;
 
     const message =
-      `Rocketie test notification! ${randomName} could win ` +
+      `Rocketie test notification! ${randomName} just won ` +
       `${randomNumber * 10}/- (${randomNumber} Rocketie Coins) ` +
-      `by beating AI Ben!`;
+      `by staking 10/- (1 Rocketie coin) and beating AI Ben!`;
 
     console.log("[TEST NOTIFICATION] Triggered.");
     console.log("[TEST NOTIFICATION] Message:", message);
