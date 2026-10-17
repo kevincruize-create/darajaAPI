@@ -318,9 +318,9 @@ app.get("/", (req, res) => {
   res.status(200).send("OK");
 });
 
-  app.get("/keep_awake", async (req, res) => {
-    return 'cron jon working';
-  });
+app.get("/keep_awake", async (req, res) => {
+  return res.send("cron job working");
+});
 
 server.listen(port, () => {
   console.log(`Server running on ${port}`);
