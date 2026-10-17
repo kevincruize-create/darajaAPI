@@ -1,4 +1,6 @@
 
+const crypto = require("crypto");
+
 const registerAutoNotificationRoutes = (app, io) => {
   const BASE_URL = (
     process.env.PUBLIC_BASE_URL ||
@@ -7,7 +9,6 @@ const registerAutoNotificationRoutes = (app, io) => {
 
   const CRON_SECRET = process.env.CRON_SECRET;
 
-  // Simulated usernames for promotional messages.
   const kenyanUsernames = [
     "Kevin 🚀", "Brian", "Wanjiku 🌸", "Akinyi 💕", "Kamau",
     "Njeri 🌷", "Otieno", "Wambui 💖", "Kiptoo", "Atieno 🦋",
@@ -38,60 +39,54 @@ const registerAutoNotificationRoutes = (app, io) => {
     "Abdi Noor", "Amina Hassan 🌺"
   ];
 
-  // Health-check route: opening this URL does NOT send a notification.
-  app.get("/run-notification", (req, res) => {
-    res.status(200).send(
-      "Rocketie notification endpoint is online. Send an authenticated POST request to trigger it."
+  // Compare secrets without a simple string comparison.
+  function secretMatches(providedSecret) {
+    if (
+      typeof CRON_SECRET !== "string" ||
+      !CRON_SECRET ||
+      typeof providedSecret !== "string"
+    ) {
+      return false;
+    }
+
+    const expected = Buffer.from(CRON_SECRET);
+    const provided = Buffer.from(providedSecret);
+
+    return (
+      expected.length === provided.length &&
+      crypto.timingSafeEqual(expected, provided)
     );
-  });
+  }
 
-  // Cron-job.org must call this route using POST.
-  app.post("/run-notification", async (req, res) => {
-    console.log("[ROCKETIE CRON] Request received.");
-
-    // Check server configuration.
+  // Shared notification-forwarding function.
+  async function sendAutomaticNotification(res) {
     if (!CRON_SECRET) {
-      console.error("[ROCKETIE CRON] CRON_SECRET is missing.");
+      console.error("[ROCKETIE] CRON_SECRET is not configured.");
 
       return res.status(500).json({
         success: false,
-        message: "Server configuration error: CRON_SECRET is missing."
+        message: "CRON_SECRET is missing from Render environment variables."
       });
     }
 
-    // Authenticate the cron request.
-    const authorization = req.get("authorization");
-    const expectedAuthorization = `Bearer ${CRON_SECRET}`;
-
-    if (authorization !== expectedAuthorization) {
-      console.warn("[ROCKETIE CRON] Unauthorized request.");
-
-      return res.status(401).json({
-        success: false,
-        message: "Unauthorized. Check the cron authorization header."
-      });
-    }
-
-    // Choose a random username and a random promotional amount.
     const randomName =
       kenyanUsernames[
         Math.floor(Math.random() * kenyanUsernames.length)
       ];
 
     const randomNumber = Math.floor(Math.random() * 9) + 1;
-    const simulatedWin = randomNumber * 10;
+    const possibleWin = randomNumber * 10;
 
-    // These are simulated promotional results, not verified game wins.
+    // This is promotional/demo copy, not a verified real win.
     const message =
-      `Promotional demo: ${randomName} could win ` +
-      `${simulatedWin}/- (${randomNumber} Rocketie Coins) ` +
-      `by staking 10/- and beating AI Ben!`;
+      `Rocketie demo: ${randomName} could win ${possibleWin}/- ` +
+      `(${randomNumber} Rocketie Coins) by staking 10/- ` +
+      `and beating AI Ben!`;
 
-    console.log("[ROCKETIE CRON] Forwarding notification.");
-    console.log("[ROCKETIE CRON] Target:", `${BASE_URL}/AI_ben_earner`);
+    console.log("[ROCKETIE] Sending notification request.");
+    console.log("[ROCKETIE] Message:", message);
 
     try {
-      // Forward the message to your existing push-notification endpoint.
       const response = await fetch(
         `${BASE_URL}/AI_ben_earner`,
         {
@@ -99,78 +94,102 @@ const registerAutoNotificationRoutes = (app, io) => {
           headers: {
             "Content-Type": "application/json"
           },
-          body: JSON.stringify({ message })
+          body: JSON.stringify({ message }),
+          signal: AbortSignal.timeout(20000)
         }
       );
 
       const responseText = await response.text();
 
       console.log(
-        "[ROCKETIE CRON] AI endpoint HTTP status:",
+        "[ROCKETIE] AI endpoint HTTP status:",
         response.status
       );
 
       console.log(
-        "[ROCKETIE CRON] AI endpoint response:",
+        "[ROCKETIE] AI endpoint response:",
         responseText
       );
 
-      // Detect HTTP errors.
       if (!response.ok) {
         return res.status(502).json({
           success: false,
-          message: "The AI Ben notification endpoint returned an HTTP error.",
+          message: "The AI Ben notification endpoint failed.",
           targetStatus: response.status,
           details: responseText.slice(0, 500)
         });
       }
 
-      // Also detect an application-level failure returned as HTTP 200.
-      let targetResult = null;
+      let result;
 
       try {
-        targetResult = JSON.parse(responseText);
+        result = JSON.parse(responseText);
       } catch {
-        // The target may return plain text rather than JSON.
+        result = null;
       }
 
       if (
-        targetResult &&
-        (
-          targetResult.success === false ||
-          targetResult.ok === false
-        )
+        result &&
+        (result.success === false || result.ok === false)
       ) {
         return res.status(502).json({
           success: false,
           message: "The AI Ben endpoint reported a failure.",
-          targetStatus: response.status,
           details: responseText.slice(0, 500)
         });
       }
 
-      console.log(
-        "[ROCKETIE CRON] Forwarding request completed."
-      );
-
       return res.status(200).json({
         success: true,
-        message: "The message was forwarded to the AI Ben endpoint.",
-        targetStatus: response.status
+        message: "Notification request forwarded to AI Ben endpoint.",
+        targetStatus: response.status,
+        targetResponse: responseText.slice(0, 300)
       });
-
     } catch (error) {
       console.error(
-        "[ROCKETIE CRON] Forwarding failed:",
+        "[ROCKETIE] Notification forwarding error:",
         error.message
       );
 
-      return res.status(500).json({
+      return res.status(502).json({
         success: false,
-        message: "Could not contact the AI Ben notification endpoint.",
+        message: "Could not contact the AI Ben endpoint.",
         error: error.message
       });
     }
+  }
+
+  // Browser test:
+  // /run-notification?secret=YOUR_CRON_SECRET
+  app.get("/run-notification", async (req, res) => {
+    if (!secretMatches(req.query.secret)) {
+      return res.status(401).send(
+        "Unauthorized. Provide the correct test secret."
+      );
+    }
+
+    console.log("[ROCKETIE] Authenticated browser test.");
+
+    return sendAutomaticNotification(res);
+  });
+
+  // cron-job.org:
+  // POST /run-notification
+  // Authorization: Bearer YOUR_CRON_SECRET
+  app.post("/run-notification", async (req, res) => {
+    const authorization = req.get("authorization") || "";
+    const match = authorization.match(/^Bearer\s+(.+)$/i);
+
+    if (!match || !secretMatches(match[1])) {
+      return res.status(401).json({
+        success: false,
+        message: "Unauthorized cron request."
+      });
+    }
+
+    console.log("[ROCKETIE] Authenticated cron request.");
+
+    return sendAutomaticNotification(res);
   });
 };
 
