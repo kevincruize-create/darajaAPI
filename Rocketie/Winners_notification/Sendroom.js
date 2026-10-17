@@ -72,7 +72,7 @@ async function sendRoomNotification(message) {
 
         tokens,
 
-        "🤖 Another AI Ben Earner!! 🪙🪙🪙",
+        "🤖 Someone Just Earned Money!! 🪙🪙🪙",
 
         notificationMessage,
 
